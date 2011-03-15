@@ -64,7 +64,7 @@ return_op
 	;     
 	  	
 	
-inOut 	
+in_out_op 	
 	: 	('out' operationCondition  EOL) | 
 		('read' idInBrackets EOL)
         ;
@@ -86,10 +86,10 @@ conditionType
 	;
 	    	  
 operations 
-	: 	operation | if_op | while_op | for_op | inOut
+	: 	id_op | if_op | while_op | for_op | in_out_op
 	;	 
 
-operation
+id_op
 	:  	(idInit	| selfOperation | (ID POSTFIXOPER)) EOL	
 	;  
 

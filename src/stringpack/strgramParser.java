@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g 2011-03-15 09:57:58
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g 2011-03-15 10:01:24
 
   package stringpack;
   import java.io.*;
@@ -836,9 +836,9 @@ public class strgramParser extends Parser {
     // $ANTLR end "return_op"
 
 
-    // $ANTLR start "inOut"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:67:1: inOut : ( ( 'out' operationCondition EOL ) | ( 'read' idInBrackets EOL ) );
-    public final void inOut() throws RecognitionException {
+    // $ANTLR start "in_out_op"
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:67:1: in_out_op : ( ( 'out' operationCondition EOL ) | ( 'read' idInBrackets EOL ) );
+    public final void in_out_op() throws RecognitionException {
         try {
             // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:68:2: ( ( 'out' operationCondition EOL ) | ( 'read' idInBrackets EOL ) )
             int alt12=2;
@@ -863,13 +863,13 @@ public class strgramParser extends Parser {
                     // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:68:5: ( 'out' operationCondition EOL )
                     // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:68:6: 'out' operationCondition EOL
                     {
-                    match(input,29,FOLLOW_29_in_inOut391); 
-                    pushFollow(FOLLOW_operationCondition_in_inOut393);
+                    match(input,29,FOLLOW_29_in_in_out_op391); 
+                    pushFollow(FOLLOW_operationCondition_in_in_out_op393);
                     operationCondition();
 
                     state._fsp--;
 
-                    match(input,EOL,FOLLOW_EOL_in_inOut396); 
+                    match(input,EOL,FOLLOW_EOL_in_in_out_op396); 
 
                     }
 
@@ -882,13 +882,13 @@ public class strgramParser extends Parser {
                     // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:69:3: ( 'read' idInBrackets EOL )
                     // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:69:4: 'read' idInBrackets EOL
                     {
-                    match(input,30,FOLLOW_30_in_inOut405); 
-                    pushFollow(FOLLOW_idInBrackets_in_inOut407);
+                    match(input,30,FOLLOW_30_in_in_out_op405); 
+                    pushFollow(FOLLOW_idInBrackets_in_in_out_op407);
                     idInBrackets();
 
                     state._fsp--;
 
-                    match(input,EOL,FOLLOW_EOL_in_inOut409); 
+                    match(input,EOL,FOLLOW_EOL_in_in_out_op409); 
 
                     }
 
@@ -906,7 +906,7 @@ public class strgramParser extends Parser {
         }
         return ;
     }
-    // $ANTLR end "inOut"
+    // $ANTLR end "in_out_op"
 
 
     // $ANTLR start "methodCall"
@@ -1134,10 +1134,10 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "operations"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:88:1: operations : ( operation | if_op | while_op | for_op | inOut );
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:88:1: operations : ( id_op | if_op | while_op | for_op | in_out_op );
     public final void operations() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:89:2: ( operation | if_op | while_op | for_op | inOut )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:89:2: ( id_op | if_op | while_op | for_op | in_out_op )
             int alt17=5;
             switch ( input.LA(1) ) {
             case ID:
@@ -1175,10 +1175,10 @@ public class strgramParser extends Parser {
 
             switch (alt17) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:89:5: operation
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:89:5: id_op
                     {
-                    pushFollow(FOLLOW_operation_in_operations511);
-                    operation();
+                    pushFollow(FOLLOW_id_op_in_operations511);
+                    id_op();
 
                     state._fsp--;
 
@@ -1186,7 +1186,7 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:89:17: if_op
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:89:13: if_op
                     {
                     pushFollow(FOLLOW_if_op_in_operations515);
                     if_op();
@@ -1197,7 +1197,7 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:89:25: while_op
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:89:21: while_op
                     {
                     pushFollow(FOLLOW_while_op_in_operations519);
                     while_op();
@@ -1208,7 +1208,7 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:89:36: for_op
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:89:32: for_op
                     {
                     pushFollow(FOLLOW_for_op_in_operations523);
                     for_op();
@@ -1219,10 +1219,10 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 5 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:89:45: inOut
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:89:41: in_out_op
                     {
-                    pushFollow(FOLLOW_inOut_in_operations527);
-                    inOut();
+                    pushFollow(FOLLOW_in_out_op_in_operations527);
+                    in_out_op();
 
                     state._fsp--;
 
@@ -1243,9 +1243,9 @@ public class strgramParser extends Parser {
     // $ANTLR end "operations"
 
 
-    // $ANTLR start "operation"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:92:1: operation : ( idInit | selfOperation | ( ID POSTFIXOPER ) ) EOL ;
-    public final void operation() throws RecognitionException {
+    // $ANTLR start "id_op"
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:92:1: id_op : ( idInit | selfOperation | ( ID POSTFIXOPER ) ) EOL ;
+    public final void id_op() throws RecognitionException {
         try {
             // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:93:2: ( ( idInit | selfOperation | ( ID POSTFIXOPER ) ) EOL )
             // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:93:6: ( idInit | selfOperation | ( ID POSTFIXOPER ) ) EOL
@@ -1291,7 +1291,7 @@ public class strgramParser extends Parser {
                 case 1 :
                     // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:93:7: idInit
                     {
-                    pushFollow(FOLLOW_idInit_in_operation543);
+                    pushFollow(FOLLOW_idInit_in_id_op543);
                     idInit();
 
                     state._fsp--;
@@ -1302,7 +1302,7 @@ public class strgramParser extends Parser {
                 case 2 :
                     // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:93:16: selfOperation
                     {
-                    pushFollow(FOLLOW_selfOperation_in_operation547);
+                    pushFollow(FOLLOW_selfOperation_in_id_op547);
                     selfOperation();
 
                     state._fsp--;
@@ -1316,8 +1316,8 @@ public class strgramParser extends Parser {
                     // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:93:32: ( ID POSTFIXOPER )
                     // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:93:33: ID POSTFIXOPER
                     {
-                    match(input,ID,FOLLOW_ID_in_operation552); 
-                    match(input,POSTFIXOPER,FOLLOW_POSTFIXOPER_in_operation554); 
+                    match(input,ID,FOLLOW_ID_in_id_op552); 
+                    match(input,POSTFIXOPER,FOLLOW_POSTFIXOPER_in_id_op554); 
 
                     }
 
@@ -1327,7 +1327,7 @@ public class strgramParser extends Parser {
 
             }
 
-            match(input,EOL,FOLLOW_EOL_in_operation558); 
+            match(input,EOL,FOLLOW_EOL_in_id_op558); 
 
             }
 
@@ -1340,7 +1340,7 @@ public class strgramParser extends Parser {
         }
         return ;
     }
-    // $ANTLR end "operation"
+    // $ANTLR end "id_op"
 
 
     // $ANTLR start "functions"
@@ -1616,12 +1616,12 @@ public class strgramParser extends Parser {
     public static final BitSet FOLLOW_28_in_return_op360 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_ID_in_return_op362 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_EOL_in_return_op364 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_inOut391 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_operationCondition_in_inOut393 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_EOL_in_inOut396 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_inOut405 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_idInBrackets_in_inOut407 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_EOL_in_inOut409 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_in_out_op391 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_operationCondition_in_in_out_op393 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_EOL_in_in_out_op396 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_in_out_op405 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_idInBrackets_in_in_out_op407 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_EOL_in_in_out_op409 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ID_in_methodCall428 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_operationCondition_in_methodCall430 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ID_in_selfOperation443 = new BitSet(new long[]{0x0000000080000000L});
@@ -1634,16 +1634,16 @@ public class strgramParser extends Parser {
     public static final BitSet FOLLOW_PARENTHESES_CLOSE_in_operationCondition473 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_typeVsId_in_conditionType486 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_selfOperation_in_conditionType490 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_operation_in_operations511 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_id_op_in_operations511 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_if_op_in_operations515 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_while_op_in_operations519 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_for_op_in_operations523 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_inOut_in_operations527 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_idInit_in_operation543 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_selfOperation_in_operation547 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_ID_in_operation552 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_POSTFIXOPER_in_operation554 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_EOL_in_operation558 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_in_out_op_in_operations527 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_idInit_in_id_op543 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_selfOperation_in_id_op547 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ID_in_id_op552 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_POSTFIXOPER_in_id_op554 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_EOL_in_id_op558 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_MAIN_NAME_in_functions576 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_PARENTHESES_OPEN_in_functions578 = new BitSet(new long[]{0x0000000000001000L});
     public static final BitSet FOLLOW_TYPE_in_functions582 = new BitSet(new long[]{0x0000000000000100L});
