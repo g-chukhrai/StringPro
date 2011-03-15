@@ -1,0 +1,8 @@
+Main() {
+	String first = "first";
+	List list(first, "second");
+	for (String s in list) {
+		toUpper(s);
+	}
+	out(list);
+}

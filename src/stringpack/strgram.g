@@ -12,10 +12,10 @@ grammar strgram;
   protected ArrayList<String> errors = new ArrayList<String>(); 
   
   public static void main(String[] args) throws Exception {
-    ANTLRInputStream input = new ANTLRInputStream(System.in);
-    strgramLexer lex = new strgramLexer(input);
+//    ANTLRInputStream input = new ANTLRInputStream(System.in);
+    strgramLexer lex = new strgramLexer(new ANTLRFileStream(args[0]));
     strgramParser parser = new strgramParser(new CommonTokenStream(lex));
-    parser.mtext();
+    parser.text();
     parser.names.print(System.out);
     if (! parser.errors.isEmpty()) {
       System.out.println("Found " + parser.errors.size() + " errors:");
@@ -32,39 +32,41 @@ grammar strgram;
   } 
 }
 
+text : text2 
+   ; 
 
-mtext : text ;
-
-text
+text2
 scope {
   String name;
 }
-@init {$text::name = "";}
+@init {$text2::name = "";}
   : ( fun_decl 
-    | {$text::name = "";} var
+    | {$text2::name = "";} var
     )+
+  ; 
+  
+ type  returns  [String idType]
+  :    'Int'    {$idType = "Int";} 
+  |    'String' {$idType = "String";}  
+  |    'Char'   {$idType = "Char";} 
   ;
-
-program	
-	:   var* fun_decl* 
-	;
- 
+    
 var 	 
-	: 	((types id_init (COMMA id_init)*)|(LIST fun_call)) EOL 
+	: 	( id_init|(LIST fun_call)) EOL 
   ;
 
 id_init	
-	:	 ID 
+	:	  type a = ID 
 		  {
-		    if (names.isExist($text::name + "." + $ID.text)) {
-		      errors.add("line "+$ID.line+": name "+$ID.text+" duplicated");
+		    if (names.isExist($text2::name + "." + $a.text)) {
+		      errors.add("line "+$a.line+": name "+$a.text+" duplicated");
 		    } else {
-		      names.add(names.new Name($text::name + "." + $ID.text, $types.idType, $ID.line));
+		      names.add(names.new Name($text2::name + "." + $a.text, $type.idType, $a.line));
 		    }
-		    if (names.isExist($text::name + "." + $ID.text)) {
-		      names.get($text::name + "." + $ID.text).addLineUses($ID.line);
+		    if (names.isExist($text2::name + "." + $a.text)) {
+		      names.get($text2::name + "." + $a.text).addLineUses($a.line);
 		    } else {
-		      errors.add("line "+$ID.line+": name "+$ID.text+" cannot be resolved");
+		      errors.add("line "+$a.line+": name "+$a.text+" cannot be resolved");
 		    }  		     
 		  }
 			(EQUAL (expr | fun_call))?
@@ -75,16 +77,16 @@ expr
   ;
   
 math_exp
-  :   type_id
+  :   data_id
   |   PAR_OPEN expr PAR_CLOSE
   ;
 
-type 
+data 
   :	  INT | STRING | CHAR
   ;
    	
-type_id
- 	:	  ID | type
+data_id
+ 	:	  ID | data
  	;
    	
 if_op	
@@ -93,17 +95,17 @@ if_op
   ;
 
 for_op 	
-	: 	'for' PAR_OPEN (INT|(types a=ID 'in' b=ID))
+	: 	'for' PAR_OPEN (INT|(type a=ID 'in' b=ID))
 	 {
-    if (! names.isExist($text::name + "." + $a.text)) {
+    if (! names.isExist($text2::name + "." + $a.text)) {
       errors.add("line "+$a.line+": name "+$a.text+" cannot be resolved");
     } else {
-      names.get($text::name + "." + $a.text).addLineUses($a.line);
+      names.get($text2::name + "." + $a.text).addLineUses($a.line);
     }
-    if (! names.isExist($text::name + "." + $b.text)) {
+    if (! names.isExist($text2::name + "." + $b.text)) {
       errors.add("line "+$b.line+": name "+$b.text+" cannot be resolved");
     } else {
-      names.get($text::name + "." + $b.text).addLineUses($b.line);   
+      names.get($text2::name + "." + $b.text).addLineUses($b.line);   
     }
   } 
 	 PAR_CLOSE fun_body
@@ -144,7 +146,7 @@ op_cond
 	;
 	
 cond_arg
-	:	type_id | self_op
+	:	data_id | self_op
 	;
 	    	  
 ops 
@@ -160,18 +162,18 @@ main_fun
   ;
 
 fun_decl
-	: 	types? ID
-	  { $text::name = $ID.text; } 
+	: 	type? ID
+	  { $text2::name = $ID.text; } 
 	 PAR_OPEN  args? PAR_CLOSE fun_body
-	;
+	; 
 	
 args
-  : types ID (COMMA types ID )*
+  : type ID (COMMA type ID )*
   ;
 	
 fun_body
 	:   	CUR_OPEN
-		 	    (var|ops)+ 	    
+		 	     ops* 	    
 			     return_op?    
 	    	CUR_CLOSE
 	;	
@@ -188,11 +190,7 @@ CUR_CLOSE 	: '}';
 SQ_OPEN		  : '[';
 SQ_CLOSE 		: ']';
 
-types returns [String idType]
-	: 	 'Int'    {$idType = "Int";} 
-	|    'String' {$idType = "String";}  
-	|    'Char'   {$idType = "Char";} 
-	;
+
 	
 INT
   : DIGIT+

@@ -1,0 +1,5 @@
+Main() {
+	String s;
+	s = readLine();
+	out("Hello, [s]!");
+}
