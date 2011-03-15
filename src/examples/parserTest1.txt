@@ -1,0 +1,6 @@
+main(){
+	Int i = 5;
+	Int d;
+	String fff,s; String ddd;
+	
+}

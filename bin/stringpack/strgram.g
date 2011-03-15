@@ -10,10 +10,12 @@ grammar strgram;
 @members {
   protected NamesTable names = new NamesTable();
   protected ArrayList<String> errors = new ArrayList<String>(); 
-  
+   
   public static void main(String[] args) throws Exception {
 //    ANTLRInputStream input = new ANTLRInputStream(System.in);
-    strgramLexer lex = new strgramLexer(new ANTLRFileStream(args[0]));
+    ANTLRFileStream input = new ANTLRFileStream("D:/JavaProj/stringpro/src/examples/parserTest1.txt");
+    strgramLexer lex = new strgramLexer(input);
+    System.out.println("Start parsing " + input.getSourceName());
     strgramParser parser = new strgramParser(new CommonTokenStream(lex));
     parser.text();
     parser.names.print(System.out);
@@ -22,7 +24,7 @@ grammar strgram;
       for (String m : parser.errors) {
         System.out.println(m);
       } 
-    }
+    } 
     } 
   public String getErrorHeader(RecognitionException e) {
     return "line "+e.line+":";  
@@ -44,7 +46,7 @@ scope {
     | {$text2::name = "";} var
     )+
   ; 
-  
+   
  type  returns  [String idType]
   :    'Int'    {$idType = "Int";} 
   |    'String' {$idType = "String";}  
@@ -52,22 +54,27 @@ scope {
   ;
     
 var 	 
-	: 	( id_init|(LIST fun_call)) EOL 
+	: 	(id_init |(LIST fun_call)) EOL 
   ;
 
 id_init	
-	:	  type a = ID 
+	:	  type a = ID (COMMA b=ID)*
 		  {
 		    if (names.isExist($text2::name + "." + $a.text)) {
 		      errors.add("line "+$a.line+": name "+$a.text+" duplicated");
 		    } else {
 		      names.add(names.new Name($text2::name + "." + $a.text, $type.idType, $a.line));
-		    }
-		    if (names.isExist($text2::name + "." + $a.text)) {
 		      names.get($text2::name + "." + $a.text).addLineUses($a.line);
-		    } else {
-		      errors.add("line "+$a.line+": name "+$a.text+" cannot be resolved");
-		    }  		     
+		    }
+		    if (b != null) {
+	        if (names.isExist($text2::name + "." + $b.text)) {
+	          errors.add("line "+$b.line+": name "+$b.text+" duplicated");
+	        } else {
+	          names.add(names.new Name($text2::name + "." + $b.text, $type.idType, $b.line));
+	          names.get($text2::name + "." + $b.text).addLineUses($b.line);          
+	        }		    
+        }
+     
 		  }
 			(EQUAL (expr | fun_call))?
 	;
