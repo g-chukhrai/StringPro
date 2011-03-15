@@ -12,17 +12,18 @@ grammar strgram;
   protected ArrayList<String> errors = new ArrayList<String>(); 
   
   public static void main(String[] args) throws Exception {
-    GLL3Lexer lex = new GLL3Lexer(new ANTLRFileStream(args[0]));
-    GLL3Parser parser = new GLL3Parser(new CommonTokenStream(lex));
-    parser.text();
+    ANTLRInputStream input = new ANTLRInputStream(System.in);
+    strgramLexer lex = new strgramLexer(input);
+    strgramParser parser = new strgramParser(new CommonTokenStream(lex));
+    parser.mtext();
     parser.names.print(System.out);
     if (! parser.errors.isEmpty()) {
       System.out.println("Found " + parser.errors.size() + " errors:");
       for (String m : parser.errors) {
         System.out.println(m);
-      }
+      } 
     }
-    }
+    } 
   public String getErrorHeader(RecognitionException e) {
     return "line "+e.line+":";  
   }
@@ -31,6 +32,8 @@ grammar strgram;
   } 
 }
 
+
+mtext : text ;
 
 text
 scope {
@@ -45,7 +48,7 @@ scope {
 program	
 	:   var* fun_decl* 
 	;
-
+ 
 var 	 
 	: 	((types id_init (COMMA id_init)*)|(LIST fun_call)) EOL 
   ;
@@ -58,6 +61,11 @@ id_init
 		    } else {
 		      names.add(names.new Name($text::name + "." + $ID.text, $types.idType, $ID.line));
 		    }
+		    if (names.isExist($text::name + "." + $ID.text)) {
+		      names.get($text::name + "." + $ID.text).addLineUses($ID.line);
+		    } else {
+		      errors.add("line "+$ID.line+": name "+$ID.text+" cannot be resolved");
+		    }  		     
 		  }
 			(EQUAL (expr | fun_call))?
 	;
@@ -85,7 +93,20 @@ if_op
   ;
 
 for_op 	
-	: 	'for' PAR_OPEN (INT|(types ID 'in' ID)) PAR_CLOSE fun_body
+	: 	'for' PAR_OPEN (INT|(types a=ID 'in' b=ID))
+	 {
+    if (! names.isExist($text::name + "." + $a.text)) {
+      errors.add("line "+$a.line+": name "+$a.text+" cannot be resolved");
+    } else {
+      names.get($text::name + "." + $a.text).addLineUses($a.line);
+    }
+    if (! names.isExist($text::name + "." + $b.text)) {
+      errors.add("line "+$b.line+": name "+$b.text+" cannot be resolved");
+    } else {
+      names.get($text::name + "." + $b.text).addLineUses($b.line);   
+    }
+  } 
+	 PAR_CLOSE fun_body
   ;	       
 
 while_op	
@@ -205,11 +226,11 @@ COMPROPER
 	; 		
      
 STRING 	
-	:  	'"' ALPHA+ '"'
+	:  	'"' ALPHA* '"'
   ;
 
 CHAR  
-  :   '\'' ALPHA '\''
+  :   '\'' ALPHA? '\''
   ;
  
 COMMENT
