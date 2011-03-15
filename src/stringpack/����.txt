@@ -1,0 +1,44 @@
+1.
+
+Main() {
+	String s;
+	s = readLine();
+	out("Hello, [s]!");
+}
+
+
+2.
+
+Main() {
+	String first = "first";
+	List list(first, "second");
+	for (String s in list) {
+		toUpper(s);
+	}
+	out(list);
+}
+
+3.
+
+String ECHO = "EchoString";
+
+Main(){
+	while (hasUpper(ECHO)){
+		Char c = getUpper(ECHO);
+		// E -> e
+		toLower(c);
+		// e -> f
+		c++;
+	}
+	// EchoString -> fchottring
+	ECHO.removeDublicate("t");
+	// fchottring -> fchoring;
+	ECHO.remove("fcho");
+	// fchoring -> ring;
+	out(ECHO);
+	outThreeChar(ECHO);
+}
+
+outThreeChar(String s) {
+	out(ECHO.sub(0,3));
+}
