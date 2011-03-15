@@ -31,77 +31,73 @@ grammar strgram;
   } 
 }
 
-text : text2
-   ; 
 
-
-text2
+text
 scope {
   String name;
 }
-@init {$text2::name = "";}
+@init {$text::name = "";}
   : ( fun_decl 
-    | {$text2::name = "";} var ';'
+    | {$text::name = "";} var
     )+
   ;
 
 program	
-	: 	var* fun_decl* main_fun? 
+	:   var* fun_decl* 
 	;
-	
-var 	
-	: 	((TYPE idInit (COMMA idInit)*)|(LIST methodCall)) EOL 
-    	;
 
-idInit	
+var 	 
+	: 	((types id_init (COMMA id_init)*)|(LIST fun_call)) EOL 
+  ;
+
+id_init	
 	:	 ID 
 		  {
-		    if (names.isExist($text2::name + "." + $ID.text)) {
+		    if (names.isExist($text::name + "." + $ID.text)) {
 		      errors.add("line "+$ID.line+": name "+$ID.text+" duplicated");
 		    } else {
-		      names.add(names.new Name($text2::name + "." + $ID.text, $type.idType, $ID.line));
+		      names.add(names.new Name($text::name + "." + $ID.text, $types.idType, $ID.line));
 		    }
 		  }
-			(EQUAL (expr | methodCall))?
+			(EQUAL (expr | fun_call))?
 	;
 
 expr
-  : multExpression (MATHOPER multExpression)*
+  :   math_exp (MATHOPER math_exp)*
   ;
   
-multExpression
-  :   typeVsId
-  |   PARENTHESES_OPEN expr PARENTHESES_CLOSE
+math_exp
+  :   type_id
+  |   PAR_OPEN expr PAR_CLOSE
   ;
 
 type 
-  :	  INT|STRING
+  :	  INT | STRING | CHAR
   ;
    	
-typeVsId
+type_id
  	:	  ID | type
  	;
-
    	
 if_op	
-	: 	'if' boolCondition functionBody 
-    	'else' functionBody
+	: 	'if' bool_cond fun_body 
+    	'else' fun_body
   ;
 
 for_op 	
-	: 	'for' PARENTHESES_OPEN (INT|(TYPE ID 'in' ID)) PARENTHESES_CLOSE functionBody
+	: 	'for' PAR_OPEN (INT|(types ID 'in' ID)) PAR_CLOSE fun_body
   ;	       
 
 while_op	
-	: 	'while' boolCondition functionBody
+	: 	'while' bool_cond fun_body
   ;	
 
-boolCondition 
-	:	   PARENTHESES_OPEN ((ID COMPROPER ID) | methodCall) PARENTHESES_CLOSE
+bool_cond
+	:	   PAR_OPEN ((ID COMPROPER ID) | fun_call) PAR_CLOSE
 	;
 	
-idInBrackets
-	:	   PARENTHESES_OPEN ID PARENTHESES_CLOSE
+brack_id
+	:	   PAR_OPEN ID PAR_CLOSE
 	;
        
 return_op
@@ -110,73 +106,75 @@ return_op
 	  	
 	
 in_out_op 	
-	: 	('out' operationCondition  EOL) | 
-		  ('read' idInBrackets EOL)
+	: 	('out' op_cond  EOL) | 
+		  ('read' brack_id EOL)
   ;
 
-methodCall
-	:	   ID operationCondition
+fun_call
+	:	   ID op_cond
 	;
 
-selfOperation 
-	:	   (ID'.')? methodCall
+self_op
+	:	   (ID'.')? fun_call
 	;
 
-operationCondition
-	:	PARENTHESES_OPEN (conditionType (COMMA conditionType)*)? PARENTHESES_CLOSE
+op_cond
+	:	PAR_OPEN (cond_arg (COMMA cond_arg)*)? PAR_CLOSE
 	;
 	
-conditionType 
-	:	typeVsId | selfOperation
+cond_arg
+	:	type_id | self_op
 	;
 	    	  
-operations 
+ops 
 	: 	id_op | if_op | while_op | for_op | in_out_op
 	;	 
 
 id_op
-	:  	(idInit	| selfOperation | (ID POSTFIXOPER)) EOL	
+	:  	(id_init	| self_op | (ID POSTFIX)) EOL	
 	;  
 
 main_fun
-  :   MAIN_NAME PARENTHESES_OPEN PARENTHESES_CLOSE functionBody
+  :   MAIN_NAME PAR_OPEN PAR_CLOSE fun_body
   ;
 
 fun_decl
-	: 	TYPE? a=ID
-	  { $text2::name = $a.text; } 
-	 PARENTHESES_OPEN  args PARENTHESES_CLOSE functionBody
+	: 	types? ID
+	  { $text::name = $ID.text; } 
+	 PAR_OPEN  args? PAR_CLOSE fun_body
 	;
 	
 args
-  : TYPE ID (COMMA TYPE ID )*
+  : types ID (COMMA types ID )*
   ;
 	
-functionBody 
-	:   	CURLY_OPEN
-		 	    (var|operations)+ 	    
+fun_body
+	:   	CUR_OPEN
+		 	    (var|ops)+ 	    
 			     return_op?    
-	    	CURLY_CLOSE
+	    	CUR_CLOSE
 	;	
 
-MAIN_NAME		: 'Main';
-LIST 		 	: 'List';
+MAIN_NAME		: 'MAIN';
+LIST 		 	  : 'List';
 COMMA 			: ',';
-EQUAL			: '=';
-EOL 			: ';';
-PARENTHESES_OPEN 	: '(';
-PARENTHESES_CLOSE	: ')';
-CURLY_OPEN 	 	: '{';
-CURLY_CLOSE 	 	: '}';
-SQUARE_OPEN		: '[';
-SQUARE_CLOSE 		: ']';
+EQUAL			  : '=';
+EOL 			  : ';';
+PAR_OPEN 	  : '(';
+PAR_CLOSE	  : ')';
+CUR_OPEN 	 	: '{';
+CUR_CLOSE 	: '}';
+SQ_OPEN		  : '[';
+SQ_CLOSE 		: ']';
 
-TYPE 	
-	: 	'Int' | 'String' | 'Char'
+types returns [String idType]
+	: 	 'Int'    {$idType = "Int";} 
+	|    'String' {$idType = "String";}  
+	|    'Char'   {$idType = "Char";} 
 	;
-
+	
 INT
-  : (DIGIT)+
+  : DIGIT+
   ;
     
 ID  
@@ -194,7 +192,7 @@ fragment DIGIT
 WS  :  ( ' ' | '\r' | '\t' | '\n' ) {$channel=HIDDEN;}
     ;
  	 
-POSTFIXOPER 
+POSTFIX 
 	:	'++'| '--'
 	;
 	
@@ -208,7 +206,12 @@ COMPROPER
      
 STRING 	
 	:  	'"' ALPHA+ '"'
-    	;
+  ;
+
+CHAR  
+  :   '\'' ALPHA '\''
+  ;
+ 
 COMMENT
     : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
     | '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
