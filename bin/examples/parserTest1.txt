@@ -1,6 +1,15 @@
+Int sss = 5;
+
 main(){
 	Int d;
-	String fff, s,f; String d,ddd;
-	sdds="sd";
-
+	String fff, s,f; String ddd;
+	f=5;
+	String sss = 6;
+	
 }
+
+op2(){
+	String ss;
+}
+
+Int ssss = 5;

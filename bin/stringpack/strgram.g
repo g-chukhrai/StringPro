@@ -20,9 +20,9 @@ grammar strgram;
     parser.text();
     parser.names.print(System.out);
     if (! parser.errors.isEmpty()) {
-      System.out.println("Found " + parser.errors.size() + " errors:");
+      System.err.println("\n\rFound " + parser.errors.size() + " errors:");
       for (String m : parser.errors) {
-        System.out.println(m);
+        System.err.println(m);
       } 
     } 
     } 
@@ -41,9 +41,9 @@ text2
 scope {
   String name;
 }
-@init {$text2::name = "";}
+@init {$text2::name = "[global]";}
   : ( fun_decl 
-    | {$text2::name = "";} var
+    | {$text2::name = "[global]";} var
     )+
   ; 
    
@@ -56,42 +56,92 @@ scope {
 id_init returns[String idName,int idLine]
   :   a = ID 
       {
+       if ($a.text != null) {
         if (names.isExist($text2::name + "." + $a.text)) {
           errors.add("line "+$a.line+": name "+$a.text+" duplicated");
         } else {
-          $idName = $a.text;
-          $idLine = $a.line;
+	          $idName = $a.text;
+	          $idLine = $a.line;
+	          names.add(names.new Name($text2::name + "." + $a.text, $var::varType, $a.line));
+				    names.get($text2::name + "." + $a.text).addLineUses($a.line);
+			    }
         }
       }
-      (EQUAL (expr | fun_call))?
+      (EQUAL 
+      (expr 
+      {
+            if (!$var::varType.equals($expr.idType)) {
+              errors.add("line "+$a.line+": name "+$a.text+" wrong type conversion cannot convert " + $expr.idType + " to " + $var::varType);
+            } else {
+              names.get($text2::name + "." + $a.text).addLineUses($a.line);
+            }
+      }
+      |  
+      fun_call))?
   ;
-var 	 
-	: 	(type a=id_init (COMMA b=id_init)*|(LIST fun_call)) 
+var
+scope {
+  String varType;
+}
+@init {$var::varType = "";} 	 
+	: 	(type
 	{
+    $var::varType = $type.idType;	
+	}
+	 a=id_init (COMMA b=id_init)*|(LIST fun_call)) 
+	{
+     if ($a.idName != null) {
           names.add(names.new Name($text2::name + "." + $a.idName, $type.idType, $a.idLine));
           names.get($text2::name + "." + $a.idName).addLineUses($a.idLine);
-          names.add(names.new Name($text2::name + "." + $b.idName, $type.idType, $b.idLine));
-          names.get($text2::name + "." + $b.idName).addLineUses($b.idLine);
+     }
+
   }
 	EOL 
   ;
 
-
-expr
-  :   math_exp (MATHOPER math_exp)*
+ 
+expr returns [String idType]
+  :   a=math_exp (MATHOPER b=math_exp)*
+  {
+    if ($b.idType != null && !$a.idType.equals($b.idType)){
+      errors.add("line " + "a.line" + ": names " + $a.text + " and " + $b.text + " has inconvertable types");
+    } else {
+      $idType = $a.idType;
+    }
+  }
   ;
   
-math_exp
+math_exp returns  [String idType]
   :   data_id
+  {
+    $idType = $data_id.idType;
+  }
   |   PAR_OPEN expr PAR_CLOSE
+  {
+    $idType = $expr.idType;
+  }
   ;
 
-data 
-  :	  INT | STRING | CHAR
+data returns  [String idType]
+  :	  INT     {$idType = "Int";} 
+  |   STRING  {$idType = "String";}
+  |   CHAR    {$idType = "Char";}
   ;
    	
-data_id
- 	:	  ID | data
+data_id returns  [String idType]
+ 	:	  ID
+ 	{
+    if (! names.isExist($text2::name + "." + $ID.text)) {
+      errors.add("line "+$ID.line+": name "+$ID.text+" cannot be resolved");
+    } else {
+      names.get($text2::name + "." + $ID.text).addLineUses($ID.line);   
+    }
+    $idType = names.get($text2::name + "." + $ID.text).getType();
+  } 
+ 	|   data
+ 	{
+ 	  $idType = $data.idType;
+ 	}
  	;
    	
 if_op	
@@ -202,7 +252,7 @@ INT
   ;
     
 ID  
-  : ALPHA+
+  : (ALPHA|DIGIT)+
   ;
   
 fragment ALPHA
@@ -229,7 +279,7 @@ COMPROPER
 	; 		
      
 STRING 	
-	:  	'"' ALPHA* '"'
+	:  	'"' ID '"'
   ;
 
 CHAR  

@@ -2,6 +2,8 @@ package stringpack;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class NamesTable {
@@ -50,6 +52,7 @@ public class NamesTable {
 		return _n;
 	}
 	public void print(PrintStream out) {
+	    System.out.println("\n\rVariables: ");
 		for (String idtf : names.keySet()) {
 			Name n = names.get(idtf);
 			out.println(n);
