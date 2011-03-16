@@ -52,32 +52,30 @@ scope {
   |    'String' {$idType = "String";}  
   |    'Char'   {$idType = "Char";} 
   ;
-    
+     
+id_init returns[String idName,int idLine]
+  :   a = ID 
+      {
+        if (names.isExist($text2::name + "." + $a.text)) {
+          errors.add("line "+$a.line+": name "+$a.text+" duplicated");
+        } else {
+          $idName = $a.text;
+          $idLine = $a.line;
+        }
+      }
+      (EQUAL (expr | fun_call))?
+  ;
 var 	 
-	: 	(id_init |(LIST fun_call)) EOL 
+	: 	(type a=id_init (COMMA b=id_init)*|(LIST fun_call)) 
+	{
+          names.add(names.new Name($text2::name + "." + $a.idName, $type.idType, $a.idLine));
+          names.get($text2::name + "." + $a.idName).addLineUses($a.idLine);
+          names.add(names.new Name($text2::name + "." + $b.idName, $type.idType, $b.idLine));
+          names.get($text2::name + "." + $b.idName).addLineUses($b.idLine);
+  }
+	EOL 
   ;
 
-id_init	
-	:	  type a = ID (COMMA b=ID)*
-		  {
-		    if (names.isExist($text2::name + "." + $a.text)) {
-		      errors.add("line "+$a.line+": name "+$a.text+" duplicated");
-		    } else {
-		      names.add(names.new Name($text2::name + "." + $a.text, $type.idType, $a.line));
-		      names.get($text2::name + "." + $a.text).addLineUses($a.line);
-		    }
-		    if (b != null) {
-	        if (names.isExist($text2::name + "." + $b.text)) {
-	          errors.add("line "+$b.line+": name "+$b.text+" duplicated");
-	        } else {
-	          names.add(names.new Name($text2::name + "." + $b.text, $type.idType, $b.line));
-	          names.get($text2::name + "." + $b.text).addLineUses($b.line);          
-	        }		    
-        }
-     
-		  }
-			(EQUAL (expr | fun_call))?
-	;
 
 expr
   :   math_exp (MATHOPER math_exp)*
@@ -157,11 +155,11 @@ cond_arg
 	;
 	    	  
 ops 
-	: 	id_op | if_op | while_op | for_op | in_out_op
+	: 	id_op | if_op | while_op | for_op | in_out_op | var
 	;	 
 
 id_op
-	:  	(id_init	| self_op | (ID POSTFIX)) EOL	
+	:  	(self_op | (ID POSTFIX)) EOL	
 	;  
 
 main_fun
@@ -180,7 +178,7 @@ args
 	
 fun_body
 	:   	CUR_OPEN
-		 	     ops* 	    
+		 	     ops*
 			     return_op?    
 	    	CUR_CLOSE
 	;	

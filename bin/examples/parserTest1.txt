@@ -1,6 +1,6 @@
 main(){
-	Int i = 5;
 	Int d;
-	String fff,s; String ddd;
-	
+	String fff, s,f; String d,ddd;
+	sdds="sd";
+
 }
