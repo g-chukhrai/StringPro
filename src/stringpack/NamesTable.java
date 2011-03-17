@@ -2,8 +2,6 @@ package stringpack;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 
 public class NamesTable {
@@ -36,7 +34,7 @@ public class NamesTable {
 	public boolean isExist(String name) {
 		boolean rv = names.containsKey(name);
 		if (! rv) {
-			rv = names.containsKey(name.substring(name.indexOf('.')));
+			rv = names.containsKey("[global]" + name.substring(name.indexOf('.')));
 		}
 		return rv;
 	}
@@ -47,7 +45,7 @@ public class NamesTable {
 	public Name get(String n) {
 		Name _n = names.get(n); 
 		if (_n == null) {
-			_n = names.get(n.substring(n.indexOf('.')));
+			_n = names.get("[global]" + n.substring(n.indexOf('.')));
 		}
 		return _n;
 	}

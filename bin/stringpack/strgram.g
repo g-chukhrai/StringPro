@@ -2,13 +2,13 @@ grammar strgram;
 
 @header {
   package stringpack;
-  import java.io.*;
 }
 @lexer::header {
   package stringpack;
 } 
 @members {
   protected NamesTable names = new NamesTable();
+  protected MethodTable methods = new MethodTable();
   protected ArrayList<String> errors = new ArrayList<String>(); 
    
   public static void main(String[] args) throws Exception {
@@ -19,8 +19,10 @@ grammar strgram;
     strgramParser parser = new strgramParser(new CommonTokenStream(lex));
     parser.text();
     parser.names.print(System.out);
+    parser.methods.print(System.out);
     if (! parser.errors.isEmpty()) {
-      System.err.println("\n\rFound " + parser.errors.size() + " errors:");
+      System.out.println("\n\rFound: ");
+      System.err.println(parser.errors.size() + " errors");
       for (String m : parser.errors) {
         System.err.println(m);
       } 
@@ -67,18 +69,48 @@ id_init returns[String idName,int idLine]
 			    }
         }
       }
-      (EQUAL 
-      (expr 
+      (EQUAL id_value)?
       {
-            if (!$var::varType.equals($expr.idType)) {
-              errors.add("line "+$a.line+": name "+$a.text+" wrong type conversion cannot convert " + $expr.idType + " to " + $var::varType);
+        if ($id_value.idType != null){
+            String varType = names.get($text2::name + "." + $a.text).getType();
+            if (!varType.equals($id_value.idType)) {
+              errors.add("line "+$a.line+": name "+$a.text+" wrong type conversion cannot convert " + $id_value.idType + " to " + varType);
             } else {
               names.get($text2::name + "." + $a.text).addLineUses($a.line);
             }
+        }
+      }
+
+  ;
+  
+id_assign
+	: a = ID EQUAL id_value
+	{
+            if (!names.isExist($text2::name + "." + $a.text)) {
+              errors.add("line "+$a.line+": name "+$a.text+" not exist");
+            } else {
+              names.get($text2::name + "." + $a.text).addLineUses($a.line);
+	            String varType = names.get($text2::name + "." + $a.text).getType();
+	            if (!varType.equals($id_value.idType)) {
+	              errors.add("line "+$a.line+": name "+$a.text+" wrong type conversion cannot convert " + $id_value.idType + " to " + varType);
+	            } else {
+	              names.get($text2::name + "." + $a.text).addLineUses($a.line);
+	            }
+            }
+	}
+	;   
+
+id_value returns [String idType]
+  :
+      (expr 
+      {
+        $idType = $expr.idType;
       }
       |  
-      fun_call))?
+      fun_call)
   ;
+
+  
 var
 scope {
   String varType;
@@ -92,7 +124,6 @@ scope {
 	{
      if ($a.idName != null) {
           names.add(names.new Name($text2::name + "." + $a.idName, $type.idType, $a.idLine));
-          names.get($text2::name + "." + $a.idName).addLineUses($a.idLine);
      }
 
   }
@@ -209,7 +240,7 @@ ops
 	;	 
 
 id_op
-	:  	(self_op | (ID POSTFIX)) EOL	
+	:  	(id_assign | self_op | (ID POSTFIX)) EOL	
 	;  
 
 main_fun
@@ -217,11 +248,14 @@ main_fun
   ;
 
 fun_decl
-	: 	type? ID
-	  { $text2::name = $ID.text; } 
+	: type? ID
+	  { 
+	     $text2::name = $ID.text; 
+	     methods.add(methods.new Method($text2::name, $type.idType));
+	  } 
 	 PAR_OPEN  args? PAR_CLOSE fun_body
 	; 
-	
+	 
 args
   : type ID (COMMA type ID )*
   ;

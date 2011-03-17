@@ -1,7 +1,6 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g 2011-03-16 18:49:41
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g 2011-03-17 09:05:00
 
   package stringpack;
-  import java.io.*;
 
 
 import org.antlr.runtime.*;
@@ -67,6 +66,7 @@ public class strgramParser extends Parser {
 
 
       protected NamesTable names = new NamesTable();
+      protected MethodTable methods = new MethodTable();
       protected ArrayList<String> errors = new ArrayList<String>(); 
        
       public static void main(String[] args) throws Exception {
@@ -77,8 +77,10 @@ public class strgramParser extends Parser {
         strgramParser parser = new strgramParser(new CommonTokenStream(lex));
         parser.text();
         parser.names.print(System.out);
+        parser.methods.print(System.out);
         if (! parser.errors.isEmpty()) {
-          System.err.println("\n\rFound " + parser.errors.size() + " errors:");
+          System.out.println("\n\rFound: ");
+          System.err.println(parser.errors.size() + " errors");
           for (String m : parser.errors) {
             System.err.println(m);
           } 
@@ -94,11 +96,11 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "text"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:37:1: text : text2 ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:39:1: text : text2 ;
     public final void text() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:37:6: ( text2 )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:37:8: text2
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:39:6: ( text2 )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:39:8: text2
             {
             pushFollow(FOLLOW_text2_in_text30);
             text2();
@@ -126,15 +128,15 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "text2"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:40:1: text2 : ( fun_decl | var )+ ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:42:1: text2 : ( fun_decl | var )+ ;
     public final void text2() throws RecognitionException {
         text2_stack.push(new text2_scope());
         ((text2_scope)text2_stack.peek()).name = "[global]";
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:45:3: ( ( fun_decl | var )+ )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:45:5: ( fun_decl | var )+
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:47:3: ( ( fun_decl | var )+ )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:47:5: ( fun_decl | var )+
             {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:45:5: ( fun_decl | var )+
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:47:5: ( fun_decl | var )+
             int cnt1=0;
             loop1:
             do {
@@ -215,7 +217,7 @@ public class strgramParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:45:7: fun_decl
+            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:47:7: fun_decl
             	    {
             	    pushFollow(FOLLOW_fun_decl_in_text257);
             	    fun_decl();
@@ -226,7 +228,7 @@ public class strgramParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:46:7: var
+            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:48:7: var
             	    {
             	    ((text2_scope)text2_stack.peek()).name = "[global]";
             	    pushFollow(FOLLOW_var_in_text268);
@@ -264,12 +266,12 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "type"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:50:2: type returns [String idType] : ( 'Int' | 'String' | 'Char' );
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:52:2: type returns [String idType] : ( 'Int' | 'String' | 'Char' );
     public final String type() throws RecognitionException {
         String idType = null;
 
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:51:3: ( 'Int' | 'String' | 'Char' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:53:3: ( 'Int' | 'String' | 'Char' )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 26:
@@ -296,7 +298,7 @@ public class strgramParser extends Parser {
 
             switch (alt2) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:51:8: 'Int'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:53:8: 'Int'
                     {
                     match(input,26,FOLLOW_26_in_type102); 
                     idType = "Int";
@@ -304,7 +306,7 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:52:8: 'String'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:54:8: 'String'
                     {
                     match(input,27,FOLLOW_27_in_type117); 
                     idType = "String";
@@ -312,7 +314,7 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:53:8: 'Char'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:55:8: 'Char'
                     {
                     match(input,28,FOLLOW_28_in_type130); 
                     idType = "Char";
@@ -338,18 +340,18 @@ public class strgramParser extends Parser {
     };
 
     // $ANTLR start "id_init"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:56:1: id_init returns [String idName,int idLine] : a= ID ( EQUAL ( expr | fun_call ) )? ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:58:1: id_init returns [String idName,int idLine] : a= ID ( EQUAL id_value )? ;
     public final strgramParser.id_init_return id_init() throws RecognitionException {
         strgramParser.id_init_return retval = new strgramParser.id_init_return();
         retval.start = input.LT(1);
 
         Token a=null;
-        String expr1 = null;
+        String id_value1 = null;
 
 
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:57:3: (a= ID ( EQUAL ( expr | fun_call ) )? )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:57:7: a= ID ( EQUAL ( expr | fun_call ) )?
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:59:3: (a= ID ( EQUAL id_value )? )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:59:7: a= ID ( EQUAL id_value )?
             {
             a=(Token)match(input,ID,FOLLOW_ID_in_id_init162); 
 
@@ -364,79 +366,22 @@ public class strgramParser extends Parser {
             			    }
                     }
                   
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:70:7: ( EQUAL ( expr | fun_call ) )?
-            int alt4=2;
-            int LA4_0 = input.LA(1);
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:72:7: ( EQUAL id_value )?
+            int alt3=2;
+            int LA3_0 = input.LA(1);
 
-            if ( (LA4_0==EQUAL) ) {
-                alt4=1;
+            if ( (LA3_0==EQUAL) ) {
+                alt3=1;
             }
-            switch (alt4) {
+            switch (alt3) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:70:8: EQUAL ( expr | fun_call )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:72:8: EQUAL id_value
                     {
                     match(input,EQUAL,FOLLOW_EQUAL_in_id_init180); 
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:71:7: ( expr | fun_call )
-                    int alt3=2;
-                    int LA3_0 = input.LA(1);
+                    pushFollow(FOLLOW_id_value_in_id_init182);
+                    id_value1=id_value();
 
-                    if ( (LA3_0==ID) ) {
-                        int LA3_1 = input.LA(2);
-
-                        if ( (LA3_1==COMMA||(LA3_1>=EOL && LA3_1<=MATHOPER)) ) {
-                            alt3=1;
-                        }
-                        else if ( (LA3_1==PAR_OPEN) ) {
-                            alt3=2;
-                        }
-                        else {
-                            NoViableAltException nvae =
-                                new NoViableAltException("", 3, 1, input);
-
-                            throw nvae;
-                        }
-                    }
-                    else if ( (LA3_0==PAR_OPEN||(LA3_0>=INT && LA3_0<=CHAR)) ) {
-                        alt3=1;
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 3, 0, input);
-
-                        throw nvae;
-                    }
-                    switch (alt3) {
-                        case 1 :
-                            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:71:8: expr
-                            {
-                            pushFollow(FOLLOW_expr_in_id_init190);
-                            expr1=expr();
-
-                            state._fsp--;
-
-
-                                        if (!((var_scope)var_stack.peek()).varType.equals(expr1)) {
-                                          errors.add("line "+(a!=null?a.getLine():0)+": name "+(a!=null?a.getText():null)+" wrong type conversion cannot convert " + expr1 + " to " + ((var_scope)var_stack.peek()).varType);
-                                        } else {
-                                          names.get(((text2_scope)text2_stack.peek()).name + "." + (a!=null?a.getText():null)).addLineUses((a!=null?a.getLine():0));
-                                        }
-                                  
-
-                            }
-                            break;
-                        case 2 :
-                            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:80:7: fun_call
-                            {
-                            pushFollow(FOLLOW_fun_call_in_id_init217);
-                            fun_call();
-
-                            state._fsp--;
-
-
-                            }
-                            break;
-
-                    }
+                    state._fsp--;
 
 
                     }
@@ -444,6 +389,16 @@ public class strgramParser extends Parser {
 
             }
 
+
+                    if (id_value1 != null){
+                        String varType = names.get(((text2_scope)text2_stack.peek()).name + "." + (a!=null?a.getText():null)).getType();
+                        if (!varType.equals(id_value1)) {
+                          errors.add("line "+(a!=null?a.getLine():0)+": name "+(a!=null?a.getText():null)+" wrong type conversion cannot convert " + id_value1 + " to " + varType);
+                        } else {
+                          names.get(((text2_scope)text2_stack.peek()).name + "." + (a!=null?a.getText():null)).addLineUses((a!=null?a.getLine():0));
+                        }
+                    }
+                  
 
             }
 
@@ -460,6 +415,137 @@ public class strgramParser extends Parser {
     }
     // $ANTLR end "id_init"
 
+
+    // $ANTLR start "id_assign"
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:86:1: id_assign : a= ID EQUAL id_value ;
+    public final void id_assign() throws RecognitionException {
+        Token a=null;
+        String id_value2 = null;
+
+
+        try {
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:87:2: (a= ID EQUAL id_value )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:87:4: a= ID EQUAL id_value
+            {
+            a=(Token)match(input,ID,FOLLOW_ID_in_id_assign211); 
+            match(input,EQUAL,FOLLOW_EQUAL_in_id_assign213); 
+            pushFollow(FOLLOW_id_value_in_id_assign215);
+            id_value2=id_value();
+
+            state._fsp--;
+
+
+                        if (!names.isExist(((text2_scope)text2_stack.peek()).name + "." + (a!=null?a.getText():null))) {
+                          errors.add("line "+(a!=null?a.getLine():0)+": name "+(a!=null?a.getText():null)+" not exist");
+                        } else {
+                          names.get(((text2_scope)text2_stack.peek()).name + "." + (a!=null?a.getText():null)).addLineUses((a!=null?a.getLine():0));
+            	            String varType = names.get(((text2_scope)text2_stack.peek()).name + "." + (a!=null?a.getText():null)).getType();
+            	            if (!varType.equals(id_value2)) {
+            	              errors.add("line "+(a!=null?a.getLine():0)+": name "+(a!=null?a.getText():null)+" wrong type conversion cannot convert " + id_value2 + " to " + varType);
+            	            } else {
+            	              names.get(((text2_scope)text2_stack.peek()).name + "." + (a!=null?a.getText():null)).addLineUses((a!=null?a.getLine():0));
+            	            }
+                        }
+            	
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "id_assign"
+
+
+    // $ANTLR start "id_value"
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:103:1: id_value returns [String idType] : ( expr | fun_call ) ;
+    public final String id_value() throws RecognitionException {
+        String idType = null;
+
+        String expr3 = null;
+
+
+        try {
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:104:3: ( ( expr | fun_call ) )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:105:7: ( expr | fun_call )
+            {
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:105:7: ( expr | fun_call )
+            int alt4=2;
+            int LA4_0 = input.LA(1);
+
+            if ( (LA4_0==ID) ) {
+                int LA4_1 = input.LA(2);
+
+                if ( (LA4_1==COMMA||(LA4_1>=EOL && LA4_1<=MATHOPER)) ) {
+                    alt4=1;
+                }
+                else if ( (LA4_1==PAR_OPEN) ) {
+                    alt4=2;
+                }
+                else {
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 4, 1, input);
+
+                    throw nvae;
+                }
+            }
+            else if ( (LA4_0==PAR_OPEN||(LA4_0>=INT && LA4_0<=CHAR)) ) {
+                alt4=1;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 4, 0, input);
+
+                throw nvae;
+            }
+            switch (alt4) {
+                case 1 :
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:105:8: expr
+                    {
+                    pushFollow(FOLLOW_expr_in_id_value244);
+                    expr3=expr();
+
+                    state._fsp--;
+
+
+                            idType = expr3;
+                          
+
+                    }
+                    break;
+                case 2 :
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:110:7: fun_call
+                    {
+                    pushFollow(FOLLOW_fun_call_in_id_value271);
+                    fun_call();
+
+                    state._fsp--;
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return idType;
+    }
+    // $ANTLR end "id_value"
+
     protected static class var_scope {
         String varType;
     }
@@ -467,22 +553,22 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "var"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:82:1: var : ( type a= id_init ( COMMA b= id_init )* | ( LIST fun_call ) ) EOL ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:114:1: var : ( type a= id_init ( COMMA b= id_init )* | ( LIST fun_call ) ) EOL ;
     public final void var() throws RecognitionException {
         var_stack.push(new var_scope());
         strgramParser.id_init_return a = null;
 
         strgramParser.id_init_return b = null;
 
-        String type2 = null;
+        String type4 = null;
 
 
         ((var_scope)var_stack.peek()).varType = "";
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:87:2: ( ( type a= id_init ( COMMA b= id_init )* | ( LIST fun_call ) ) EOL )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:87:5: ( type a= id_init ( COMMA b= id_init )* | ( LIST fun_call ) ) EOL
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:119:2: ( ( type a= id_init ( COMMA b= id_init )* | ( LIST fun_call ) ) EOL )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:119:5: ( type a= id_init ( COMMA b= id_init )* | ( LIST fun_call ) ) EOL
             {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:87:5: ( type a= id_init ( COMMA b= id_init )* | ( LIST fun_call ) )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:119:5: ( type a= id_init ( COMMA b= id_init )* | ( LIST fun_call ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -500,22 +586,22 @@ public class strgramParser extends Parser {
             }
             switch (alt6) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:87:6: type a= id_init ( COMMA b= id_init )*
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:119:6: type a= id_init ( COMMA b= id_init )*
                     {
-                    pushFollow(FOLLOW_type_in_var245);
-                    type2=type();
+                    pushFollow(FOLLOW_type_in_var301);
+                    type4=type();
 
                     state._fsp--;
 
 
-                        ((var_scope)var_stack.peek()).varType = type2;	
+                        ((var_scope)var_stack.peek()).varType = type4;	
                     	
-                    pushFollow(FOLLOW_id_init_in_var254);
+                    pushFollow(FOLLOW_id_init_in_var310);
                     a=id_init();
 
                     state._fsp--;
 
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:91:13: ( COMMA b= id_init )*
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:123:13: ( COMMA b= id_init )*
                     loop5:
                     do {
                         int alt5=2;
@@ -528,10 +614,10 @@ public class strgramParser extends Parser {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:91:14: COMMA b= id_init
+                    	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:123:14: COMMA b= id_init
                     	    {
-                    	    match(input,COMMA,FOLLOW_COMMA_in_var257); 
-                    	    pushFollow(FOLLOW_id_init_in_var261);
+                    	    match(input,COMMA,FOLLOW_COMMA_in_var313); 
+                    	    pushFollow(FOLLOW_id_init_in_var317);
                     	    b=id_init();
 
                     	    state._fsp--;
@@ -549,13 +635,13 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:91:32: ( LIST fun_call )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:123:32: ( LIST fun_call )
                     {
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:91:32: ( LIST fun_call )
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:91:33: LIST fun_call
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:123:32: ( LIST fun_call )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:123:33: LIST fun_call
                     {
-                    match(input,LIST,FOLLOW_LIST_in_var266); 
-                    pushFollow(FOLLOW_fun_call_in_var268);
+                    match(input,LIST,FOLLOW_LIST_in_var322); 
+                    pushFollow(FOLLOW_fun_call_in_var324);
                     fun_call();
 
                     state._fsp--;
@@ -571,12 +657,11 @@ public class strgramParser extends Parser {
 
 
                  if ((a!=null?a.idName:null) != null) {
-                      names.add(names.new Name(((text2_scope)text2_stack.peek()).name + "." + (a!=null?a.idName:null), type2, (a!=null?a.idLine:0)));
-                      names.get(((text2_scope)text2_stack.peek()).name + "." + (a!=null?a.idName:null)).addLineUses((a!=null?a.idLine:0));
+                      names.add(names.new Name(((text2_scope)text2_stack.peek()).name + "." + (a!=null?a.idName:null), type4, (a!=null?a.idLine:0)));
                  }
 
               
-            match(input,EOL,FOLLOW_EOL_in_var277); 
+            match(input,EOL,FOLLOW_EOL_in_var333); 
 
             }
 
@@ -594,7 +679,7 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "expr"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:103:1: expr returns [String idType] : a= math_exp ( MATHOPER b= math_exp )* ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:134:1: expr returns [String idType] : a= math_exp ( MATHOPER b= math_exp )* ;
     public final String expr() throws RecognitionException {
         String idType = null;
 
@@ -604,15 +689,15 @@ public class strgramParser extends Parser {
 
 
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:104:3: (a= math_exp ( MATHOPER b= math_exp )* )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:104:7: a= math_exp ( MATHOPER b= math_exp )*
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:135:3: (a= math_exp ( MATHOPER b= math_exp )* )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:135:7: a= math_exp ( MATHOPER b= math_exp )*
             {
-            pushFollow(FOLLOW_math_exp_in_expr301);
+            pushFollow(FOLLOW_math_exp_in_expr357);
             a=math_exp();
 
             state._fsp--;
 
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:104:18: ( MATHOPER b= math_exp )*
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:135:18: ( MATHOPER b= math_exp )*
             loop7:
             do {
                 int alt7=2;
@@ -625,10 +710,10 @@ public class strgramParser extends Parser {
 
                 switch (alt7) {
             	case 1 :
-            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:104:19: MATHOPER b= math_exp
+            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:135:19: MATHOPER b= math_exp
             	    {
-            	    match(input,MATHOPER,FOLLOW_MATHOPER_in_expr304); 
-            	    pushFollow(FOLLOW_math_exp_in_expr308);
+            	    match(input,MATHOPER,FOLLOW_MATHOPER_in_expr360); 
+            	    pushFollow(FOLLOW_math_exp_in_expr364);
             	    b=math_exp();
 
             	    state._fsp--;
@@ -668,18 +753,18 @@ public class strgramParser extends Parser {
     };
 
     // $ANTLR start "math_exp"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:114:1: math_exp returns [String idType] : ( data_id | PAR_OPEN expr PAR_CLOSE );
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:145:1: math_exp returns [String idType] : ( data_id | PAR_OPEN expr PAR_CLOSE );
     public final strgramParser.math_exp_return math_exp() throws RecognitionException {
         strgramParser.math_exp_return retval = new strgramParser.math_exp_return();
         retval.start = input.LT(1);
 
-        String data_id3 = null;
+        String data_id5 = null;
 
-        String expr4 = null;
+        String expr6 = null;
 
 
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:115:3: ( data_id | PAR_OPEN expr PAR_CLOSE )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:146:3: ( data_id | PAR_OPEN expr PAR_CLOSE )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -697,31 +782,31 @@ public class strgramParser extends Parser {
             }
             switch (alt8) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:115:7: data_id
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:146:7: data_id
                     {
-                    pushFollow(FOLLOW_data_id_in_math_exp336);
-                    data_id3=data_id();
+                    pushFollow(FOLLOW_data_id_in_math_exp392);
+                    data_id5=data_id();
 
                     state._fsp--;
 
 
-                        retval.idType = data_id3;
+                        retval.idType = data_id5;
                       
 
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:119:7: PAR_OPEN expr PAR_CLOSE
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:150:7: PAR_OPEN expr PAR_CLOSE
                     {
-                    match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_math_exp348); 
-                    pushFollow(FOLLOW_expr_in_math_exp350);
-                    expr4=expr();
+                    match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_math_exp404); 
+                    pushFollow(FOLLOW_expr_in_math_exp406);
+                    expr6=expr();
 
                     state._fsp--;
 
-                    match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_math_exp352); 
+                    match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_math_exp408); 
 
-                        retval.idType = expr4;
+                        retval.idType = expr6;
                       
 
                     }
@@ -743,12 +828,12 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "data"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:125:1: data returns [String idType] : ( INT | STRING | CHAR );
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:156:1: data returns [String idType] : ( INT | STRING | CHAR );
     public final String data() throws RecognitionException {
         String idType = null;
 
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:126:3: ( INT | STRING | CHAR )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:157:3: ( INT | STRING | CHAR )
             int alt9=3;
             switch ( input.LA(1) ) {
             case INT:
@@ -775,25 +860,25 @@ public class strgramParser extends Parser {
 
             switch (alt9) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:126:7: INT
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:157:7: INT
                     {
-                    match(input,INT,FOLLOW_INT_in_data376); 
+                    match(input,INT,FOLLOW_INT_in_data432); 
                     idType = "Int";
 
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:127:7: STRING
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:158:7: STRING
                     {
-                    match(input,STRING,FOLLOW_STRING_in_data391); 
+                    match(input,STRING,FOLLOW_STRING_in_data447); 
                     idType = "String";
 
                     }
                     break;
                 case 3 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:128:7: CHAR
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:159:7: CHAR
                     {
-                    match(input,CHAR,FOLLOW_CHAR_in_data402); 
+                    match(input,CHAR,FOLLOW_CHAR_in_data458); 
                     idType = "Char";
 
                     }
@@ -813,16 +898,16 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "data_id"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:131:1: data_id returns [String idType] : ( ID | data );
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:162:1: data_id returns [String idType] : ( ID | data );
     public final String data_id() throws RecognitionException {
         String idType = null;
 
-        Token ID5=null;
-        String data6 = null;
+        Token ID7=null;
+        String data8 = null;
 
 
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:132:3: ( ID | data )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:163:3: ( ID | data )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -840,30 +925,30 @@ public class strgramParser extends Parser {
             }
             switch (alt10) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:132:7: ID
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:163:7: ID
                     {
-                    ID5=(Token)match(input,ID,FOLLOW_ID_in_data_id431); 
+                    ID7=(Token)match(input,ID,FOLLOW_ID_in_data_id487); 
 
-                        if (! names.isExist(((text2_scope)text2_stack.peek()).name + "." + (ID5!=null?ID5.getText():null))) {
-                          errors.add("line "+(ID5!=null?ID5.getLine():0)+": name "+(ID5!=null?ID5.getText():null)+" cannot be resolved");
+                        if (! names.isExist(((text2_scope)text2_stack.peek()).name + "." + (ID7!=null?ID7.getText():null))) {
+                          errors.add("line "+(ID7!=null?ID7.getLine():0)+": name "+(ID7!=null?ID7.getText():null)+" cannot be resolved");
                         } else {
-                          names.get(((text2_scope)text2_stack.peek()).name + "." + (ID5!=null?ID5.getText():null)).addLineUses((ID5!=null?ID5.getLine():0));   
+                          names.get(((text2_scope)text2_stack.peek()).name + "." + (ID7!=null?ID7.getText():null)).addLineUses((ID7!=null?ID7.getLine():0));   
                         }
-                        idType = names.get(((text2_scope)text2_stack.peek()).name + "." + (ID5!=null?ID5.getText():null)).getType();
+                        idType = names.get(((text2_scope)text2_stack.peek()).name + "." + (ID7!=null?ID7.getText():null)).getType();
                       
 
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:141:7: data
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:172:7: data
                     {
-                    pushFollow(FOLLOW_data_in_data_id444);
-                    data6=data();
+                    pushFollow(FOLLOW_data_in_data_id500);
+                    data8=data();
 
                     state._fsp--;
 
 
-                     	  idType = data6;
+                     	  idType = data8;
                      	
 
                     }
@@ -883,25 +968,25 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "if_op"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:147:1: if_op : 'if' bool_cond fun_body 'else' fun_body ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:178:1: if_op : 'if' bool_cond fun_body 'else' fun_body ;
     public final void if_op() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:148:2: ( 'if' bool_cond fun_body 'else' fun_body )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:148:5: 'if' bool_cond fun_body 'else' fun_body
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:179:2: ( 'if' bool_cond fun_body 'else' fun_body )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:179:5: 'if' bool_cond fun_body 'else' fun_body
             {
-            match(input,29,FOLLOW_29_in_if_op466); 
-            pushFollow(FOLLOW_bool_cond_in_if_op468);
+            match(input,29,FOLLOW_29_in_if_op522); 
+            pushFollow(FOLLOW_bool_cond_in_if_op524);
             bool_cond();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_fun_body_in_if_op470);
+            pushFollow(FOLLOW_fun_body_in_if_op526);
             fun_body();
 
             state._fsp--;
 
-            match(input,30,FOLLOW_30_in_if_op478); 
-            pushFollow(FOLLOW_fun_body_in_if_op480);
+            match(input,30,FOLLOW_30_in_if_op534); 
+            pushFollow(FOLLOW_fun_body_in_if_op536);
             fun_body();
 
             state._fsp--;
@@ -922,18 +1007,18 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "for_op"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:152:1: for_op : 'for' PAR_OPEN ( INT | ( type a= ID 'in' b= ID ) ) PAR_CLOSE fun_body ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:183:1: for_op : 'for' PAR_OPEN ( INT | ( type a= ID 'in' b= ID ) ) PAR_CLOSE fun_body ;
     public final void for_op() throws RecognitionException {
         Token a=null;
         Token b=null;
 
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:153:2: ( 'for' PAR_OPEN ( INT | ( type a= ID 'in' b= ID ) ) PAR_CLOSE fun_body )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:153:5: 'for' PAR_OPEN ( INT | ( type a= ID 'in' b= ID ) ) PAR_CLOSE fun_body
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:184:2: ( 'for' PAR_OPEN ( INT | ( type a= ID 'in' b= ID ) ) PAR_CLOSE fun_body )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:184:5: 'for' PAR_OPEN ( INT | ( type a= ID 'in' b= ID ) ) PAR_CLOSE fun_body
             {
-            match(input,31,FOLLOW_31_in_for_op495); 
-            match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_for_op497); 
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:153:20: ( INT | ( type a= ID 'in' b= ID ) )
+            match(input,31,FOLLOW_31_in_for_op551); 
+            match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_for_op553); 
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:184:20: ( INT | ( type a= ID 'in' b= ID ) )
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -951,26 +1036,26 @@ public class strgramParser extends Parser {
             }
             switch (alt11) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:153:21: INT
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:184:21: INT
                     {
-                    match(input,INT,FOLLOW_INT_in_for_op500); 
+                    match(input,INT,FOLLOW_INT_in_for_op556); 
 
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:153:25: ( type a= ID 'in' b= ID )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:184:25: ( type a= ID 'in' b= ID )
                     {
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:153:25: ( type a= ID 'in' b= ID )
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:153:26: type a= ID 'in' b= ID
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:184:25: ( type a= ID 'in' b= ID )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:184:26: type a= ID 'in' b= ID
                     {
-                    pushFollow(FOLLOW_type_in_for_op503);
+                    pushFollow(FOLLOW_type_in_for_op559);
                     type();
 
                     state._fsp--;
 
-                    a=(Token)match(input,ID,FOLLOW_ID_in_for_op507); 
-                    match(input,32,FOLLOW_32_in_for_op509); 
-                    b=(Token)match(input,ID,FOLLOW_ID_in_for_op513); 
+                    a=(Token)match(input,ID,FOLLOW_ID_in_for_op563); 
+                    match(input,32,FOLLOW_32_in_for_op565); 
+                    b=(Token)match(input,ID,FOLLOW_ID_in_for_op569); 
 
                     }
 
@@ -992,8 +1077,8 @@ public class strgramParser extends Parser {
                   names.get(((text2_scope)text2_stack.peek()).name + "." + (b!=null?b.getText():null)).addLineUses((b!=null?b.getLine():0));   
                 }
               
-            match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_for_op524); 
-            pushFollow(FOLLOW_fun_body_in_for_op526);
+            match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_for_op580); 
+            pushFollow(FOLLOW_fun_body_in_for_op582);
             fun_body();
 
             state._fsp--;
@@ -1014,19 +1099,19 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "while_op"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:169:1: while_op : 'while' bool_cond fun_body ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:200:1: while_op : 'while' bool_cond fun_body ;
     public final void while_op() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:170:2: ( 'while' bool_cond fun_body )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:170:5: 'while' bool_cond fun_body
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:201:2: ( 'while' bool_cond fun_body )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:201:5: 'while' bool_cond fun_body
             {
-            match(input,33,FOLLOW_33_in_while_op548); 
-            pushFollow(FOLLOW_bool_cond_in_while_op550);
+            match(input,33,FOLLOW_33_in_while_op604); 
+            pushFollow(FOLLOW_bool_cond_in_while_op606);
             bool_cond();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_fun_body_in_while_op552);
+            pushFollow(FOLLOW_fun_body_in_while_op608);
             fun_body();
 
             state._fsp--;
@@ -1047,14 +1132,14 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "bool_cond"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:173:1: bool_cond : PAR_OPEN ( ( ID COMPROPER ID ) | fun_call ) PAR_CLOSE ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:204:1: bool_cond : PAR_OPEN ( ( ID COMPROPER ID ) | fun_call ) PAR_CLOSE ;
     public final void bool_cond() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:174:2: ( PAR_OPEN ( ( ID COMPROPER ID ) | fun_call ) PAR_CLOSE )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:174:7: PAR_OPEN ( ( ID COMPROPER ID ) | fun_call ) PAR_CLOSE
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:205:2: ( PAR_OPEN ( ( ID COMPROPER ID ) | fun_call ) PAR_CLOSE )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:205:7: PAR_OPEN ( ( ID COMPROPER ID ) | fun_call ) PAR_CLOSE
             {
-            match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_bool_cond568); 
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:174:16: ( ( ID COMPROPER ID ) | fun_call )
+            match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_bool_cond624); 
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:205:16: ( ( ID COMPROPER ID ) | fun_call )
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1082,14 +1167,14 @@ public class strgramParser extends Parser {
             }
             switch (alt12) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:174:17: ( ID COMPROPER ID )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:205:17: ( ID COMPROPER ID )
                     {
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:174:17: ( ID COMPROPER ID )
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:174:18: ID COMPROPER ID
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:205:17: ( ID COMPROPER ID )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:205:18: ID COMPROPER ID
                     {
-                    match(input,ID,FOLLOW_ID_in_bool_cond572); 
-                    match(input,COMPROPER,FOLLOW_COMPROPER_in_bool_cond574); 
-                    match(input,ID,FOLLOW_ID_in_bool_cond576); 
+                    match(input,ID,FOLLOW_ID_in_bool_cond628); 
+                    match(input,COMPROPER,FOLLOW_COMPROPER_in_bool_cond630); 
+                    match(input,ID,FOLLOW_ID_in_bool_cond632); 
 
                     }
 
@@ -1097,9 +1182,9 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:174:37: fun_call
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:205:37: fun_call
                     {
-                    pushFollow(FOLLOW_fun_call_in_bool_cond581);
+                    pushFollow(FOLLOW_fun_call_in_bool_cond637);
                     fun_call();
 
                     state._fsp--;
@@ -1110,7 +1195,7 @@ public class strgramParser extends Parser {
 
             }
 
-            match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_bool_cond584); 
+            match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_bool_cond640); 
 
             }
 
@@ -1127,15 +1212,15 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "brack_id"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:177:1: brack_id : PAR_OPEN ID PAR_CLOSE ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:208:1: brack_id : PAR_OPEN ID PAR_CLOSE ;
     public final void brack_id() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:178:2: ( PAR_OPEN ID PAR_CLOSE )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:178:7: PAR_OPEN ID PAR_CLOSE
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:209:2: ( PAR_OPEN ID PAR_CLOSE )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:209:7: PAR_OPEN ID PAR_CLOSE
             {
-            match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_brack_id599); 
-            match(input,ID,FOLLOW_ID_in_brack_id601); 
-            match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_brack_id603); 
+            match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_brack_id655); 
+            match(input,ID,FOLLOW_ID_in_brack_id657); 
+            match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_brack_id659); 
 
             }
 
@@ -1152,15 +1237,15 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "return_op"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:181:1: return_op : 'return' ID EOL ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:212:1: return_op : 'return' ID EOL ;
     public final void return_op() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:182:2: ( 'return' ID EOL )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:182:5: 'return' ID EOL
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:213:2: ( 'return' ID EOL )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:213:5: 'return' ID EOL
             {
-            match(input,34,FOLLOW_34_in_return_op622); 
-            match(input,ID,FOLLOW_ID_in_return_op624); 
-            match(input,EOL,FOLLOW_EOL_in_return_op626); 
+            match(input,34,FOLLOW_34_in_return_op678); 
+            match(input,ID,FOLLOW_ID_in_return_op680); 
+            match(input,EOL,FOLLOW_EOL_in_return_op682); 
 
             }
 
@@ -1177,10 +1262,10 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "in_out_op"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:186:1: in_out_op : ( ( 'out' op_cond EOL ) | ( 'read' brack_id EOL ) );
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:217:1: in_out_op : ( ( 'out' op_cond EOL ) | ( 'read' brack_id EOL ) );
     public final void in_out_op() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:187:2: ( ( 'out' op_cond EOL ) | ( 'read' brack_id EOL ) )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:218:2: ( ( 'out' op_cond EOL ) | ( 'read' brack_id EOL ) )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1198,18 +1283,18 @@ public class strgramParser extends Parser {
             }
             switch (alt13) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:187:5: ( 'out' op_cond EOL )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:218:5: ( 'out' op_cond EOL )
                     {
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:187:5: ( 'out' op_cond EOL )
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:187:6: 'out' op_cond EOL
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:218:5: ( 'out' op_cond EOL )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:218:6: 'out' op_cond EOL
                     {
-                    match(input,35,FOLLOW_35_in_in_out_op653); 
-                    pushFollow(FOLLOW_op_cond_in_in_out_op655);
+                    match(input,35,FOLLOW_35_in_in_out_op709); 
+                    pushFollow(FOLLOW_op_cond_in_in_out_op711);
                     op_cond();
 
                     state._fsp--;
 
-                    match(input,EOL,FOLLOW_EOL_in_in_out_op658); 
+                    match(input,EOL,FOLLOW_EOL_in_in_out_op714); 
 
                     }
 
@@ -1217,18 +1302,18 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:188:5: ( 'read' brack_id EOL )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:219:5: ( 'read' brack_id EOL )
                     {
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:188:5: ( 'read' brack_id EOL )
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:188:6: 'read' brack_id EOL
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:219:5: ( 'read' brack_id EOL )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:219:6: 'read' brack_id EOL
                     {
-                    match(input,36,FOLLOW_36_in_in_out_op669); 
-                    pushFollow(FOLLOW_brack_id_in_in_out_op671);
+                    match(input,36,FOLLOW_36_in_in_out_op725); 
+                    pushFollow(FOLLOW_brack_id_in_in_out_op727);
                     brack_id();
 
                     state._fsp--;
 
-                    match(input,EOL,FOLLOW_EOL_in_in_out_op673); 
+                    match(input,EOL,FOLLOW_EOL_in_in_out_op729); 
 
                     }
 
@@ -1250,14 +1335,14 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "fun_call"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:191:1: fun_call : ID op_cond ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:222:1: fun_call : ID op_cond ;
     public final void fun_call() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:192:2: ( ID op_cond )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:192:7: ID op_cond
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:223:2: ( ID op_cond )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:223:7: ID op_cond
             {
-            match(input,ID,FOLLOW_ID_in_fun_call689); 
-            pushFollow(FOLLOW_op_cond_in_fun_call691);
+            match(input,ID,FOLLOW_ID_in_fun_call745); 
+            pushFollow(FOLLOW_op_cond_in_fun_call747);
             op_cond();
 
             state._fsp--;
@@ -1278,13 +1363,13 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "self_op"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:195:1: self_op : ( ID '.' )? fun_call ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:226:1: self_op : ( ID '.' )? fun_call ;
     public final void self_op() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:196:2: ( ( ID '.' )? fun_call )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:196:7: ( ID '.' )? fun_call
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:227:2: ( ( ID '.' )? fun_call )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:227:7: ( ID '.' )? fun_call
             {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:196:7: ( ID '.' )?
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:227:7: ( ID '.' )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1297,17 +1382,17 @@ public class strgramParser extends Parser {
             }
             switch (alt14) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:196:8: ID '.'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:227:8: ID '.'
                     {
-                    match(input,ID,FOLLOW_ID_in_self_op706); 
-                    match(input,37,FOLLOW_37_in_self_op707); 
+                    match(input,ID,FOLLOW_ID_in_self_op762); 
+                    match(input,37,FOLLOW_37_in_self_op763); 
 
                     }
                     break;
 
             }
 
-            pushFollow(FOLLOW_fun_call_in_self_op711);
+            pushFollow(FOLLOW_fun_call_in_self_op767);
             fun_call();
 
             state._fsp--;
@@ -1328,14 +1413,14 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "op_cond"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:199:1: op_cond : PAR_OPEN ( cond_arg ( COMMA cond_arg )* )? PAR_CLOSE ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:230:1: op_cond : PAR_OPEN ( cond_arg ( COMMA cond_arg )* )? PAR_CLOSE ;
     public final void op_cond() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:200:2: ( PAR_OPEN ( cond_arg ( COMMA cond_arg )* )? PAR_CLOSE )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:200:4: PAR_OPEN ( cond_arg ( COMMA cond_arg )* )? PAR_CLOSE
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:231:2: ( PAR_OPEN ( cond_arg ( COMMA cond_arg )* )? PAR_CLOSE )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:231:4: PAR_OPEN ( cond_arg ( COMMA cond_arg )* )? PAR_CLOSE
             {
-            match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_op_cond722); 
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:200:13: ( cond_arg ( COMMA cond_arg )* )?
+            match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_op_cond778); 
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:231:13: ( cond_arg ( COMMA cond_arg )* )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -1344,14 +1429,14 @@ public class strgramParser extends Parser {
             }
             switch (alt16) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:200:14: cond_arg ( COMMA cond_arg )*
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:231:14: cond_arg ( COMMA cond_arg )*
                     {
-                    pushFollow(FOLLOW_cond_arg_in_op_cond725);
+                    pushFollow(FOLLOW_cond_arg_in_op_cond781);
                     cond_arg();
 
                     state._fsp--;
 
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:200:23: ( COMMA cond_arg )*
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:231:23: ( COMMA cond_arg )*
                     loop15:
                     do {
                         int alt15=2;
@@ -1364,10 +1449,10 @@ public class strgramParser extends Parser {
 
                         switch (alt15) {
                     	case 1 :
-                    	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:200:24: COMMA cond_arg
+                    	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:231:24: COMMA cond_arg
                     	    {
-                    	    match(input,COMMA,FOLLOW_COMMA_in_op_cond728); 
-                    	    pushFollow(FOLLOW_cond_arg_in_op_cond730);
+                    	    match(input,COMMA,FOLLOW_COMMA_in_op_cond784); 
+                    	    pushFollow(FOLLOW_cond_arg_in_op_cond786);
                     	    cond_arg();
 
                     	    state._fsp--;
@@ -1387,7 +1472,7 @@ public class strgramParser extends Parser {
 
             }
 
-            match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_op_cond736); 
+            match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_op_cond792); 
 
             }
 
@@ -1404,10 +1489,10 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "cond_arg"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:203:1: cond_arg : ( data_id | self_op );
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:234:1: cond_arg : ( data_id | self_op );
     public final void cond_arg() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:204:2: ( data_id | self_op )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:235:2: ( data_id | self_op )
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -1438,9 +1523,9 @@ public class strgramParser extends Parser {
             }
             switch (alt17) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:204:4: data_id
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:235:4: data_id
                     {
-                    pushFollow(FOLLOW_data_id_in_cond_arg748);
+                    pushFollow(FOLLOW_data_id_in_cond_arg804);
                     data_id();
 
                     state._fsp--;
@@ -1449,9 +1534,9 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:204:14: self_op
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:235:14: self_op
                     {
-                    pushFollow(FOLLOW_self_op_in_cond_arg752);
+                    pushFollow(FOLLOW_self_op_in_cond_arg808);
                     self_op();
 
                     state._fsp--;
@@ -1474,10 +1559,10 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "ops"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:207:1: ops : ( id_op | if_op | while_op | for_op | in_out_op | var );
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:238:1: ops : ( id_op | if_op | while_op | for_op | in_out_op | var );
     public final void ops() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:208:2: ( id_op | if_op | while_op | for_op | in_out_op | var )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:239:2: ( id_op | if_op | while_op | for_op | in_out_op | var )
             int alt18=6;
             switch ( input.LA(1) ) {
             case ID:
@@ -1523,9 +1608,9 @@ public class strgramParser extends Parser {
 
             switch (alt18) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:208:5: id_op
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:239:5: id_op
                     {
-                    pushFollow(FOLLOW_id_op_in_ops773);
+                    pushFollow(FOLLOW_id_op_in_ops829);
                     id_op();
 
                     state._fsp--;
@@ -1534,9 +1619,9 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:208:13: if_op
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:239:13: if_op
                     {
-                    pushFollow(FOLLOW_if_op_in_ops777);
+                    pushFollow(FOLLOW_if_op_in_ops833);
                     if_op();
 
                     state._fsp--;
@@ -1545,9 +1630,9 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:208:21: while_op
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:239:21: while_op
                     {
-                    pushFollow(FOLLOW_while_op_in_ops781);
+                    pushFollow(FOLLOW_while_op_in_ops837);
                     while_op();
 
                     state._fsp--;
@@ -1556,9 +1641,9 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:208:32: for_op
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:239:32: for_op
                     {
-                    pushFollow(FOLLOW_for_op_in_ops785);
+                    pushFollow(FOLLOW_for_op_in_ops841);
                     for_op();
 
                     state._fsp--;
@@ -1567,9 +1652,9 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 5 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:208:41: in_out_op
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:239:41: in_out_op
                     {
-                    pushFollow(FOLLOW_in_out_op_in_ops789);
+                    pushFollow(FOLLOW_in_out_op_in_ops845);
                     in_out_op();
 
                     state._fsp--;
@@ -1578,9 +1663,9 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 6 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:208:53: var
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:239:53: var
                     {
-                    pushFollow(FOLLOW_var_in_ops793);
+                    pushFollow(FOLLOW_var_in_ops849);
                     var();
 
                     state._fsp--;
@@ -1603,31 +1688,41 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "id_op"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:211:1: id_op : ( self_op | ( ID POSTFIX ) ) EOL ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:242:1: id_op : ( id_assign | self_op | ( ID POSTFIX ) ) EOL ;
     public final void id_op() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:212:2: ( ( self_op | ( ID POSTFIX ) ) EOL )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:212:6: ( self_op | ( ID POSTFIX ) ) EOL
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:243:2: ( ( id_assign | self_op | ( ID POSTFIX ) ) EOL )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:243:6: ( id_assign | self_op | ( ID POSTFIX ) ) EOL
             {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:212:6: ( self_op | ( ID POSTFIX ) )
-            int alt19=2;
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:243:6: ( id_assign | self_op | ( ID POSTFIX ) )
+            int alt19=3;
             int LA19_0 = input.LA(1);
 
             if ( (LA19_0==ID) ) {
-                int LA19_1 = input.LA(2);
-
-                if ( (LA19_1==PAR_OPEN||LA19_1==37) ) {
+                switch ( input.LA(2) ) {
+                case EQUAL:
+                    {
                     alt19=1;
-                }
-                else if ( (LA19_1==POSTFIX) ) {
+                    }
+                    break;
+                case PAR_OPEN:
+                case 37:
+                    {
                     alt19=2;
-                }
-                else {
+                    }
+                    break;
+                case POSTFIX:
+                    {
+                    alt19=3;
+                    }
+                    break;
+                default:
                     NoViableAltException nvae =
                         new NoViableAltException("", 19, 1, input);
 
                     throw nvae;
                 }
+
             }
             else {
                 NoViableAltException nvae =
@@ -1637,10 +1732,10 @@ public class strgramParser extends Parser {
             }
             switch (alt19) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:212:7: self_op
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:243:7: id_assign
                     {
-                    pushFollow(FOLLOW_self_op_in_id_op809);
-                    self_op();
+                    pushFollow(FOLLOW_id_assign_in_id_op865);
+                    id_assign();
 
                     state._fsp--;
 
@@ -1648,13 +1743,24 @@ public class strgramParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:212:17: ( ID POSTFIX )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:243:19: self_op
                     {
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:212:17: ( ID POSTFIX )
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:212:18: ID POSTFIX
+                    pushFollow(FOLLOW_self_op_in_id_op869);
+                    self_op();
+
+                    state._fsp--;
+
+
+                    }
+                    break;
+                case 3 :
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:243:29: ( ID POSTFIX )
                     {
-                    match(input,ID,FOLLOW_ID_in_id_op814); 
-                    match(input,POSTFIX,FOLLOW_POSTFIX_in_id_op816); 
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:243:29: ( ID POSTFIX )
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:243:30: ID POSTFIX
+                    {
+                    match(input,ID,FOLLOW_ID_in_id_op874); 
+                    match(input,POSTFIX,FOLLOW_POSTFIX_in_id_op876); 
 
                     }
 
@@ -1664,7 +1770,7 @@ public class strgramParser extends Parser {
 
             }
 
-            match(input,EOL,FOLLOW_EOL_in_id_op820); 
+            match(input,EOL,FOLLOW_EOL_in_id_op880); 
 
             }
 
@@ -1681,16 +1787,16 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "main_fun"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:215:1: main_fun : MAIN_NAME PAR_OPEN PAR_CLOSE fun_body ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:246:1: main_fun : MAIN_NAME PAR_OPEN PAR_CLOSE fun_body ;
     public final void main_fun() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:216:3: ( MAIN_NAME PAR_OPEN PAR_CLOSE fun_body )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:216:7: MAIN_NAME PAR_OPEN PAR_CLOSE fun_body
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:247:3: ( MAIN_NAME PAR_OPEN PAR_CLOSE fun_body )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:247:7: MAIN_NAME PAR_OPEN PAR_CLOSE fun_body
             {
-            match(input,MAIN_NAME,FOLLOW_MAIN_NAME_in_main_fun837); 
-            match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_main_fun839); 
-            match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_main_fun841); 
-            pushFollow(FOLLOW_fun_body_in_main_fun843);
+            match(input,MAIN_NAME,FOLLOW_MAIN_NAME_in_main_fun897); 
+            match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_main_fun899); 
+            match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_main_fun901); 
+            pushFollow(FOLLOW_fun_body_in_main_fun903);
             fun_body();
 
             state._fsp--;
@@ -1711,15 +1817,17 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "fun_decl"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:219:1: fun_decl : ( type )? ID PAR_OPEN ( args )? PAR_CLOSE fun_body ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:250:1: fun_decl : ( type )? ID PAR_OPEN ( args )? PAR_CLOSE fun_body ;
     public final void fun_decl() throws RecognitionException {
-        Token ID7=null;
+        Token ID9=null;
+        String type10 = null;
+
 
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:220:2: ( ( type )? ID PAR_OPEN ( args )? PAR_CLOSE fun_body )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:220:5: ( type )? ID PAR_OPEN ( args )? PAR_CLOSE fun_body
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:251:2: ( ( type )? ID PAR_OPEN ( args )? PAR_CLOSE fun_body )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:251:4: ( type )? ID PAR_OPEN ( args )? PAR_CLOSE fun_body
             {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:220:5: ( type )?
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:251:4: ( type )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -1728,10 +1836,10 @@ public class strgramParser extends Parser {
             }
             switch (alt20) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:220:5: type
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:251:4: type
                     {
-                    pushFollow(FOLLOW_type_in_fun_decl856);
-                    type();
+                    pushFollow(FOLLOW_type_in_fun_decl915);
+                    type10=type();
 
                     state._fsp--;
 
@@ -1741,10 +1849,13 @@ public class strgramParser extends Parser {
 
             }
 
-            ID7=(Token)match(input,ID,FOLLOW_ID_in_fun_decl859); 
-             ((text2_scope)text2_stack.peek()).name = (ID7!=null?ID7.getText():null); 
-            match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_fun_decl869); 
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:222:13: ( args )?
+            ID9=(Token)match(input,ID,FOLLOW_ID_in_fun_decl918); 
+             
+            	     ((text2_scope)text2_stack.peek()).name = (ID9!=null?ID9.getText():null); 
+            	     methods.add(methods.new Method(((text2_scope)text2_stack.peek()).name, type10));
+            	  
+            match(input,PAR_OPEN,FOLLOW_PAR_OPEN_in_fun_decl928); 
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:256:13: ( args )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -1753,9 +1864,9 @@ public class strgramParser extends Parser {
             }
             switch (alt21) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:222:13: args
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:256:13: args
                     {
-                    pushFollow(FOLLOW_args_in_fun_decl872);
+                    pushFollow(FOLLOW_args_in_fun_decl931);
                     args();
 
                     state._fsp--;
@@ -1766,8 +1877,8 @@ public class strgramParser extends Parser {
 
             }
 
-            match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_fun_decl875); 
-            pushFollow(FOLLOW_fun_body_in_fun_decl877);
+            match(input,PAR_CLOSE,FOLLOW_PAR_CLOSE_in_fun_decl934); 
+            pushFollow(FOLLOW_fun_body_in_fun_decl936);
             fun_body();
 
             state._fsp--;
@@ -1788,19 +1899,19 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "args"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:225:1: args : type ID ( COMMA type ID )* ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:259:1: args : type ID ( COMMA type ID )* ;
     public final void args() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:226:3: ( type ID ( COMMA type ID )* )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:226:5: type ID ( COMMA type ID )*
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:260:3: ( type ID ( COMMA type ID )* )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:260:5: type ID ( COMMA type ID )*
             {
-            pushFollow(FOLLOW_type_in_args891);
+            pushFollow(FOLLOW_type_in_args951);
             type();
 
             state._fsp--;
 
-            match(input,ID,FOLLOW_ID_in_args893); 
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:226:13: ( COMMA type ID )*
+            match(input,ID,FOLLOW_ID_in_args953); 
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:260:13: ( COMMA type ID )*
             loop22:
             do {
                 int alt22=2;
@@ -1813,15 +1924,15 @@ public class strgramParser extends Parser {
 
                 switch (alt22) {
             	case 1 :
-            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:226:14: COMMA type ID
+            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:260:14: COMMA type ID
             	    {
-            	    match(input,COMMA,FOLLOW_COMMA_in_args896); 
-            	    pushFollow(FOLLOW_type_in_args898);
+            	    match(input,COMMA,FOLLOW_COMMA_in_args956); 
+            	    pushFollow(FOLLOW_type_in_args958);
             	    type();
 
             	    state._fsp--;
 
-            	    match(input,ID,FOLLOW_ID_in_args900); 
+            	    match(input,ID,FOLLOW_ID_in_args960); 
 
             	    }
             	    break;
@@ -1847,14 +1958,14 @@ public class strgramParser extends Parser {
 
 
     // $ANTLR start "fun_body"
-    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:229:1: fun_body : CUR_OPEN ( ops )* ( return_op )? CUR_CLOSE ;
+    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:263:1: fun_body : CUR_OPEN ( ops )* ( return_op )? CUR_CLOSE ;
     public final void fun_body() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:230:2: ( CUR_OPEN ( ops )* ( return_op )? CUR_CLOSE )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:230:7: CUR_OPEN ( ops )* ( return_op )? CUR_CLOSE
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:264:2: ( CUR_OPEN ( ops )* ( return_op )? CUR_CLOSE )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:264:7: CUR_OPEN ( ops )* ( return_op )? CUR_CLOSE
             {
-            match(input,CUR_OPEN,FOLLOW_CUR_OPEN_in_fun_body919); 
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:231:10: ( ops )*
+            match(input,CUR_OPEN,FOLLOW_CUR_OPEN_in_fun_body979); 
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:265:10: ( ops )*
             loop23:
             do {
                 int alt23=2;
@@ -1867,9 +1978,9 @@ public class strgramParser extends Parser {
 
                 switch (alt23) {
             	case 1 :
-            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:231:10: ops
+            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:265:10: ops
             	    {
-            	    pushFollow(FOLLOW_ops_in_fun_body930);
+            	    pushFollow(FOLLOW_ops_in_fun_body990);
             	    ops();
 
             	    state._fsp--;
@@ -1883,7 +1994,7 @@ public class strgramParser extends Parser {
                 }
             } while (true);
 
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:232:9: ( return_op )?
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:266:9: ( return_op )?
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -1892,9 +2003,9 @@ public class strgramParser extends Parser {
             }
             switch (alt24) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:232:9: return_op
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:266:9: return_op
                     {
-                    pushFollow(FOLLOW_return_op_in_fun_body941);
+                    pushFollow(FOLLOW_return_op_in_fun_body1001);
                     return_op();
 
                     state._fsp--;
@@ -1905,7 +2016,7 @@ public class strgramParser extends Parser {
 
             }
 
-            match(input,CUR_CLOSE,FOLLOW_CUR_CLOSE_in_fun_body954); 
+            match(input,CUR_CLOSE,FOLLOW_CUR_CLOSE_in_fun_body1014); 
 
             }
 
@@ -1933,102 +2044,107 @@ public class strgramParser extends Parser {
     public static final BitSet FOLLOW_28_in_type130 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ID_in_id_init162 = new BitSet(new long[]{0x0000000000000022L});
     public static final BitSet FOLLOW_EQUAL_in_id_init180 = new BitSet(new long[]{0x0000000000007410L});
-    public static final BitSet FOLLOW_expr_in_id_init190 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_fun_call_in_id_init217 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_type_in_var245 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_id_init_in_var254 = new BitSet(new long[]{0x0000000000000140L});
-    public static final BitSet FOLLOW_COMMA_in_var257 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_id_init_in_var261 = new BitSet(new long[]{0x0000000000000140L});
-    public static final BitSet FOLLOW_LIST_in_var266 = new BitSet(new long[]{0x0000000000007410L});
-    public static final BitSet FOLLOW_fun_call_in_var268 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_EOL_in_var277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_math_exp_in_expr301 = new BitSet(new long[]{0x0000000000000202L});
-    public static final BitSet FOLLOW_MATHOPER_in_expr304 = new BitSet(new long[]{0x0000000000007410L});
-    public static final BitSet FOLLOW_math_exp_in_expr308 = new BitSet(new long[]{0x0000000000000202L});
-    public static final BitSet FOLLOW_data_id_in_math_exp336 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_PAR_OPEN_in_math_exp348 = new BitSet(new long[]{0x0000000000007410L});
-    public static final BitSet FOLLOW_expr_in_math_exp350 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_PAR_CLOSE_in_math_exp352 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_INT_in_data376 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_in_data391 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHAR_in_data402 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_data_id431 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_data_in_data_id444 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_if_op466 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_bool_cond_in_if_op468 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_fun_body_in_if_op470 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_30_in_if_op478 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_fun_body_in_if_op480 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_for_op495 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_PAR_OPEN_in_for_op497 = new BitSet(new long[]{0x000000001C001000L});
-    public static final BitSet FOLLOW_INT_in_for_op500 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_type_in_for_op503 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ID_in_for_op507 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_32_in_for_op509 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ID_in_for_op513 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_PAR_CLOSE_in_for_op524 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_fun_body_in_for_op526 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_while_op548 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_bool_cond_in_while_op550 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_fun_body_in_while_op552 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_PAR_OPEN_in_bool_cond568 = new BitSet(new long[]{0x0000000000007410L});
-    public static final BitSet FOLLOW_ID_in_bool_cond572 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_COMPROPER_in_bool_cond574 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ID_in_bool_cond576 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_fun_call_in_bool_cond581 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_PAR_CLOSE_in_bool_cond584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_PAR_OPEN_in_brack_id599 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ID_in_brack_id601 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_PAR_CLOSE_in_brack_id603 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_return_op622 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ID_in_return_op624 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_EOL_in_return_op626 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_in_out_op653 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_op_cond_in_in_out_op655 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_EOL_in_in_out_op658 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_in_out_op669 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_brack_id_in_in_out_op671 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_EOL_in_in_out_op673 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_fun_call689 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_op_cond_in_fun_call691 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_self_op706 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_self_op707 = new BitSet(new long[]{0x0000000000007410L});
-    public static final BitSet FOLLOW_fun_call_in_self_op711 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_PAR_OPEN_in_op_cond722 = new BitSet(new long[]{0x0000000000007C10L});
-    public static final BitSet FOLLOW_cond_arg_in_op_cond725 = new BitSet(new long[]{0x0000000000000840L});
-    public static final BitSet FOLLOW_COMMA_in_op_cond728 = new BitSet(new long[]{0x0000000000007410L});
-    public static final BitSet FOLLOW_cond_arg_in_op_cond730 = new BitSet(new long[]{0x0000000000000840L});
-    public static final BitSet FOLLOW_PAR_CLOSE_in_op_cond736 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_data_id_in_cond_arg748 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_self_op_in_cond_arg752 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_id_op_in_ops773 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_if_op_in_ops777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_while_op_in_ops781 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_for_op_in_ops785 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_in_out_op_in_ops789 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_var_in_ops793 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_self_op_in_id_op809 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_ID_in_id_op814 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_POSTFIX_in_id_op816 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_EOL_in_id_op820 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_MAIN_NAME_in_main_fun837 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_PAR_OPEN_in_main_fun839 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_PAR_CLOSE_in_main_fun841 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_fun_body_in_main_fun843 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_type_in_fun_decl856 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ID_in_fun_decl859 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_PAR_OPEN_in_fun_decl869 = new BitSet(new long[]{0x000000001C000800L});
-    public static final BitSet FOLLOW_args_in_fun_decl872 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_PAR_CLOSE_in_fun_decl875 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_fun_body_in_fun_decl877 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_type_in_args891 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ID_in_args893 = new BitSet(new long[]{0x0000000000000042L});
-    public static final BitSet FOLLOW_COMMA_in_args896 = new BitSet(new long[]{0x000000001C000000L});
-    public static final BitSet FOLLOW_type_in_args898 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ID_in_args900 = new BitSet(new long[]{0x0000000000000042L});
-    public static final BitSet FOLLOW_CUR_OPEN_in_fun_body919 = new BitSet(new long[]{0x0000001EBC087490L});
-    public static final BitSet FOLLOW_ops_in_fun_body930 = new BitSet(new long[]{0x0000001EBC087490L});
-    public static final BitSet FOLLOW_return_op_in_fun_body941 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_CUR_CLOSE_in_fun_body954 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_id_value_in_id_init182 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_id_assign211 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_EQUAL_in_id_assign213 = new BitSet(new long[]{0x0000000000007410L});
+    public static final BitSet FOLLOW_id_value_in_id_assign215 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_expr_in_id_value244 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_fun_call_in_id_value271 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_type_in_var301 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_id_init_in_var310 = new BitSet(new long[]{0x0000000000000140L});
+    public static final BitSet FOLLOW_COMMA_in_var313 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_id_init_in_var317 = new BitSet(new long[]{0x0000000000000140L});
+    public static final BitSet FOLLOW_LIST_in_var322 = new BitSet(new long[]{0x0000000000007410L});
+    public static final BitSet FOLLOW_fun_call_in_var324 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_EOL_in_var333 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_math_exp_in_expr357 = new BitSet(new long[]{0x0000000000000202L});
+    public static final BitSet FOLLOW_MATHOPER_in_expr360 = new BitSet(new long[]{0x0000000000007410L});
+    public static final BitSet FOLLOW_math_exp_in_expr364 = new BitSet(new long[]{0x0000000000000202L});
+    public static final BitSet FOLLOW_data_id_in_math_exp392 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_PAR_OPEN_in_math_exp404 = new BitSet(new long[]{0x0000000000007410L});
+    public static final BitSet FOLLOW_expr_in_math_exp406 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_PAR_CLOSE_in_math_exp408 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_INT_in_data432 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_in_data447 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHAR_in_data458 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_data_id487 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_data_in_data_id500 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_if_op522 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_bool_cond_in_if_op524 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_fun_body_in_if_op526 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_30_in_if_op534 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_fun_body_in_if_op536 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_for_op551 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_PAR_OPEN_in_for_op553 = new BitSet(new long[]{0x000000001C001000L});
+    public static final BitSet FOLLOW_INT_in_for_op556 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_type_in_for_op559 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ID_in_for_op563 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_32_in_for_op565 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ID_in_for_op569 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_PAR_CLOSE_in_for_op580 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_fun_body_in_for_op582 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_while_op604 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_bool_cond_in_while_op606 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_fun_body_in_while_op608 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_PAR_OPEN_in_bool_cond624 = new BitSet(new long[]{0x0000000000007410L});
+    public static final BitSet FOLLOW_ID_in_bool_cond628 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_COMPROPER_in_bool_cond630 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ID_in_bool_cond632 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_fun_call_in_bool_cond637 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_PAR_CLOSE_in_bool_cond640 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_PAR_OPEN_in_brack_id655 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ID_in_brack_id657 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_PAR_CLOSE_in_brack_id659 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_return_op678 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ID_in_return_op680 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_EOL_in_return_op682 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_in_out_op709 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_op_cond_in_in_out_op711 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_EOL_in_in_out_op714 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_in_out_op725 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_brack_id_in_in_out_op727 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_EOL_in_in_out_op729 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_fun_call745 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_op_cond_in_fun_call747 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_self_op762 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_37_in_self_op763 = new BitSet(new long[]{0x0000000000007410L});
+    public static final BitSet FOLLOW_fun_call_in_self_op767 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_PAR_OPEN_in_op_cond778 = new BitSet(new long[]{0x0000000000007C10L});
+    public static final BitSet FOLLOW_cond_arg_in_op_cond781 = new BitSet(new long[]{0x0000000000000840L});
+    public static final BitSet FOLLOW_COMMA_in_op_cond784 = new BitSet(new long[]{0x0000000000007410L});
+    public static final BitSet FOLLOW_cond_arg_in_op_cond786 = new BitSet(new long[]{0x0000000000000840L});
+    public static final BitSet FOLLOW_PAR_CLOSE_in_op_cond792 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_data_id_in_cond_arg804 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_self_op_in_cond_arg808 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_id_op_in_ops829 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_if_op_in_ops833 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_while_op_in_ops837 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_for_op_in_ops841 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_in_out_op_in_ops845 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_var_in_ops849 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_id_assign_in_id_op865 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_self_op_in_id_op869 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_ID_in_id_op874 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_POSTFIX_in_id_op876 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_EOL_in_id_op880 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_MAIN_NAME_in_main_fun897 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_PAR_OPEN_in_main_fun899 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_PAR_CLOSE_in_main_fun901 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_fun_body_in_main_fun903 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_type_in_fun_decl915 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ID_in_fun_decl918 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_PAR_OPEN_in_fun_decl928 = new BitSet(new long[]{0x000000001C000800L});
+    public static final BitSet FOLLOW_args_in_fun_decl931 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_PAR_CLOSE_in_fun_decl934 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_fun_body_in_fun_decl936 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_type_in_args951 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ID_in_args953 = new BitSet(new long[]{0x0000000000000042L});
+    public static final BitSet FOLLOW_COMMA_in_args956 = new BitSet(new long[]{0x000000001C000000L});
+    public static final BitSet FOLLOW_type_in_args958 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ID_in_args960 = new BitSet(new long[]{0x0000000000000042L});
+    public static final BitSet FOLLOW_CUR_OPEN_in_fun_body979 = new BitSet(new long[]{0x0000001EBC087490L});
+    public static final BitSet FOLLOW_ops_in_fun_body990 = new BitSet(new long[]{0x0000001EBC087490L});
+    public static final BitSet FOLLOW_return_op_in_fun_body1001 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_CUR_CLOSE_in_fun_body1014 = new BitSet(new long[]{0x0000000000000002L});
 
 }

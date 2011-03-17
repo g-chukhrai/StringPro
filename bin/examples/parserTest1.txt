@@ -1,15 +1,19 @@
-Int sss = 5;
+Int StringInt;
 
 main(){
-	Int d;
-	String fff, s,f; String ddd;
-	f=5;
-	String sss = 6;
-	
+
+	StringInt = 4;
+	Int StringInt;
+	String fff, s = 4,f; 
+	String ddd,sadasd,asdfsfsdf;
+	f="sd";
+		d=5;
+	String d2;
 }
 
-op2(){
+String op2(){
 	String ss;
+	return ss;
 }
 
-Int ssss = 5;
+Int ssss;
