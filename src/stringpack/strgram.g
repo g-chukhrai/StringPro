@@ -17,7 +17,7 @@ grammar strgram;
     strgramLexer lex = new strgramLexer(input);
     System.out.println("Start parsing " + input.getSourceName());
     strgramParser parser = new strgramParser(new CommonTokenStream(lex));
-    parser.text();
+    parser.program();
     parser.names.print(System.out);
     parser.methods.print(System.out);
     if (! parser.errors.isEmpty()) {
@@ -36,16 +36,13 @@ grammar strgram;
   } 
 }
 
-text : text2 
-   ; 
-
-text2
+program
 scope {
   String name;
 }
-@init {$text2::name = "[global]";}
+@init {$program::name = "[global]";}
   : ( fun_decl 
-    | {$text2::name = "[global]";} var
+    | {$program::name = "[global]";} var
     )+
   ; 
    
@@ -59,24 +56,24 @@ id_init returns[String idName,int idLine]
   :   a = ID 
       {
        if ($a.text != null) {
-        if (names.isExist($text2::name + "." + $a.text)) {
+        if (names.isExist($program::name + "." + $a.text)) {
           errors.add("line "+$a.line+": name "+$a.text+" duplicated");
         } else {
 	          $idName = $a.text;
 	          $idLine = $a.line;
-	          names.add(names.new Name($text2::name + "." + $a.text, $var::varType, $a.line));
-				    names.get($text2::name + "." + $a.text).addLineUses($a.line);
+	          names.add(names.new Name($program::name + "." + $a.text, $var::varType, $a.line));
+				    names.get($program::name + "." + $a.text).addLineUses($a.line);
 			    }
         }
       }
       (EQUAL id_value)?
       {
         if ($id_value.idType != null){
-            String varType = names.get($text2::name + "." + $a.text).getType();
+            String varType = names.get($program::name + "." + $a.text).getType();
             if (!varType.equals($id_value.idType)) {
               errors.add("line "+$a.line+": name "+$a.text+" wrong type conversion cannot convert " + $id_value.idType + " to " + varType);
             } else {
-              names.get($text2::name + "." + $a.text).addLineUses($a.line);
+              names.get($program::name + "." + $a.text).addLineUses($a.line);
             }
         }
       }
@@ -86,15 +83,15 @@ id_init returns[String idName,int idLine]
 id_assign
 	: a = ID EQUAL id_value
 	{
-            if (!names.isExist($text2::name + "." + $a.text)) {
+            if (!names.isExist($program::name + "." + $a.text)) {
               errors.add("line "+$a.line+": name "+$a.text+" not exist");
             } else {
-              names.get($text2::name + "." + $a.text).addLineUses($a.line);
-	            String varType = names.get($text2::name + "." + $a.text).getType();
+              names.get($program::name + "." + $a.text).addLineUses($a.line);
+	            String varType = names.get($program::name + "." + $a.text).getType();
 	            if (!varType.equals($id_value.idType)) {
 	              errors.add("line "+$a.line+": name "+$a.text+" wrong type conversion cannot convert " + $id_value.idType + " to " + varType);
 	            } else {
-	              names.get($text2::name + "." + $a.text).addLineUses($a.line);
+	              names.get($program::name + "." + $a.text).addLineUses($a.line);
 	            }
             }
 	}
@@ -102,12 +99,15 @@ id_assign
 
 id_value returns [String idType]
   :
-      (expr 
+      expr 
       {
         $idType = $expr.idType;
       }
       |  
-      fun_call)
+      fun_call
+      {
+        $idType = $fun_call.idType;  
+      }
   ;
 
   
@@ -116,17 +116,27 @@ scope {
   String varType;
 }
 @init {$var::varType = "";} 	 
-	: 	(type
+	: 	
+	((type
 	{
     $var::varType = $type.idType;	
 	}
-	 a=id_init (COMMA b=id_init)*|(LIST fun_call)) 
+	 a=id_init (COMMA b=id_init)*) 
 	{
      if ($a.idName != null) {
-          names.add(names.new Name($text2::name + "." + $a.idName, $type.idType, $a.idLine));
+          names.add(names.new Name($program::name + "." + $a.idName, $type.idType, $a.idLine));
      }
-
   }
+  |
+  (LIST c = ID
+  {
+        if (names.isExist($program::name + "." + $c.text)) {
+          errors.add("line "+$c.line+": name "+$c.text+" duplicated");
+        } else {
+            names.add(names.new Name($program::name + "." + $c.text, "List", $c.line));
+        }  
+  }
+  op_cond))
 	EOL 
   ;
 
@@ -162,16 +172,16 @@ data returns  [String idType]
 data_id returns  [String idType]
  	:	  ID
  	{
-    if (! names.isExist($text2::name + "." + $ID.text)) {
+    if (! names.isExist($program::name + "." + $ID.text)) {
       errors.add("line "+$ID.line+": name "+$ID.text+" cannot be resolved");
     } else {
-      names.get($text2::name + "." + $ID.text).addLineUses($ID.line);   
+      names.get($program::name + "." + $ID.text).addLineUses($ID.line);   
+      $idType = names.get($program::name + "." + $ID.text).getType();
     }
-    $idType = names.get($text2::name + "." + $ID.text).getType();
   } 
  	|   data
  	{
- 	  $idType = $data.idType;
+ 	    $idType = $data.idType;
  	}
  	;
    	
@@ -183,15 +193,15 @@ if_op
 for_op 	
 	: 	'for' PAR_OPEN (INT|(type a=ID 'in' b=ID))
 	 {
-    if (! names.isExist($text2::name + "." + $a.text)) {
-      errors.add("line "+$a.line+": name "+$a.text+" cannot be resolved");
+    if (names.isExist($program::name + "." + $a.text)) {
+      errors.add("line "+$a.line+": name "+$a.text+" dublicated");
     } else {
-      names.get($text2::name + "." + $a.text).addLineUses($a.line);
+      names.add(names.new Name($program::name + "." + $a.text, $type.idType, $a.line));
     }
-    if (! names.isExist($text2::name + "." + $b.text)) {
+    if (! names.isExist($program::name + "." + $b.text)) {
       errors.add("line "+$b.line+": name "+$b.text+" cannot be resolved");
     } else {
-      names.get($text2::name + "." + $b.text).addLineUses($b.line);   
+      names.get($program::name + "." + $b.text).addLineUses($b.line);   
     }
   } 
 	 PAR_CLOSE fun_body
@@ -208,19 +218,32 @@ bool_cond
 brack_id
 	:	   PAR_OPEN ID PAR_CLOSE
 	;
-       
-return_op
-	: 	'return' ID EOL	
-	;     
-	  	
-	
-in_out_op 	
-	: 	('out' op_cond  EOL) | 
-		  ('read' brack_id EOL)
+    
+in_out_op returns [String idType]
+	: 	('out' op_cond ) 
+	{
+	   $idType = null;
+	}
+	|   ('read' PAR_OPEN PAR_CLOSE) 
+	{
+	   $idType = "String";
+	}
   ;
-
-fun_call
-	:	   ID op_cond
+  
+fun_call returns [String idType]
+	:	   a=ID op_cond
+	{
+		    if (!methods.isExist($a.text)) {
+		      errors.add("line "+$a.line+": methon name "+$a.text+" cannot be resolved");
+		    } else {
+		      $idType = methods.get($a.text).getReturnType();		   
+		      methods.get($a.text).addLineUses($a.line);   
+		    }	     
+	}
+	|    in_out_op
+	{
+	     $idType = $in_out_op.idType;
+	}
 	;
 
 self_op
@@ -230,13 +253,13 @@ self_op
 op_cond
 	:	PAR_OPEN (cond_arg (COMMA cond_arg)*)? PAR_CLOSE
 	;
-	
+
 cond_arg
 	:	data_id | self_op
 	;
 	    	  
 ops 
-	: 	id_op | if_op | while_op | for_op | in_out_op | var
+	: 	id_op | if_op | while_op | for_op | var
 	;	 
 
 id_op
@@ -248,22 +271,42 @@ main_fun
   ;
 
 fun_decl
-	: type? ID
+	: type? a=ID
 	  { 
-	     $text2::name = $ID.text; 
-	     methods.add(methods.new Method($text2::name, $type.idType));
+	     $program::name = $ID.text; 
+	     methods.add(methods.new Method($program::name, $type.idType));
 	  } 
 	 PAR_OPEN  args? PAR_CLOSE fun_body
+	 {
+	     if ($type.idType != null){
+	       if($fun_body.returnType == null) {
+	           errors.add("line "+$a.line+": method "+$a.text+" missing return statement, expecting " + $type.idType);
+	       }else if(!$type.idType.equals($fun_body.returnType)){
+            errors.add("line "+$a.line+": method "+$a.text+" wrong type conversion cannot convert return type " + 
+                      $fun_body.returnType + " to " + $type.idType);
+         }
+	     }
+	 }
 	; 
 	 
 args
   : type ID (COMMA type ID )*
   ;
 	
-fun_body
+fun_body returns  [String returnType]
 	:   	CUR_OPEN
 		 	     ops*
-			     return_op?    
+			     ('return' a=ID EOL)?   
+			     {
+			       if($a.text!= null){
+						    if (! names.isExist($program::name + "." + $a.text)) {
+						      errors.add("line "+$a.line+": name "+$a.text+" cannot be resolved");
+						    } else {
+	                names.get($program::name + "." + $a.text).addLineUses($a.line);
+	                $returnType = names.get($program::name + "." + $a.text).getType();
+						    }			
+					   }         
+			     } 
 	    	CUR_CLOSE
 	;	
 
@@ -313,7 +356,7 @@ COMPROPER
 	; 		
      
 STRING 	
-	:  	'"' ID '"'
+	:  	'"' .* '"'
   ;
 
 CHAR  

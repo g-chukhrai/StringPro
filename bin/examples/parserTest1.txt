@@ -1,19 +1,28 @@
-Int StringInt;
+String ECHO = "EchoString";
 
-main(){
 
-	StringInt = 4;
-	Int StringInt;
-	String fff, s = 4,f; 
-	String ddd,sadasd,asdfsfsdf;
-	f="sd";
-		d=5;
-	String d2;
+removeDublicate(){}
+remove(){}
+
+
+Main(){
+	while (hasUpper(ECHO)){
+		Char c = getUpper(ECHO);
+		// E -> e
+		toLower(c);
+		// e -> f
+		c++;
+	}
+	// EchoString -> fchottring
+	ECHO.removeDublicate("t");
+	// fchottring -> fchoring;
+	ECHO.remove("fcho");
+	// fchoring -> ring;
+	out(ECHO);
+	outThreeChar(ECHO);
 }
 
-String op2(){
-	String ss;
-	return ss;
-}
 
-Int ssss;
+outThreeChar(String s) {
+	out(ECHO.sub(0,3));
+}
