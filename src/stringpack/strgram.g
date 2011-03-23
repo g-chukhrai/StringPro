@@ -1,33 +1,22 @@
 grammar strgram;
+options {output=template;}
 
+scope slist {
+    List locals; // must be defined one per semicolon
+    List stats;
+}
 @header {
   package stringpack;
+  import org.antlr.stringtemplate.*;
 }
 @lexer::header {
   package stringpack;
 } 
-@members {
+@members {	
   protected NamesTable names = new NamesTable();
   protected MethodTable methods = new MethodTable();
   protected ArrayList<String> errors = new ArrayList<String>(); 
-   
-  public static void main(String[] args) throws Exception {
-//    ANTLRInputStream input = new ANTLRInputStream(System.in);
-    ANTLRFileStream input = new ANTLRFileStream("D:/JavaProj/stringpro/src/examples/parserTest1.txt");
-    strgramLexer lex = new strgramLexer(input);
-    System.out.println("Start parsing " + input.getSourceName());
-    strgramParser parser = new strgramParser(new CommonTokenStream(lex));
-    parser.program();
-    parser.names.print(System.out);
-    parser.methods.print(System.out);
-    if (! parser.errors.isEmpty()) {
-      System.out.println("\n\rFound: ");
-      System.err.println(parser.errors.size() + " errors");
-      for (String m : parser.errors) {
-        System.err.println(m);
-      } 
-    } 
-    } 
+
   public String getErrorHeader(RecognitionException e) {
     return "line "+e.line+":";  
   }
@@ -52,17 +41,14 @@ scope {
   |    'Char'   {$idType = "Char";} 
   ;
      
-id_init returns[String idName,int idLine]
+id_init
   :   a = ID 
       {
        if ($a.text != null) {
         if (names.isExist($program::name + "." + $a.text)) {
-          errors.add("line "+$a.line+": name "+$a.text+" duplicated");
+            errors.add("line "+$a.line+": name "+$a.text+" duplicated");
         } else {
-	          $idName = $a.text;
-	          $idLine = $a.line;
 	          names.add(names.new Name($program::name + "." + $a.text, $var::varType, $a.line));
-				    names.get($program::name + "." + $a.text).addLineUses($a.line);
 			    }
         }
       }
@@ -90,8 +76,6 @@ id_assign
 	            String varType = names.get($program::name + "." + $a.text).getType();
 	            if (!varType.equals($id_value.idType)) {
 	              errors.add("line "+$a.line+": name "+$a.text+" wrong type conversion cannot convert " + $id_value.idType + " to " + varType);
-	            } else {
-	              names.get($program::name + "." + $a.text).addLineUses($a.line);
 	            }
             }
 	}
@@ -121,19 +105,15 @@ scope {
 	{
     $var::varType = $type.idType;	
 	}
-	 a=id_init (COMMA b=id_init)*) 
-	{
-     if ($a.idName != null) {
-          names.add(names.new Name($program::name + "." + $a.idName, $type.idType, $a.idLine));
-     }
-  }
+	id_init (COMMA id_init)*) 
+
   |
-  (LIST c = ID
+  (LIST a = ID
   {
-        if (names.isExist($program::name + "." + $c.text)) {
-          errors.add("line "+$c.line+": name "+$c.text+" duplicated");
+        if (names.isExist($program::name + "." + $a.text)) {
+          errors.add("line "+$a.line+": name "+$a.text+" duplicated");
         } else {
-            names.add(names.new Name($program::name + "." + $c.text, "List", $c.line));
+            names.add(names.new Name($program::name + "." + $a.text, "List", $a.line));
         }  
   }
   op_cond))
