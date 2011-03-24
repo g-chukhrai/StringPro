@@ -7,11 +7,13 @@ class Wrapper {
 }
 >>
 
-variable(type,name) ::= "<type> <name>;"
+variable(type,name) ::=  << 
+<type> <name; separator=", ">;
+>>
 
 globalVariable ::= variable
 
-function(type,name,args,locals,stats) ::= <<
+fun_decl(type,name,args,locals,stats) ::= <<
 <type> <name>(<args; separator=", ">) {
     <locals; separator="\n">
     <stats; separator="\n">
@@ -21,6 +23,8 @@ function(type,name,args,locals,stats) ::= <<
 type_int() ::= "int"
 
 type_char() ::= "char"
+
+type_string() ::= "String"
 
 type_user_object(name) ::= "<name>"
 
@@ -35,14 +39,14 @@ statementList(locals,stats) ::= <<
 }<\n>
 >>
 
-forLoop(e1,e2,e3,locals,stats) ::= <<
+for_op(e1,e2,e3,locals,stats) ::= <<
 for (<e1> <e2>; <e3>) {
     <locals; separator="\n">
     <stats; separator="\n">
 }
 >>
 
-assign(lhs,rhs) ::= "<lhs> = <rhs>;"
+assign(lhs,rhs) ::= "<lhs> = <rhs>"
 
 equals(left,right) ::= "<left> == <right>"
 

@@ -2,7 +2,7 @@ grammar strgram;
 options {output=template;}
 
 scope slist {
-    List locals; // must be defined one per semicolon
+    List locals; 
     List stats;
 }
 @header {
@@ -28,21 +28,33 @@ scope slist {
 program
 scope {
   String name;
+  List globals;
+  List functions;
 }
-@init {$program::name = "[global]";}
-  : ( fun_decl 
-    | {$program::name = "[global]";} var
+@init {
+  $program::globals = new ArrayList();
+  $program::functions = new ArrayList();
+  $program::name = "[global]";
+ }
+  :     
+    ( fun_decl 
+      {$program::functions.add($fun_decl.st);}
+    | {$program::name = "[global]";} 
+      var
+      {$program::globals.add($var.st);}
     )+
+    -> program(globals={$program::globals},functions={$program::functions})
   ; 
    
  type  returns  [String idType]
-  :    'Int'    {$idType = "Int";} 
-  |    'String' {$idType = "String";}  
-  |    'Char'   {$idType = "Char";} 
+  :    'Int'    {$idType = "Int";}      -> type_int()
+  |    'String' {$idType = "String";}   -> type_string()
+  |    'Char'   {$idType = "Char";}     -> type_char()
   ;
      
 id_init
-  :   a = ID 
+  :   
+      a = ID 
       {
        if ($a.text != null) {
         if (names.isExist($program::name + "." + $a.text)) {
@@ -52,23 +64,19 @@ id_init
 			    }
         }
       }
-      (EQUAL id_value)?
-      {
-        if ($id_value.idType != null){
-            String varType = names.get($program::name + "." + $a.text).getType();
-            if (!varType.equals($id_value.idType)) {
-              errors.add("line "+$a.line+": name "+$a.text+" wrong type conversion cannot convert " + $id_value.idType + " to " + varType);
-            } else {
-              names.get($program::name + "." + $a.text).addLineUses($a.line);
-            }
-        }
-      }
-
+      -> {new StringTemplate($a.text)}
+      |
+      id_assign    
+      -> {$id_assign.st}
   ;
   
+  
+  
 id_assign
-	: a = ID EQUAL id_value
+	: 
+	a = ID EQUAL id_value
 	{
+	   
             if (!names.isExist($program::name + "." + $a.text)) {
               errors.add("line "+$a.line+": name "+$a.text+" not exist");
             } else {
@@ -79,6 +87,7 @@ id_assign
 	            }
             }
 	}
+	-> assign(lhs={$a.text}, rhs={$id_value.st})
 	;   
 
 id_value returns [String idType]
@@ -87,11 +96,13 @@ id_value returns [String idType]
       {
         $idType = $expr.idType;
       }
+      -> {$expr.st}
       |  
       fun_call
       {
         $idType = $fun_call.idType;  
       }
+      -> {$fun_call.st}
   ;
 
   
@@ -105,8 +116,7 @@ scope {
 	{
     $var::varType = $type.idType;	
 	}
-	id_init (COMMA id_init)*) 
-
+	b+=id_init (COMMA b+=id_init)*) 
   |
   (LIST a = ID
   {
@@ -118,9 +128,11 @@ scope {
   }
   op_cond))
 	EOL 
+        -> {$program::name.equals("[global]")}?
+           globalVariable(type={$type.st},name={$b})
+        -> variable(type={$type.st},name={$b})
   ;
 
- 
 expr returns [String idType]
   :   a=math_exp (MATHOPER b=math_exp)*
   {
@@ -130,27 +142,33 @@ expr returns [String idType]
       $idType = $a.idType;
     }
   }
+  -> {$a.st}
+
   ;
   
 math_exp returns  [String idType]
-  :   data_id
+  :   
+  data_id
   {
     $idType = $data_id.idType;
   }
+  -> {$data_id.st}
   |   PAR_OPEN expr PAR_CLOSE
   {
     $idType = $expr.idType;
   }
+  -> {$expr.st}
   ;
 
 data returns  [String idType]
-  :	  INT     {$idType = "Int";} 
-  |   STRING  {$idType = "String";}
-  |   CHAR    {$idType = "Char";}
+  :	  INT     {$idType = "Int";}    -> {new StringTemplate($INT.text)}
+  |   STRING  {$idType = "String";} -> {new StringTemplate($STRING.text)}
+  |   CHAR    {$idType = "Char";}   -> {new StringTemplate($CHAR.text)}
   ;
    	
 data_id returns  [String idType]
- 	:	  ID
+ 	:	  
+ 	ID
  	{
     if (! names.isExist($program::name + "." + $ID.text)) {
       errors.add("line "+$ID.line+": name "+$ID.text+" cannot be resolved");
@@ -159,10 +177,13 @@ data_id returns  [String idType]
       $idType = names.get($program::name + "." + $ID.text).getType();
     }
   } 
- 	|   data
+  -> {new StringTemplate($ID.text)}
+ 	|   
+ 	data
  	{
  	    $idType = $data.idType;
  	}
+ 	-> {$data.st}
  	;
    	
 if_op	
@@ -170,8 +191,17 @@ if_op
     	'else' fun_body
   ;
 
-for_op 	
-	: 	'for' PAR_OPEN (INT|(type a=ID 'in' b=ID))
+for_op
+scope slist;
+@init {
+  $slist::locals = new ArrayList();
+  $slist::stats = new ArrayList();
+} 	
+	: 	
+	'for' PAR_OPEN 
+	(INT
+	|
+	(type a=ID 'in' b=ID))
 	 {
     if (names.isExist($program::name + "." + $a.text)) {
       errors.add("line "+$a.line+": name "+$a.text+" dublicated");
@@ -185,6 +215,8 @@ for_op
     }
   } 
 	 PAR_CLOSE fun_body
+        -> for_op(e1={"int i = 0"},e2={"; i < " + $INT.text},e3={" i++"},
+                   locals={$slist::locals}, stats={$slist::stats})
   ;	       
 
 while_op	
@@ -237,13 +269,27 @@ op_cond
 cond_arg
 	:	data_id | self_op
 	;
-	    	  
+	
+    	  
 ops 
-	: 	id_op | if_op | while_op | for_op | var
+	: 	
+	id_op      -> statement(expr={$id_op.st})
+	| 
+	if_op   
+	| 
+	while_op
+	| 
+	for_op     -> {$for_op.st}
 	;	 
 
 id_op
-	:  	(id_assign | self_op | (ID POSTFIX)) EOL	
+	:  	
+	(id_assign -> {$id_assign.st}
+	| 
+	self_op 
+	| 
+	(ID POSTFIX)
+	) EOL	
 	;  
 
 main_fun
@@ -251,12 +297,20 @@ main_fun
   ;
 
 fun_decl
-	: type? a=ID
+scope {
+    String name;
+}
+scope slist;
+@init {
+  $slist::locals = new ArrayList();
+  $slist::stats = new ArrayList();
+}
+	: type? a=ID {$fun_decl::name=$a.text;}
 	  { 
 	     $program::name = $ID.text; 
 	     methods.add(methods.new Method($program::name, $type.idType));
 	  } 
-	 PAR_OPEN  args? PAR_CLOSE fun_body
+	 PAR_OPEN  p+=args? PAR_CLOSE fun_body
 	 {
 	     if ($type.idType != null){
 	       if($fun_body.returnType == null) {
@@ -267,15 +321,25 @@ fun_decl
          }
 	     }
 	 }
+	         -> fun_decl(type={$type.st}, name={$fun_decl::name},
+                    locals={$slist::locals},
+                    stats={$slist::stats},
+                    args={$p})
 	; 
 	 
 args
-  : type ID (COMMA type ID )*
+  : a=type b=ID (COMMA type ID )*
+  -> parameter(type={$a.st},name={$b.text})
   ;
-	
+	 
 fun_body returns  [String returnType]
 	:   	CUR_OPEN
-		 	     ops*
+		 	     
+	       ( var {$slist::locals.add($var.st);} 
+	       |
+	         ops {$slist::stats.add($ops.st);}
+	       )*
+
 			     ('return' a=ID EOL)?   
 			     {
 			       if($a.text!= null){

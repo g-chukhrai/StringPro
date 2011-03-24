@@ -1,5 +1,9 @@
+String ss;
 Main() {
-	String s;
-	s = read();
-	out("Hello ",s,"!");
+	String s,s1;
+	for (3){
+		String sss,s3;
+	}
+	Int ab=3,c=4;
+	ab = 5;
 }
