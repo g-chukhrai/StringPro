@@ -39,7 +39,7 @@ public class Main {
       for (String m : parser.errors) {
         System.err.println(m);
       } 
-    }
+    }System.out.println();
 	System.out.println(r.getTemplate().toString());
     }
 }

@@ -1,6 +1,6 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g 2011-03-24 22:12:33
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g 2011-03-25 12:19:19
 
-  package stringpack;
+package stringpack;
 
 
 import org.antlr.runtime.*;
@@ -314,8 +314,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = MAIN_NAME;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:357:12: ( 'MAIN' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:357:14: 'MAIN'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:429:13: ( 'MAIN' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:429:16: 'MAIN'
             {
             match("MAIN"); 
 
@@ -335,8 +335,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = LIST;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:358:12: ( 'List' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:358:14: 'List'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:430:13: ( 'List' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:430:16: 'List'
             {
             match("List"); 
 
@@ -356,8 +356,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = COMMA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:359:10: ( ',' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:359:12: ','
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:431:13: ( ',' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:431:16: ','
             {
             match(','); 
 
@@ -376,8 +376,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = EQUAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:360:11: ( '=' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:360:13: '='
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:432:13: ( '=' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:432:16: '='
             {
             match('='); 
 
@@ -396,8 +396,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = EOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:361:10: ( ';' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:361:12: ';'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:433:13: ( ';' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:433:16: ';'
             {
             match(';'); 
 
@@ -416,8 +416,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = PAR_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:362:13: ( '(' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:362:15: '('
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:434:13: ( '(' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:434:16: '('
             {
             match('('); 
 
@@ -436,8 +436,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = PAR_CLOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:363:13: ( ')' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:363:15: ')'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:435:13: ( ')' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:435:16: ')'
             {
             match(')'); 
 
@@ -456,8 +456,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = CUR_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:364:13: ( '{' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:364:15: '{'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:436:13: ( '{' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:436:16: '{'
             {
             match('{'); 
 
@@ -476,8 +476,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = CUR_CLOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:365:12: ( '}' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:365:14: '}'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:437:13: ( '}' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:437:16: '}'
             {
             match('}'); 
 
@@ -496,8 +496,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = SQ_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:366:12: ( '[' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:366:14: '['
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:438:13: ( '[' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:438:16: '['
             {
             match('['); 
 
@@ -516,8 +516,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = SQ_CLOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:367:12: ( ']' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:367:14: ']'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:439:13: ( ']' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:439:16: ']'
             {
             match(']'); 
 
@@ -536,10 +536,10 @@ public class strgramLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:372:3: ( ( DIGIT )+ )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:372:5: ( DIGIT )+
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:440:13: ( ( DIGIT )+ )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:440:16: ( DIGIT )+
             {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:372:5: ( DIGIT )+
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:440:16: ( DIGIT )+
             int cnt1=0;
             loop1:
             do {
@@ -553,7 +553,7 @@ public class strgramLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:372:5: DIGIT
+            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:440:16: DIGIT
             	    {
             	    mDIGIT(); 
 
@@ -585,10 +585,10 @@ public class strgramLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:376:3: ( ( ALPHA | DIGIT )+ )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:376:5: ( ALPHA | DIGIT )+
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:443:3: ( ( ALPHA | DIGIT )+ )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:444:3: ( ALPHA | DIGIT )+
             {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:376:5: ( ALPHA | DIGIT )+
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:444:3: ( ALPHA | DIGIT )+
             int cnt2=0;
             loop2:
             do {
@@ -640,8 +640,8 @@ public class strgramLexer extends Lexer {
     // $ANTLR start "ALPHA"
     public final void mALPHA() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:380:3: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:380:5: ( 'a' .. 'z' | 'A' .. 'Z' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:452:3: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:453:3: ( 'a' .. 'z' | 'A' .. 'Z' )
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -664,8 +664,8 @@ public class strgramLexer extends Lexer {
     // $ANTLR start "DIGIT"
     public final void mDIGIT() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:384:3: ( '0' .. '9' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:384:5: '0' .. '9'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:461:3: ( '0' .. '9' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:462:3: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -682,17 +682,46 @@ public class strgramLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:387:5: ( ( ' ' | '\\r' | '\\t' | '\\n' ) )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:387:8: ( ' ' | '\\r' | '\\t' | '\\n' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:465:5: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:465:9: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
-                input.consume();
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:465:9: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            int cnt3=0;
+            loop3:
+            do {
+                int alt3=2;
+                int LA3_0 = input.LA(1);
 
-            }
-            else {
-                MismatchedSetException mse = new MismatchedSetException(null,input);
-                recover(mse);
-                throw mse;}
+                if ( ((LA3_0>='\t' && LA3_0<='\n')||LA3_0=='\r'||LA3_0==' ') ) {
+                    alt3=1;
+                }
+
+
+                switch (alt3) {
+            	case 1 :
+            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:
+            	    {
+            	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
+            	        input.consume();
+
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;}
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt3 >= 1 ) break loop3;
+                        EarlyExitException eee =
+                            new EarlyExitException(3, input);
+                        throw eee;
+                }
+                cnt3++;
+            } while (true);
 
             _channel=HIDDEN;
 
@@ -711,25 +740,25 @@ public class strgramLexer extends Lexer {
         try {
             int _type = POSTFIX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:391:2: ( '++' | '--' )
-            int alt3=2;
-            int LA3_0 = input.LA(1);
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:469:3: ( '++' | '--' )
+            int alt4=2;
+            int LA4_0 = input.LA(1);
 
-            if ( (LA3_0=='+') ) {
-                alt3=1;
+            if ( (LA4_0=='+') ) {
+                alt4=1;
             }
-            else if ( (LA3_0=='-') ) {
-                alt3=2;
+            else if ( (LA4_0=='-') ) {
+                alt4=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 3, 0, input);
+                    new NoViableAltException("", 4, 0, input);
 
                 throw nvae;
             }
-            switch (alt3) {
+            switch (alt4) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:391:4: '++'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:470:3: '++'
                     {
                     match("++"); 
 
@@ -737,7 +766,7 @@ public class strgramLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:391:10: '--'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:471:5: '--'
                     {
                     match("--"); 
 
@@ -759,7 +788,7 @@ public class strgramLexer extends Lexer {
         try {
             int _type = MATHOPER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:395:2: ( '-' | '+' | '*' | '/' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:475:3: ( '-' | '+' | '*' | '/' )
             // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:
             {
             if ( (input.LA(1)>='*' && input.LA(1)<='+')||input.LA(1)=='-'||input.LA(1)=='/' ) {
@@ -787,63 +816,60 @@ public class strgramLexer extends Lexer {
         try {
             int _type = COMPROPER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:399:2: ( ( '>' | '<' | '==' | '>=' | '<=' ) )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:399:5: ( '>' | '<' | '==' | '>=' | '<=' )
-            {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:399:5: ( '>' | '<' | '==' | '>=' | '<=' )
-            int alt4=5;
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:483:3: ( '>' | '<' | '==' | '>=' | '<=' )
+            int alt5=5;
             switch ( input.LA(1) ) {
             case '>':
                 {
-                int LA4_1 = input.LA(2);
+                int LA5_1 = input.LA(2);
 
-                if ( (LA4_1=='=') ) {
-                    alt4=4;
+                if ( (LA5_1=='=') ) {
+                    alt5=4;
                 }
                 else {
-                    alt4=1;}
+                    alt5=1;}
                 }
                 break;
             case '<':
                 {
-                int LA4_2 = input.LA(2);
+                int LA5_2 = input.LA(2);
 
-                if ( (LA4_2=='=') ) {
-                    alt4=5;
+                if ( (LA5_2=='=') ) {
+                    alt5=5;
                 }
                 else {
-                    alt4=2;}
+                    alt5=2;}
                 }
                 break;
             case '=':
                 {
-                alt4=3;
+                alt5=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 4, 0, input);
+                    new NoViableAltException("", 5, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt4) {
+            switch (alt5) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:399:6: '>'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:484:3: '>'
                     {
                     match('>'); 
 
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:399:10: '<'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:485:5: '<'
                     {
                     match('<'); 
 
                     }
                     break;
                 case 3 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:399:14: '=='
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:486:5: '=='
                     {
                     match("=="); 
 
@@ -851,7 +877,7 @@ public class strgramLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:399:19: '>='
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:487:5: '>='
                     {
                     match(">="); 
 
@@ -859,7 +885,7 @@ public class strgramLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:399:24: '<='
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:488:5: '<='
                     {
                     match("<="); 
 
@@ -868,10 +894,6 @@ public class strgramLexer extends Lexer {
                     break;
 
             }
-
-
-            }
-
             state.type = _type;
             state.channel = _channel;
         }
@@ -885,27 +907,27 @@ public class strgramLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:403:2: ( '\"' ( . )* '\"' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:403:6: '\"' ( . )* '\"'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:492:3: ( '\"' ( . )* '\"' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:493:3: '\"' ( . )* '\"'
             {
             match('\"'); 
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:403:10: ( . )*
-            loop5:
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:493:7: ( . )*
+            loop6:
             do {
-                int alt5=2;
-                int LA5_0 = input.LA(1);
+                int alt6=2;
+                int LA6_0 = input.LA(1);
 
-                if ( (LA5_0=='\"') ) {
-                    alt5=2;
+                if ( (LA6_0=='\"') ) {
+                    alt6=2;
                 }
-                else if ( ((LA5_0>='\u0000' && LA5_0<='!')||(LA5_0>='#' && LA5_0<='\uFFFF')) ) {
-                    alt5=1;
+                else if ( ((LA6_0>='\u0000' && LA6_0<='!')||(LA6_0>='#' && LA6_0<='\uFFFF')) ) {
+                    alt6=1;
                 }
 
 
-                switch (alt5) {
+                switch (alt6) {
             	case 1 :
-            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:403:10: .
+            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:493:7: .
             	    {
             	    matchAny(); 
 
@@ -913,7 +935,7 @@ public class strgramLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop5;
+            	    break loop6;
                 }
             } while (true);
 
@@ -934,20 +956,20 @@ public class strgramLexer extends Lexer {
         try {
             int _type = CHAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:407:3: ( '\\'' ( ALPHA )? '\\'' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:407:7: '\\'' ( ALPHA )? '\\''
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:497:3: ( '\\'' ( ALPHA )? '\\'' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:498:3: '\\'' ( ALPHA )? '\\''
             {
             match('\''); 
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:407:12: ( ALPHA )?
-            int alt6=2;
-            int LA6_0 = input.LA(1);
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:498:8: ( ALPHA )?
+            int alt7=2;
+            int LA7_0 = input.LA(1);
 
-            if ( ((LA6_0>='A' && LA6_0<='Z')||(LA6_0>='a' && LA6_0<='z')) ) {
-                alt6=1;
+            if ( ((LA7_0>='A' && LA7_0<='Z')||(LA7_0>='a' && LA7_0<='z')) ) {
+                alt7=1;
             }
-            switch (alt6) {
+            switch (alt7) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:407:12: ALPHA
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:498:8: ALPHA
                     {
                     mALPHA(); 
 
@@ -973,64 +995,64 @@ public class strgramLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:411:5: ( '/*' ( options {greedy=false; } : . )* '*/' | '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:502:3: ( '/*' ( options {greedy=false; } : . )* '*/' | '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA10_0=='/') ) {
-                int LA10_1 = input.LA(2);
+            if ( (LA11_0=='/') ) {
+                int LA11_1 = input.LA(2);
 
-                if ( (LA10_1=='*') ) {
-                    alt10=1;
+                if ( (LA11_1=='*') ) {
+                    alt11=1;
                 }
-                else if ( (LA10_1=='/') ) {
-                    alt10=2;
+                else if ( (LA11_1=='/') ) {
+                    alt11=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 10, 1, input);
+                        new NoViableAltException("", 11, 1, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 10, 0, input);
+                    new NoViableAltException("", 11, 0, input);
 
                 throw nvae;
             }
-            switch (alt10) {
+            switch (alt11) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:411:7: '/*' ( options {greedy=false; } : . )* '*/'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:503:3: '/*' ( options {greedy=false; } : . )* '*/'
                     {
                     match("/*"); 
 
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:411:12: ( options {greedy=false; } : . )*
-                    loop7:
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:503:8: ( options {greedy=false; } : . )*
+                    loop8:
                     do {
-                        int alt7=2;
-                        int LA7_0 = input.LA(1);
+                        int alt8=2;
+                        int LA8_0 = input.LA(1);
 
-                        if ( (LA7_0=='*') ) {
-                            int LA7_1 = input.LA(2);
+                        if ( (LA8_0=='*') ) {
+                            int LA8_1 = input.LA(2);
 
-                            if ( (LA7_1=='/') ) {
-                                alt7=2;
+                            if ( (LA8_1=='/') ) {
+                                alt8=2;
                             }
-                            else if ( ((LA7_1>='\u0000' && LA7_1<='.')||(LA7_1>='0' && LA7_1<='\uFFFF')) ) {
-                                alt7=1;
+                            else if ( ((LA8_1>='\u0000' && LA8_1<='.')||(LA8_1>='0' && LA8_1<='\uFFFF')) ) {
+                                alt8=1;
                             }
 
 
                         }
-                        else if ( ((LA7_0>='\u0000' && LA7_0<=')')||(LA7_0>='+' && LA7_0<='\uFFFF')) ) {
-                            alt7=1;
+                        else if ( ((LA8_0>='\u0000' && LA8_0<=')')||(LA8_0>='+' && LA8_0<='\uFFFF')) ) {
+                            alt8=1;
                         }
 
 
-                        switch (alt7) {
+                        switch (alt8) {
                     	case 1 :
-                    	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:411:40: .
+                    	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:503:34: .
                     	    {
                     	    matchAny(); 
 
@@ -1038,35 +1060,37 @@ public class strgramLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop7;
+                    	    break loop8;
                         }
                     } while (true);
 
                     match("*/"); 
 
-                    _channel=HIDDEN;
+
+                         _channel = HIDDEN;
+                        
 
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:412:7: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:507:5: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
                     {
                     match("//"); 
 
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:412:12: (~ ( '\\n' | '\\r' ) )*
-                    loop8:
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:508:3: (~ ( '\\n' | '\\r' ) )*
+                    loop9:
                     do {
-                        int alt8=2;
-                        int LA8_0 = input.LA(1);
+                        int alt9=2;
+                        int LA9_0 = input.LA(1);
 
-                        if ( ((LA8_0>='\u0000' && LA8_0<='\t')||(LA8_0>='\u000B' && LA8_0<='\f')||(LA8_0>='\u000E' && LA8_0<='\uFFFF')) ) {
-                            alt8=1;
+                        if ( ((LA9_0>='\u0000' && LA9_0<='\t')||(LA9_0>='\u000B' && LA9_0<='\f')||(LA9_0>='\u000E' && LA9_0<='\uFFFF')) ) {
+                            alt9=1;
                         }
 
 
-                        switch (alt8) {
+                        switch (alt9) {
                     	case 1 :
-                    	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:412:12: ~ ( '\\n' | '\\r' )
+                    	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:508:3: ~ ( '\\n' | '\\r' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1082,20 +1106,20 @@ public class strgramLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop8;
+                    	    break loop9;
                         }
                     } while (true);
 
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:412:26: ( '\\r' )?
-                    int alt9=2;
-                    int LA9_0 = input.LA(1);
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:512:3: ( '\\r' )?
+                    int alt10=2;
+                    int LA10_0 = input.LA(1);
 
-                    if ( (LA9_0=='\r') ) {
-                        alt9=1;
+                    if ( (LA10_0=='\r') ) {
+                        alt10=1;
                     }
-                    switch (alt9) {
+                    switch (alt10) {
                         case 1 :
-                            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:412:26: '\\r'
+                            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:512:3: '\\r'
                             {
                             match('\r'); 
 
@@ -1105,7 +1129,9 @@ public class strgramLexer extends Lexer {
                     }
 
                     match('\n'); 
-                    _channel=HIDDEN;
+
+                         _channel = HIDDEN;
+                        
 
                     }
                     break;
@@ -1121,9 +1147,9 @@ public class strgramLexer extends Lexer {
 
     public void mTokens() throws RecognitionException {
         // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:8: ( T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | MAIN_NAME | LIST | COMMA | EQUAL | EOL | PAR_OPEN | PAR_CLOSE | CUR_OPEN | CUR_CLOSE | SQ_OPEN | SQ_CLOSE | INT | ID | WS | POSTFIX | MATHOPER | COMPROPER | STRING | CHAR | COMMENT )
-        int alt11=32;
-        alt11 = dfa11.predict(input);
-        switch (alt11) {
+        int alt12=32;
+        alt12 = dfa12.predict(input);
+        switch (alt12) {
             case 1 :
                 // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:10: T__26
                 {
@@ -1354,16 +1380,16 @@ public class strgramLexer extends Lexer {
     }
 
 
-    protected DFA11 dfa11 = new DFA11(this);
-    static final String DFA11_eotS =
+    protected DFA12 dfa12 = new DFA12(this);
+    static final String DFA12_eotS =
         "\1\uffff\11\27\1\uffff\2\27\1\uffff\1\54\7\uffff\1\55\2\uffff\3"+
         "\37\4\uffff\3\27\1\63\1\64\7\27\4\uffff\1\75\2\27\2\uffff\1\27\1"+
         "\101\1\27\1\103\4\27\1\uffff\1\27\1\111\1\112\1\uffff\1\27\1\uffff"+
         "\1\114\1\27\1\116\1\117\1\27\2\uffff\1\121\1\uffff\1\27\2\uffff"+
         "\1\123\1\uffff\1\124\2\uffff";
-    static final String DFA11_eofS =
+    static final String DFA12_eofS =
         "\125\uffff";
-    static final String DFA11_minS =
+    static final String DFA12_minS =
         "\1\11\1\156\1\164\1\150\1\146\1\154\1\157\1\150\1\165\1\145\1\uffff"+
         "\1\101\1\151\1\uffff\1\75\7\uffff\1\60\2\uffff\1\53\1\55\1\52\4"+
         "\uffff\1\164\1\162\1\141\2\60\1\163\1\162\1\151\1\164\1\141\1\111"+
@@ -1371,7 +1397,7 @@ public class strgramLexer extends Lexer {
         "\144\1\165\1\116\1\164\1\uffff\1\156\2\60\1\uffff\1\145\1\uffff"+
         "\1\60\1\162\2\60\1\147\2\uffff\1\60\1\uffff\1\156\2\uffff\1\60\1"+
         "\uffff\1\60\2\uffff";
-    static final String DFA11_maxS =
+    static final String DFA12_maxS =
         "\1\175\1\156\1\164\1\150\1\156\1\154\1\157\1\150\1\165\1\145\1"+
         "\uffff\1\101\1\151\1\uffff\1\75\7\uffff\1\172\2\uffff\1\53\1\55"+
         "\1\57\4\uffff\1\164\1\162\1\141\2\172\1\163\1\162\1\151\2\164\1"+
@@ -1379,15 +1405,15 @@ public class strgramLexer extends Lexer {
         "\172\1\144\1\165\1\116\1\164\1\uffff\1\156\2\172\1\uffff\1\145\1"+
         "\uffff\1\172\1\162\2\172\1\147\2\uffff\1\172\1\uffff\1\156\2\uffff"+
         "\1\172\1\uffff\1\172\2\uffff";
-    static final String DFA11_acceptS =
+    static final String DFA12_acceptS =
         "\12\uffff\1\13\2\uffff\1\17\1\uffff\1\21\1\22\1\23\1\24\1\25\1"+
         "\26\1\27\1\uffff\1\31\1\32\3\uffff\1\35\1\36\1\37\1\34\14\uffff"+
         "\1\20\1\30\1\33\1\40\3\uffff\1\4\1\7\10\uffff\1\1\3\uffff\1\6\1"+
         "\uffff\1\11\5\uffff\1\3\1\5\1\uffff\1\12\1\uffff\1\15\1\16\1\uffff"+
         "\1\10\1\uffff\1\2\1\14";
-    static final String DFA11_specialS =
+    static final String DFA12_specialS =
         "\125\uffff}>";
-    static final String[] DFA11_transitionS = {
+    static final String[] DFA12_transitionS = {
             "\2\30\2\uffff\1\30\22\uffff\1\30\1\uffff\1\35\4\uffff\1\36"+
             "\1\20\1\21\1\37\1\31\1\15\1\32\1\12\1\33\12\26\1\uffff\1\17"+
             "\1\34\1\16\1\34\2\uffff\2\27\1\3\5\27\1\1\2\27\1\14\1\13\5\27"+
@@ -1479,34 +1505,34 @@ public class strgramLexer extends Lexer {
             ""
     };
 
-    static final short[] DFA11_eot = DFA.unpackEncodedString(DFA11_eotS);
-    static final short[] DFA11_eof = DFA.unpackEncodedString(DFA11_eofS);
-    static final char[] DFA11_min = DFA.unpackEncodedStringToUnsignedChars(DFA11_minS);
-    static final char[] DFA11_max = DFA.unpackEncodedStringToUnsignedChars(DFA11_maxS);
-    static final short[] DFA11_accept = DFA.unpackEncodedString(DFA11_acceptS);
-    static final short[] DFA11_special = DFA.unpackEncodedString(DFA11_specialS);
-    static final short[][] DFA11_transition;
+    static final short[] DFA12_eot = DFA.unpackEncodedString(DFA12_eotS);
+    static final short[] DFA12_eof = DFA.unpackEncodedString(DFA12_eofS);
+    static final char[] DFA12_min = DFA.unpackEncodedStringToUnsignedChars(DFA12_minS);
+    static final char[] DFA12_max = DFA.unpackEncodedStringToUnsignedChars(DFA12_maxS);
+    static final short[] DFA12_accept = DFA.unpackEncodedString(DFA12_acceptS);
+    static final short[] DFA12_special = DFA.unpackEncodedString(DFA12_specialS);
+    static final short[][] DFA12_transition;
 
     static {
-        int numStates = DFA11_transitionS.length;
-        DFA11_transition = new short[numStates][];
+        int numStates = DFA12_transitionS.length;
+        DFA12_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA11_transition[i] = DFA.unpackEncodedString(DFA11_transitionS[i]);
+            DFA12_transition[i] = DFA.unpackEncodedString(DFA12_transitionS[i]);
         }
     }
 
-    class DFA11 extends DFA {
+    class DFA12 extends DFA {
 
-        public DFA11(BaseRecognizer recognizer) {
+        public DFA12(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 11;
-            this.eot = DFA11_eot;
-            this.eof = DFA11_eof;
-            this.min = DFA11_min;
-            this.max = DFA11_max;
-            this.accept = DFA11_accept;
-            this.special = DFA11_special;
-            this.transition = DFA11_transition;
+            this.decisionNumber = 12;
+            this.eot = DFA12_eot;
+            this.eof = DFA12_eof;
+            this.min = DFA12_min;
+            this.max = DFA12_max;
+            this.accept = DFA12_accept;
+            this.special = DFA12_special;
+            this.transition = DFA12_transition;
         }
         public String getDescription() {
             return "1:1: Tokens : ( T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | MAIN_NAME | LIST | COMMA | EQUAL | EOL | PAR_OPEN | PAR_CLOSE | CUR_OPEN | CUR_CLOSE | SQ_OPEN | SQ_CLOSE | INT | ID | WS | POSTFIX | MATHOPER | COMPROPER | STRING | CHAR | COMMENT );";

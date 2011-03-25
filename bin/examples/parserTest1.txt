@@ -1,9 +1,10 @@
-String ss;
+
 Main() {
-	String s,s1;
-	for (3){
-		String sss,s3;
+	Int ab=1+(2*((4+5+6))+3);
+	while(ab < 5){
+		String s;
+		if (s == "d"){
+			String d;
+		}
 	}
-	Int ab=3,c=4;
-	ab = 5;
 }

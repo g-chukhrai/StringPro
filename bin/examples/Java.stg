@@ -46,6 +46,27 @@ for (<e1> <e2>; <e3>) {
 }
 >>
 
+while_op(bool_cond,locals,stats) ::= <<
+while (<bool_cond>) {
+    <locals; separator="\n">
+    <stats; separator="\n">
+}
+>>
+
+if_else_op(bool_cond,locals,stats,else_block) ::= <<
+if (<bool_cond>) {
+    <locals; separator="\n">
+    <stats; separator="\n">
+} <else_block>
+>>
+
+else_block(locals, stats) ::= <<
+ else {
+	<locals; separator="\n">
+	<stats; separator="\n">    
+}
+>>
+
 assign(lhs,rhs) ::= "<lhs> = <rhs>"
 
 equals(left,right) ::= "<left> == <right>"
@@ -54,6 +75,16 @@ lessThan(left,right) ::= "<left> \< <right>"
 
 add(left,right) ::= "<left> + <right>"
 
+addSign(left,sign,right) ::= "<left> <sign> <right>"
+
 refVar(id) ::= "<id>"
 
 iconst(value) ::= "<value>"
+
+inbrac(value) ::= "(<value>)"
+
+addExpr(sign,right) ::= "<sign><right>"
+
+more() ::= ">"
+
+less() ::= ">"
