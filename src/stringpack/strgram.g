@@ -135,6 +135,7 @@ id_value returns [String idType]
 var
 scope {
 String varType;
+String listName;
 }
 @init {
 $var::varType = "";
@@ -156,11 +157,24 @@ $var::varType = "";
                } else {
                    names.add(names.new Name($program::name + "." + $a.text, "List", $a.line));
                }
+       $var::listName = $a.text;
       }
-      op_cond)
+      listParams)
+      ->listInit(name={$a.text},params={$listParams.st})
   )
-  EOL
+  EOL 
   ;
+
+listParams
+: 
+  PAR_OPEN (a+=listParam (COMMA a+=listParam)*)? PAR_CLOSE
+  -> iconst(value={$a})
+;
+
+listParam
+: a=data_id
+-> listParam(listName={$var::listName},val={$a.st})
+;
 
 expr returns [String idType]
   :
@@ -228,13 +242,14 @@ $slist::locals = new ArrayList();
 for_op
 scope slist;
 @init {
-$slist::locals = new ArrayList();
+  $slist::locals = new ArrayList();
   $slist::stats = new ArrayList();
 }
   :
   'for' PAR_OPEN
   (
     INT
+        ->for_op (count={$INT.text}, locals={$slist::locals}, stats={$slist::stats})
     | (type a=ID 'in' b=ID)
   )
   
@@ -251,8 +266,8 @@ $slist::locals = new ArrayList();
          }
     }
   PAR_CLOSE fun_body
-    ->for_op (e1={"int i = 0"}, e2={"; i < " + $INT.text}, e3={" i++"}, 
-              locals={$slist::locals}, stats={$slist::stats})
+  ->for_list_op (type={$type.idType}, id={$a.text}, listId={$b.text}, 
+            locals={$slist::locals}, stats={$slist::stats})
   ;
 
 while_op
@@ -272,7 +287,9 @@ bool_cond
   (
     (a=data_id COMPROPER b=data_id)
       ->addSign(left={$a.st}, sign={$COMPROPER.text}, right={$b.st})
-    | fun_call
+    | 
+    fun_call
+      ->{$fun_call.st}
   )
   PAR_CLOSE
   ;
@@ -288,15 +305,17 @@ in_out_op returns [String idType]
     {
      $idType = null;
     }
+  ->outOp(params={$op_cond.st})
   | ('read' PAR_OPEN PAR_CLOSE) 
     {
      $idType = "String";
     }
+    ->readOp()
   ;
 
 fun_call returns [String idType]
   :
-  a=ID op_cond 
+  a=ID b=op_cond 
     {
      if (!methods.isExist($a.text)) {
      	errors.add("line " + $a.line + ": methon name " + $a.text
@@ -305,11 +324,15 @@ fun_call returns [String idType]
      	$idType = methods.get($a.text).getReturnType();
      	methods.get($a.text).addLineUses($a.line);
      }
-    }
-  | in_out_op 
+    }  
+  -> funCall(funName={$a.text},funArgs={$b.st})
+  | 
+  in_out_op 
     {
      $idType = $in_out_op.idType;
     }
+  -> {$in_out_op.st}
+
   ;
 
 self_op
@@ -319,18 +342,13 @@ self_op
 
 op_cond
   :
-  PAR_OPEN (cond_arg (COMMA cond_arg)*)? PAR_CLOSE
-  ;
-
-cond_arg
-  :
-  data_id
-  | self_op
+  PAR_OPEN (a+=data_id (COMMA a+=data_id)*)? PAR_CLOSE
+  -> args(args={$a})
   ;
 
 ops
   :
-  id_op
+  id_op EOL
     ->statement(expr={$id_op.st})
   | if_op
     ->{$if_op.st}
@@ -338,17 +356,15 @@ ops
     ->{$while_op.st}
   | for_op
     ->{$for_op.st}
+  | fun_call EOL
+    ->statement(expr={$fun_call.st})
   ;
 
 id_op
   :
-  (
 	  id_assign
 	    ->{$id_assign.st}
-    | self_op
     | (ID POSTFIX)
-  )
-  EOL
   ;
 
 main_fun
@@ -369,11 +385,8 @@ $slist::locals = new ArrayList();
   type? a=ID 
     {
      $fun_decl::name=$a.text;
-    }
-  
-    {
      $program::name = $ID.text; 
-     	     methods.add(methods.new Method($program::name, $type.idType));
+     methods.add(methods.new Method($program::name, $type.idType));
     }
   PAR_OPEN p+=args? PAR_CLOSE fun_body 
     {
@@ -390,6 +403,8 @@ $slist::locals = new ArrayList();
     }
     ->
       fun_decl(type={$type.st}, name={$fun_decl::name}, locals={$slist::locals}, stats={$slist::stats}, args={$p})
+   | MAIN_NAME PAR_OPEN PAR_CLOSE fun_body 
+   -> main_decl(locals={$slist::locals}, stats={$slist::stats})
   ;
 
 args
@@ -426,7 +441,7 @@ fun_body returns [String returnType]
   CUR_CLOSE
   ;
 
-MAIN_NAME   :  'MAIN'  ;
+MAIN_NAME   :  'Main'  ;
 LIST        :  'List'  ;
 COMMA       :  ','  ;
 EQUAL       :  '='  ;

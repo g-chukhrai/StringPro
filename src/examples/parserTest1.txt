@@ -1,10 +1,22 @@
+String ECHO = "EchoString";
 
-Main() {
-	Int ab=1+(2*((4+5+6))+3);
-	while(ab < 5){
-		String s;
-		if (s == "d"){
-			String d;
-		}
+Main(){
+	while (hasUpper(ECHO)){
+		Char c = getUpper(ECHO);
+		// E -> e
+		toLower(c);
+		// e -> f
+		c++;
 	}
+	// EchoString -> fchottring
+	ECHO.removeDublicate("t");
+	// fchottring -> fchoring;
+	ECHO.remove("fcho");
+	// fchoring -> ring;
+	out(ECHO);
+	outThreeChar(ECHO);
+}
+
+outThreeChar(String s) {
+	out(ECHO.sub(0,3));
 }

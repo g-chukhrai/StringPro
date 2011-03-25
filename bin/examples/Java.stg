@@ -1,6 +1,9 @@
 group Java;
 
 program(globals,functions) ::= <<
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 class Wrapper {
     <globals; separator="\n">
     <functions; separator="\n">
@@ -11,6 +14,9 @@ variable(type,name) ::=  <<
 <type> <name; separator=", ">;
 >>
 
+args(args) ::=  <<<args; separator=", "> >>
+
+
 globalVariable ::= variable
 
 fun_decl(type,name,args,locals,stats) ::= <<
@@ -18,6 +24,13 @@ fun_decl(type,name,args,locals,stats) ::= <<
     <locals; separator="\n">
     <stats; separator="\n">
 }
+>>
+
+main_decl(locals={$slist::locals}, stats={$slist::stats}) ::= <<
+  public static void main(String[] args) throws Exception {
+    <locals; separator="\n">
+    <stats; separator="\n">
+  }
 >>
 
 type_int() ::= "int"
@@ -39,13 +52,20 @@ statementList(locals,stats) ::= <<
 }<\n>
 >>
 
-for_op(e1,e2,e3,locals,stats) ::= <<
-for (<e1> <e2>; <e3>) {
+for_op(count,locals,stats) ::= <<
+for (int i = 0 ; i < <count> ; i++) {
     <locals; separator="\n">
     <stats; separator="\n">
 }
 >>
 
+for_list_op (type, id, listId, locals, stats) ::= <<
+for (<type> <id> : <listId>) {
+    <locals; separator="\n">
+    <stats; separator="\n">
+}  
+>>
+            
 while_op(bool_cond,locals,stats) ::= <<
 while (<bool_cond>) {
     <locals; separator="\n">
@@ -66,6 +86,13 @@ else_block(locals, stats) ::= <<
 	<stats; separator="\n">    
 }
 >>
+
+listInit(name,params) ::= <<List <name> = new ArrayList();
+<params>
+>>
+listParam(listName,val) ::= <<<listName>.add(<val>);
+
+>> 
 
 assign(lhs,rhs) ::= "<lhs> = <rhs>"
 
@@ -88,3 +115,8 @@ addExpr(sign,right) ::= "<sign><right>"
 more() ::= ">"
 
 less() ::= ">"
+
+funCall(funName,funArgs) ::= <<<funName>(<funArgs>)>>
+
+outOp(params) ::= <<System.out.println(<params>)>>
+readOp() ::= <<System.in.read()>>
