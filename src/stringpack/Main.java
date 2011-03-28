@@ -13,7 +13,7 @@ public class Main {
     public static StringTemplateGroup templates;
 
     public static void main(String[] args) throws Exception {
-	String templateFileName = "D:\\JavaProj\\stringpro\\src\\examples\\Java.stg";
+	String templateFileName = "D:\\JavaProj\\stringpro\\src\\examples\\LLVM.stg";
 	String exampleFileName = "D:\\JavaProj\\stringpro\\src\\examples\\parserTest1.txt";
 //	int a = 0;
 //	if ( args.length<=1 ) {
@@ -24,8 +24,9 @@ public class Main {
 //	}
 	templates = new StringTemplateGroup(new FileReader(templateFileName), AngleBracketTemplateLexer.class);
 	CharStream input = new ANTLRFileStream(exampleFileName);
-	strgramLexer lexer = new strgramLexer(input);
 	System.out.println("Start parsing " + input.getSourceName());
+	System.out.println(input);
+	strgramLexer lexer = new strgramLexer(input);
 	CommonTokenStream tokens = new CommonTokenStream(lexer);
 	strgramParser parser = new strgramParser(tokens);
 	parser.setTemplateLib(templates);
@@ -39,7 +40,8 @@ public class Main {
       for (String m : parser.errors) {
         System.err.println(m);
       } 
-    }System.out.println();
+    }
+    System.out.println();
 	System.out.println(r.getTemplate().toString());
     }
 }

@@ -1,0 +1,185 @@
+group LLVM;
+
+opToInstr ::= [ // map operators to LLVM IR instructions
+        "+":"add",
+        "-":"sub",
+        "*":"mul",
+        "/":"sdiv",
+        "==":"icmp eq",
+        "!=":"icmp ne",
+        "<":"icmp slt",
+        ">":"icmp sgt",
+        "<=":"icmp sle",
+        ">=":"icmp sge"
+]
+
+llvmType ::= [ 
+        "Int":"i32", 
+        "void":"void",
+        "int":"i32" 
+        ]
+
+program(globals,functions) ::= <<
+    declare i32 @printf(i8 *, ...)
+    <globals; separator="\n">
+    <functions; separator="\n">
+>>
+
+variable(type,name) ::=  "@<name> = global i32 0"
+
+args(args) ::=  <<<args; separator=", "> >>
+
+globalVariable ::= variable
+
+
+fun_decl(type, name, args, locals,stats) ::= <<
+define <if(type)><type><else>void<endif> @<name>(<args:{arg | <arg.type> %<arg.name>_arg}; separator=", ">) {
+    <args:{arg | %<arg.name> = alloca <arg.type>}; separator="\n">
+    <args:{arg | store <arg.type> %<arg.name>_arg, <arg.type>* %<arg.name>}; separator="\n">
+    <locals; separator="\n">
+    <stats; separator="\n">
+}
+>>
+
+return_st(ret_val) ::= <<
+<ret_val>
+ret i32 %r<ret_val.reg>
+>>
+
+block(locals={$slist::locals}, stats={$slist::stats}) ::= <<
+    <locals; separator="\n">
+    <stats; separator="\n">
+>>
+
+main_decl(locals={$slist::locals}, stats={$slist::stats}) ::= <<
+  define i32 @main() {
+    <locals; separator="\n">
+    <stats; separator="\n">
+  }
+>>
+
+type_int() ::= "i32"
+
+type_char() ::= "char"
+
+type_string() ::= "internal constant [4 x i8]"
+
+type_user_object(name) ::= "<name>"
+
+parameter(type,name) ::= "<type> %<name>"
+
+statement(expr) ::= "<expr>;"
+
+statementList(locals,stats) ::= <<
+{
+    <locals; separator="\n">
+    <stats; separator="\n">
+}<\n>
+>>
+
+for_op(count,locals,stats) ::= <<
+for (int i = 0 ; i \< <count> ; i++) {
+    <locals; separator="\n">
+    <stats; separator="\n">
+}
+>>
+
+for_list_op (type, id, listId, locals, stats) ::= <<
+for (<type> <id> : <listId>) {
+    <locals; separator="\n">
+    <stats; separator="\n">
+}  
+>>
+            
+while_op(bool_cond,locals,stats) ::= <<
+while (<bool_cond>) {
+    <locals; separator="\n">
+    <stats; separator="\n">
+}
+>>
+
+if_else_op(bool_cond,locals,stats,else_block) ::= <<
+if (<bool_cond>) {
+    <locals; separator="\n">
+    <stats; separator="\n">
+} <else_block>
+>>
+
+if_op(cond, stat1, stat2, tmp) ::= <<
+<cond>
+br i1 %r<cond.reg>, label %true<tmp>, label %false<tmp>
+true<tmp>:
+<stat1>
+<if(stat2)>
+br label %end<tmp>
+false<tmp>:
+<stat2>
+end<tmp>:
+<else>
+false<tmp>:
+<endif>
+>>
+
+bop(reg, op, a, b) ::= <<
+<a>
+<b>
+%r<reg> = <opToInstr.(op)> i32 %r<a.reg>, %r<b.reg>
+>>
+
+else_block(locals, stats) ::= <<
+ else {
+	<locals; separator="\n">
+	<stats; separator="\n">    
+}
+>>
+
+listInit(name,params) ::= <<List <name> = new ArrayList();
+<params>
+>>
+listParam(listName,val) ::= <<<listName>.add(<val>);
+
+>> 
+
+assign(lhs,rhs) ::= "<rhs> store i32 %r<rhs>, i32*"
+
+equals(left,right) ::= "<left> == <right>"
+
+lessThan(left,right) ::= "<left> \< <right>"
+
+add(left,right) ::= "<left> + <right>"
+
+addSign(left,sign,right) ::= "<left> <sign> <right>"
+
+refVar(id) ::= "<id>"
+
+iconst(value) ::= "<value>"
+
+inbrac(value) ::= "(<value>)"
+
+addExpr(sign,right) ::= "<sign><right>"
+
+funCall(reg, funName, funArgs,ret) ::= <<
+<funArgs; separator="\n">
+%r<reg> = call <llvmType.(ret)>(<funArgs:{i32}; separator=",">)* @<funName>(<funArgs:{i32 %r<it.reg>}; separator=", ">)
+>>
+
+outOp(params) ::= <<
+<if(params)>
+<params; separator="\n">
+call i32 (i8*, ...)* @printf(i8* %r, <params:{i32 %r<it.reg>}; separator=", ">)
+<else>
+call i32 (i8*, ...)* @printf(i8* %r)
+<endif>
+>>
+readOp() ::= <<System.in.read()>>
+
+array_type(type) ::= "[<type.sizeExpr> x i32]"
+
+string_type(s) ::= "[<s> x i8]"
+
+load_var(reg, id) ::= "%r<reg> = load i32* %<id>"
+
+int(reg, v) ::= "%r<reg> = add i32 <v>, 0"
+
+// s needed by C target, sreg needed by llvm target
+string(reg, s, sreg) ::= "%r<reg> = getelementptr <string_type(s)>* @s<sreg>, i32 0, i32 0"

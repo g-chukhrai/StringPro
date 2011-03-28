@@ -53,7 +53,7 @@ statementList(locals,stats) ::= <<
 >>
 
 for_op(count,locals,stats) ::= <<
-for (int i = 0 ; i < <count> ; i++) {
+for (int i = 0 ; i \< <count> ; i++) {
     <locals; separator="\n">
     <stats; separator="\n">
 }
@@ -111,10 +111,6 @@ iconst(value) ::= "<value>"
 inbrac(value) ::= "(<value>)"
 
 addExpr(sign,right) ::= "<sign><right>"
-
-more() ::= ">"
-
-less() ::= ">"
 
 funCall(funName,funArgs) ::= <<<funName>(<funArgs>)>>
 

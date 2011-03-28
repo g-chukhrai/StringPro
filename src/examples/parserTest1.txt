@@ -1,22 +1,6 @@
-String ECHO = "EchoString";
-
-Main(){
-	while (hasUpper(ECHO)){
-		Char c = getUpper(ECHO);
-		// E -> e
-		toLower(c);
-		// e -> f
-		c++;
-	}
-	// EchoString -> fchottring
-	ECHO.removeDublicate("t");
-	// fchottring -> fchoring;
-	ECHO.remove("fcho");
-	// fchoring -> ring;
-	out(ECHO);
-	outThreeChar(ECHO);
-}
-
-outThreeChar(String s) {
-	out(ECHO.sub(0,3));
-}
+Int fact(Int n) {
+    if (n <= 1) {
+    	return 1;
+    }
+    return n*fact(n-1);
+}	

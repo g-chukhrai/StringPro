@@ -30,8 +30,16 @@ public String getErrorHeader(RecognitionException e) {
 public void emitErrorMessage(String msg) {
 	errors.add(msg);
 }
+private int reg = 1;
+public int getreg() { return reg++; }
+public int getLastReg(){return reg-1;}
+    List<StringTemplate> strings = new ArrayList<StringTemplate>();
+    public int getstr(String s) {
+      strings.add(new StringTemplate(s));
+      return strings.size();
+    }
 }
-
+ 
 program
 scope {
 String name;
@@ -39,7 +47,7 @@ List globals;
 List functions;
 }
 @init {
-$program::globals = new ArrayList();
+  $program::globals = new ArrayList();
   $program::functions = new ArrayList();
   $program::name = "[global]";
 }
@@ -63,9 +71,9 @@ $program::globals = new ArrayList();
 
 type returns [String idType]
   :
-  'Int'       {$idType = "Int";}    ->type_int()
-  | 'String'  {$idType = "String";} ->type_string()
-  | 'Char'    {$idType = "Char";}   ->type_char()
+    'Int'     {$idType = "Int";}      ->type_int()
+  | 'String'  {$idType = "String";}   ->type_string()
+  | 'Char'    {$idType = "Char";}     ->type_char()
   ;
 
 id_init
@@ -102,34 +110,20 @@ id_init
 
 id_assign returns [String idName, String idType, int idLine]
   :
-  a=ID EQUAL id_value 
+  a=ID EQUAL b=expr 
     {
      $idName = $a.text;
-     	   $idType = $id_value.idType;
+     	   $idType = $b.idType;
      	   $idLine = $a.line;
                  if (names.isExist($program::name + "." + $a.text)) {
                    names.get($program::name + "." + $a.text).addLineUses($a.line);
      	            String varType = names.get($program::name + "." + $a.text).getType();
-     	            if (!varType.equals($id_value.idType)) {
-     	              errors.add("line "+$a.line+": name "+$a.text+" wrong type conversion cannot convert " + $id_value.idType + " to " + varType);
+     	            if (!varType.equals($b.idType)) {
+     	              errors.add("line "+$a.line+": name "+$a.text+" wrong type conversion cannot convert " + $b.idType + " to " + varType);
      	            }
                  }
     }
-    ->assign(lhs={$a.text}, rhs={$id_value.st})
-  ;
-
-id_value returns [String idType]
-  :
-  expr 
-    {
-     $idType = $expr.idType;
-    }
-    ->{$expr.st}
-  | fun_call 
-    {
-     $idType = $fun_call.idType;
-    }
-    ->{$fun_call.st}
+    ->assign(lhs={$a.text}, rhs={$b.st})
   ;
 
 var
@@ -167,76 +161,78 @@ $var::varType = "";
 
 listParams
 : 
-  PAR_OPEN (a+=listParam (COMMA a+=listParam)*)? PAR_CLOSE
+  PAR_OPEN (a+=expr (COMMA a+=expr)*)? PAR_CLOSE
   -> iconst(value={$a})
-;
-
-listParam
-: a=data_id
--> listParam(listName={$var::listName},val={$a.st})
 ;
 
 expr returns [String idType]
   :
-  a+=math_exp a+=addExpr*
-    ->iconst(value={$a})
-  ;
-
-addExpr
-  :
-  MATHOPER math_exp
-    ->addExpr(sign={$MATHOPER.text}, right={$math_exp.st})
+  a=math_exp (MATHOPER b=math_exp)?
+      -> {$b.st!=null}?
+         bop(reg={getreg()}, op={$MATHOPER.text}, a={$a.st}, b={$b.st})
+      -> iconst(value={$a.st},reg={getLastReg()})
   ;
 
 math_exp returns [String idType]
   :
-  data_id {$idType = $data_id.idType;}                ->{$data_id.st}
-  | PAR_OPEN expr PAR_CLOSE {$idType = $expr.idType;} -> inbrac(value={$expr.st})
+  data_id 
+  {$idType = $data_id.idType;}                
+  ->{$data_id.st}
+  | 
+  PAR_OPEN expr PAR_CLOSE 
+  {$idType = $expr.idType;} 
+  ->{$expr.st}
+  | 
+  fun_call
+  ->{$fun_call.st}
   ;
 
 data returns [String idType]
   :
-    INT {$idType = "Int";}        ->{new StringTemplate($INT.text)}
-  | STRING {$idType = "String";}  ->{new StringTemplate($STRING.text)}
+    INT {$idType = "Int";}        ->int(reg={getreg()},v={$INT.text})
+  | STRING {$idType = "String";}  ->string(reg={getreg()}, s={new StringTemplate($STRING.text)},sreg={getstr($STRING.text)})
   | CHAR {$idType = "Char";}      ->{new StringTemplate($CHAR.text)}
   ;
 
 data_id returns [String idType]
   :
   ID 
-    {
+  {
      if (! names.isExist($program::name + "." + $ID.text)) {
            errors.add("line "+$ID.line+": name "+$ID.text+" cannot be resolved");
-         } else {
+     } else {
            names.get($program::name + "." + $ID.text).addLineUses($ID.line);   
            $idType = names.get($program::name + "." + $ID.text).getType();
-         }
-    }
-    ->{new StringTemplate($ID.text)}
-  | data {$idType = $data.idType;}  ->{$data.st}
+     }
+  }
+  ->load_var(reg = {getreg()}, id={$ID.text})
+  | 
+  data 
+  {$idType = $data.idType;}  
+  ->{$data.st}
+
   ;
 
 if_op
 scope slist;
 @init {
-$slist::locals = new ArrayList();
+  $slist::locals = new ArrayList();
   $slist::stats = new ArrayList();
 }
   :
   'if' bool_cond fun_body else_block?
-    ->if_else_op( bool_cond={$bool_cond.st}, locals={$slist::locals}, 
-                  stats={$slist::stats}, else_block={$else_block.st})
+  -> if_op(cond={$bool_cond.st}, stat1={$fun_body.st}, stat2={$else_block.st}, tmp={getreg()})
   ;
 
 else_block
 scope slist;
 @init {
-$slist::locals = new ArrayList();
+  $slist::locals = new ArrayList();
   $slist::stats = new ArrayList();
 }
   :
   'else' fun_body
-    ->else_block(locals={$slist::locals}, stats={$slist::stats})
+    ->{$fun_body.st}
   ;
 
 for_op
@@ -249,7 +245,7 @@ scope slist;
   'for' PAR_OPEN
   (
     INT
-        ->for_op (count={$INT.text}, locals={$slist::locals}, stats={$slist::stats})
+    ->for_op (count={$INT.text}, locals={$slist::locals}, stats={$slist::stats})
     | (type a=ID 'in' b=ID)
   )
   
@@ -283,15 +279,8 @@ $slist::locals = new ArrayList();
 
 bool_cond
   :
-  PAR_OPEN
-  (
-    (a=data_id COMPROPER b=data_id)
-      ->addSign(left={$a.st}, sign={$COMPROPER.text}, right={$b.st})
-    | 
-    fun_call
-      ->{$fun_call.st}
-  )
-  PAR_CLOSE
+  PAR_OPEN a=data_id (COMPROPER b=data_id)* PAR_CLOSE
+  ->bop(reg={getreg()}, op={$COMPROPER.text}, a={$a.st}, b={$b.st})
   ;
 
 brack_id
@@ -315,7 +304,7 @@ in_out_op returns [String idType]
 
 fun_call returns [String idType]
   :
-  a=ID b=op_cond 
+  a=ID PAR_OPEN (b+=expr (COMMA b+=expr)*)? PAR_CLOSE
     {
      if (!methods.isExist($a.text)) {
      	errors.add("line " + $a.line + ": methon name " + $a.text
@@ -325,7 +314,7 @@ fun_call returns [String idType]
      	methods.get($a.text).addLineUses($a.line);
      }
     }  
-  -> funCall(funName={$a.text},funArgs={$b.st})
+  -> funCall(reg={getreg()},funName={$a.text},funArgs={$b},ret={$idType})
   | 
   in_out_op 
     {
@@ -342,14 +331,14 @@ self_op
 
 op_cond
   :
-  PAR_OPEN (a+=data_id (COMMA a+=data_id)*)? PAR_CLOSE
+  PAR_OPEN (a+=expr (COMMA a+=expr)*)? PAR_CLOSE
   -> args(args={$a})
   ;
 
 ops
   :
-  id_op EOL
-    ->statement(expr={$id_op.st})
+  id_assign EOL
+    ->statement(expr={$id_assign.st})
   | if_op
     ->{$if_op.st}
   | while_op
@@ -358,13 +347,6 @@ ops
     ->{$for_op.st}
   | fun_call EOL
     ->statement(expr={$fun_call.st})
-  ;
-
-id_op
-  :
-	  id_assign
-	    ->{$id_assign.st}
-    | (ID POSTFIX)
   ;
 
 main_fun
@@ -378,7 +360,7 @@ String name;
 }
 scope slist;
 @init {
-$slist::locals = new ArrayList();
+  $slist::locals = new ArrayList();
   $slist::stats = new ArrayList();
 }
   :
@@ -410,36 +392,34 @@ $slist::locals = new ArrayList();
 args
   :
   a=type b=ID (COMMA type ID)*
-    ->
-      parameter(type={$a.st}, name={$b.text})
+  ->parameter(type={$a.st}, name={$b.text})
   ;
 
 fun_body returns [String returnType]
   :
-  CUR_OPEN
-  (
-    var 
-      {
-       $slist::locals.add($var.st);
-      }
-    | ops 
-      {
-       $slist::stats.add($ops.st);
-      }
-  )*
-  ('return' a=ID EOL)? 
-    {
-     if($a.text!= null){
-     						    if (! names.isExist($program::name + "." + $a.text)) {
-     						      errors.add("line "+$a.line+": name "+$a.text+" cannot be resolved");
-     						    } else {
-     	                names.get($program::name + "." + $a.text).addLineUses($a.line);
-     	                $returnType = names.get($program::name + "." + $a.text).getType();
-     						    }			
-     					   }
-    }
+  CUR_OPEN var* ops* return_st?
+//              {
+//                $slist::stats.add($return_st.st);
+//                if($a.text!= null){
+//                    if (! names.isExist($program::name + "." + $a.text)) {
+//                      errors.add("line "+$a.line+": name "+$a.text+" cannot be resolved");
+//                    } else {
+//                      names.get($program::name + "." + $a.text).addLineUses($a.line);
+//                      $returnType = names.get($program::name + "." + $a.text).getType();
+//                    }     
+//                 }
+//              }
   CUR_CLOSE
+    {$slist::locals.add($var.st);$slist::stats.add($ops.st);$slist::stats.add($return_st.st);}
+  
+  ->block(locals={$slist::locals}, stats={$slist::stats})
   ;
+  
+return_st
+: 
+	'return' a=expr EOL
+	->return_st(ret_val={$a.st}) 
+;
 
 MAIN_NAME   :  'Main'  ;
 LIST        :  'List'  ;
@@ -453,14 +433,7 @@ CUR_CLOSE   :  '}'  ;
 SQ_OPEN     :  '['  ;
 SQ_CLOSE    :  ']'  ;
 INT         :  DIGIT+  ;
-
-ID
-  :
-  (
-    ALPHA
-    | DIGIT
-  )+
-  ;
+ID          : (ALPHA|DIGIT)+ ;
 
 fragment
 ALPHA
@@ -479,12 +452,6 @@ DIGIT
 
 WS  :   (' ' | '\t' | '\r' | '\n')+ {$channel=HIDDEN;}
     ;    
-    
-POSTFIX
-  :
-  '++'
-  | '--'
-  ;
 
 MATHOPER
   :
@@ -496,7 +463,7 @@ MATHOPER
 
 COMPROPER
   :
-  '>'
+    '>'
   | '<'
   | '=='
   | '>='
