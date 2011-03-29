@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g 2011-03-28 16:30:36
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g 2011-03-29 12:12:12
 
 package stringpack;
 
@@ -21,22 +21,21 @@ public class strgramLexer extends Lexer {
     public static final int T__33=33;
     public static final int T__34=34;
     public static final int T__35=35;
-    public static final int T__36=36;
     public static final int ID=4;
     public static final int EQUAL=5;
     public static final int COMMA=6;
-    public static final int LIST=7;
-    public static final int EOL=8;
-    public static final int PAR_OPEN=9;
-    public static final int PAR_CLOSE=10;
-    public static final int MATHOPER=11;
-    public static final int INT=12;
-    public static final int STRING=13;
-    public static final int CHAR=14;
-    public static final int COMPROPER=15;
-    public static final int MAIN_NAME=16;
-    public static final int CUR_OPEN=17;
-    public static final int CUR_CLOSE=18;
+    public static final int EOL=7;
+    public static final int PAR_OPEN=8;
+    public static final int PAR_CLOSE=9;
+    public static final int MATHOPER=10;
+    public static final int INT=11;
+    public static final int STRING=12;
+    public static final int CHAR=13;
+    public static final int COMPROPER=14;
+    public static final int MAIN_NAME=15;
+    public static final int CUR_OPEN=16;
+    public static final int CUR_CLOSE=17;
+    public static final int LIST=18;
     public static final int SQ_OPEN=19;
     public static final int SQ_CLOSE=20;
     public static final int DIGIT=21;
@@ -272,28 +271,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:17:7: ( '.' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:17:9: '.'
-            {
-            match('.'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__35"
-
-    // $ANTLR start "T__36"
-    public final void mT__36() throws RecognitionException {
-        try {
-            int _type = T__36;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:18:7: ( 'return' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:18:9: 'return'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:17:7: ( 'return' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:17:9: 'return'
             {
             match("return"); 
 
@@ -306,15 +285,15 @@ public class strgramLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__36"
+    // $ANTLR end "T__35"
 
     // $ANTLR start "MAIN_NAME"
     public final void mMAIN_NAME() throws RecognitionException {
         try {
             int _type = MAIN_NAME;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:424:13: ( 'Main' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:424:16: 'Main'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:395:13: ( 'Main' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:395:16: 'Main'
             {
             match("Main"); 
 
@@ -334,8 +313,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = LIST;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:425:13: ( 'List' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:425:16: 'List'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:396:13: ( 'List' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:396:16: 'List'
             {
             match("List"); 
 
@@ -355,8 +334,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = COMMA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:426:13: ( ',' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:426:16: ','
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:397:13: ( ',' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:397:16: ','
             {
             match(','); 
 
@@ -375,8 +354,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = EQUAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:427:13: ( '=' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:427:16: '='
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:398:13: ( '=' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:398:16: '='
             {
             match('='); 
 
@@ -395,8 +374,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = EOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:428:13: ( ';' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:428:16: ';'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:399:13: ( ';' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:399:16: ';'
             {
             match(';'); 
 
@@ -415,8 +394,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = PAR_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:429:13: ( '(' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:429:16: '('
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:400:13: ( '(' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:400:16: '('
             {
             match('('); 
 
@@ -435,8 +414,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = PAR_CLOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:430:13: ( ')' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:430:16: ')'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:401:13: ( ')' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:401:16: ')'
             {
             match(')'); 
 
@@ -455,8 +434,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = CUR_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:431:13: ( '{' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:431:16: '{'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:402:13: ( '{' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:402:16: '{'
             {
             match('{'); 
 
@@ -475,8 +454,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = CUR_CLOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:432:13: ( '}' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:432:16: '}'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:403:13: ( '}' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:403:16: '}'
             {
             match('}'); 
 
@@ -495,8 +474,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = SQ_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:433:13: ( '[' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:433:16: '['
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:404:13: ( '[' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:404:16: '['
             {
             match('['); 
 
@@ -515,8 +494,8 @@ public class strgramLexer extends Lexer {
         try {
             int _type = SQ_CLOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:434:13: ( ']' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:434:16: ']'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:405:13: ( ']' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:405:16: ']'
             {
             match(']'); 
 
@@ -535,10 +514,10 @@ public class strgramLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:435:13: ( ( DIGIT )+ )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:435:16: ( DIGIT )+
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:406:13: ( ( DIGIT )+ )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:406:16: ( DIGIT )+
             {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:435:16: ( DIGIT )+
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:406:16: ( DIGIT )+
             int cnt1=0;
             loop1:
             do {
@@ -552,7 +531,7 @@ public class strgramLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:435:16: DIGIT
+            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:406:16: DIGIT
             	    {
             	    mDIGIT(); 
 
@@ -584,10 +563,10 @@ public class strgramLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:436:13: ( ( ALPHA | DIGIT )+ )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:436:15: ( ALPHA | DIGIT )+
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:407:13: ( ( ALPHA | DIGIT )+ )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:407:15: ( ALPHA | DIGIT )+
             {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:436:15: ( ALPHA | DIGIT )+
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:407:15: ( ALPHA | DIGIT )+
             int cnt2=0;
             loop2:
             do {
@@ -639,8 +618,8 @@ public class strgramLexer extends Lexer {
     // $ANTLR start "ALPHA"
     public final void mALPHA() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:440:3: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:441:3: ( 'a' .. 'z' | 'A' .. 'Z' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:411:3: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:412:3: ( 'a' .. 'z' | 'A' .. 'Z' )
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -663,8 +642,8 @@ public class strgramLexer extends Lexer {
     // $ANTLR start "DIGIT"
     public final void mDIGIT() throws RecognitionException {
         try {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:449:3: ( '0' .. '9' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:450:3: '0' .. '9'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:420:3: ( '0' .. '9' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:421:3: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -681,10 +660,10 @@ public class strgramLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:453:5: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:453:9: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:424:5: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:424:9: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:453:9: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:424:9: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt3=0;
             loop3:
             do {
@@ -739,7 +718,7 @@ public class strgramLexer extends Lexer {
         try {
             int _type = MATHOPER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:457:3: ( '-' | '+' | '*' | '/' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:428:3: ( '-' | '+' | '*' | '/' )
             // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:
             {
             if ( (input.LA(1)>='*' && input.LA(1)<='+')||input.LA(1)=='-'||input.LA(1)=='/' ) {
@@ -767,7 +746,7 @@ public class strgramLexer extends Lexer {
         try {
             int _type = COMPROPER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:465:3: ( '>' | '<' | '==' | '>=' | '<=' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:436:3: ( '>' | '<' | '==' | '>=' | '<=' )
             int alt4=5;
             switch ( input.LA(1) ) {
             case '>':
@@ -806,21 +785,21 @@ public class strgramLexer extends Lexer {
 
             switch (alt4) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:466:5: '>'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:437:5: '>'
                     {
                     match('>'); 
 
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:467:5: '<'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:438:5: '<'
                     {
                     match('<'); 
 
                     }
                     break;
                 case 3 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:468:5: '=='
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:439:5: '=='
                     {
                     match("=="); 
 
@@ -828,7 +807,7 @@ public class strgramLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:469:5: '>='
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:440:5: '>='
                     {
                     match(">="); 
 
@@ -836,7 +815,7 @@ public class strgramLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:470:5: '<='
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:441:5: '<='
                     {
                     match("<="); 
 
@@ -858,11 +837,11 @@ public class strgramLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:474:3: ( '\"' ( . )* '\"' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:475:3: '\"' ( . )* '\"'
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:445:3: ( '\"' ( . )* '\"' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:446:3: '\"' ( . )* '\"'
             {
             match('\"'); 
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:475:7: ( . )*
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:446:7: ( . )*
             loop5:
             do {
                 int alt5=2;
@@ -878,7 +857,7 @@ public class strgramLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:475:7: .
+            	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:446:7: .
             	    {
             	    matchAny(); 
 
@@ -907,11 +886,11 @@ public class strgramLexer extends Lexer {
         try {
             int _type = CHAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:479:3: ( '\\'' ( ALPHA )? '\\'' )
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:480:3: '\\'' ( ALPHA )? '\\''
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:450:3: ( '\\'' ( ALPHA )? '\\'' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:451:3: '\\'' ( ALPHA )? '\\''
             {
             match('\''); 
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:480:8: ( ALPHA )?
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:451:8: ( ALPHA )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -920,7 +899,7 @@ public class strgramLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:480:8: ALPHA
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:451:8: ALPHA
                     {
                     mALPHA(); 
 
@@ -946,7 +925,7 @@ public class strgramLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:484:3: ( '/*' ( options {greedy=false; } : . )* '*/' | '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
+            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:455:3: ( '/*' ( options {greedy=false; } : . )* '*/' | '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -974,11 +953,11 @@ public class strgramLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:485:3: '/*' ( options {greedy=false; } : . )* '*/'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:456:3: '/*' ( options {greedy=false; } : . )* '*/'
                     {
                     match("/*"); 
 
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:485:8: ( options {greedy=false; } : . )*
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:456:8: ( options {greedy=false; } : . )*
                     loop7:
                     do {
                         int alt7=2;
@@ -1003,7 +982,7 @@ public class strgramLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:485:34: .
+                    	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:456:34: .
                     	    {
                     	    matchAny(); 
 
@@ -1024,11 +1003,11 @@ public class strgramLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:489:5: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:460:5: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
                     {
                     match("//"); 
 
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:490:3: (~ ( '\\n' | '\\r' ) )*
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:461:3: (~ ( '\\n' | '\\r' ) )*
                     loop8:
                     do {
                         int alt8=2;
@@ -1041,7 +1020,7 @@ public class strgramLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:490:3: ~ ( '\\n' | '\\r' )
+                    	    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:461:3: ~ ( '\\n' | '\\r' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1061,7 +1040,7 @@ public class strgramLexer extends Lexer {
                         }
                     } while (true);
 
-                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:494:3: ( '\\r' )?
+                    // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:465:3: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1070,7 +1049,7 @@ public class strgramLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:494:3: '\\r'
+                            // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:465:3: '\\r'
                             {
                             match('\r'); 
 
@@ -1097,8 +1076,8 @@ public class strgramLexer extends Lexer {
     // $ANTLR end "COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:8: ( T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | MAIN_NAME | LIST | COMMA | EQUAL | EOL | PAR_OPEN | PAR_CLOSE | CUR_OPEN | CUR_CLOSE | SQ_OPEN | SQ_CLOSE | INT | ID | WS | MATHOPER | COMPROPER | STRING | CHAR | COMMENT )
-        int alt11=31;
+        // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:8: ( T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | MAIN_NAME | LIST | COMMA | EQUAL | EOL | PAR_OPEN | PAR_CLOSE | CUR_OPEN | CUR_CLOSE | SQ_OPEN | SQ_CLOSE | INT | ID | WS | MATHOPER | COMPROPER | STRING | CHAR | COMMENT )
+        int alt11=30;
         alt11 = dfa11.predict(input);
         switch (alt11) {
             case 1 :
@@ -1179,140 +1158,133 @@ public class strgramLexer extends Lexer {
                 }
                 break;
             case 12 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:76: T__36
-                {
-                mT__36(); 
-
-                }
-                break;
-            case 13 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:82: MAIN_NAME
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:76: MAIN_NAME
                 {
                 mMAIN_NAME(); 
 
                 }
                 break;
-            case 14 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:92: LIST
+            case 13 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:86: LIST
                 {
                 mLIST(); 
 
                 }
                 break;
-            case 15 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:97: COMMA
+            case 14 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:91: COMMA
                 {
                 mCOMMA(); 
 
                 }
                 break;
-            case 16 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:103: EQUAL
+            case 15 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:97: EQUAL
                 {
                 mEQUAL(); 
 
                 }
                 break;
-            case 17 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:109: EOL
+            case 16 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:103: EOL
                 {
                 mEOL(); 
 
                 }
                 break;
-            case 18 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:113: PAR_OPEN
+            case 17 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:107: PAR_OPEN
                 {
                 mPAR_OPEN(); 
 
                 }
                 break;
-            case 19 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:122: PAR_CLOSE
+            case 18 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:116: PAR_CLOSE
                 {
                 mPAR_CLOSE(); 
 
                 }
                 break;
-            case 20 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:132: CUR_OPEN
+            case 19 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:126: CUR_OPEN
                 {
                 mCUR_OPEN(); 
 
                 }
                 break;
-            case 21 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:141: CUR_CLOSE
+            case 20 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:135: CUR_CLOSE
                 {
                 mCUR_CLOSE(); 
 
                 }
                 break;
-            case 22 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:151: SQ_OPEN
+            case 21 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:145: SQ_OPEN
                 {
                 mSQ_OPEN(); 
 
                 }
                 break;
-            case 23 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:159: SQ_CLOSE
+            case 22 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:153: SQ_CLOSE
                 {
                 mSQ_CLOSE(); 
 
                 }
                 break;
-            case 24 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:168: INT
+            case 23 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:162: INT
                 {
                 mINT(); 
 
                 }
                 break;
-            case 25 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:172: ID
+            case 24 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:166: ID
                 {
                 mID(); 
 
                 }
                 break;
-            case 26 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:175: WS
+            case 25 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:169: WS
                 {
                 mWS(); 
 
                 }
                 break;
-            case 27 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:178: MATHOPER
+            case 26 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:172: MATHOPER
                 {
                 mMATHOPER(); 
 
                 }
                 break;
-            case 28 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:187: COMPROPER
+            case 27 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:181: COMPROPER
                 {
                 mCOMPROPER(); 
 
                 }
                 break;
-            case 29 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:197: STRING
+            case 28 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:191: STRING
                 {
                 mSTRING(); 
 
                 }
                 break;
-            case 30 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:204: CHAR
+            case 29 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:198: CHAR
                 {
                 mCHAR(); 
 
                 }
                 break;
-            case 31 :
-                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:209: COMMENT
+            case 30 :
+                // D:\\JavaProj\\stringpro\\src\\stringpack\\strgram.g:1:203: COMMENT
                 {
                 mCOMMENT(); 
 
@@ -1326,121 +1298,119 @@ public class strgramLexer extends Lexer {
 
     protected DFA11 dfa11 = new DFA11(this);
     static final String DFA11_eotS =
-        "\1\uffff\11\27\1\uffff\2\27\1\uffff\1\52\7\uffff\1\53\2\uffff\1"+
-        "\35\4\uffff\3\27\1\60\1\61\7\27\3\uffff\1\72\2\27\2\uffff\1\27\1"+
-        "\76\1\27\1\100\4\27\1\uffff\1\27\1\106\1\107\1\uffff\1\27\1\uffff"+
-        "\1\111\1\27\1\113\1\114\1\27\2\uffff\1\116\1\uffff\1\27\2\uffff"+
-        "\1\120\1\uffff\1\121\2\uffff";
+        "\1\uffff\13\26\1\uffff\1\51\7\uffff\1\52\2\uffff\1\34\4\uffff\3"+
+        "\26\1\57\1\60\7\26\3\uffff\1\71\2\26\2\uffff\1\26\1\75\1\26\1\77"+
+        "\4\26\1\uffff\1\26\1\105\1\106\1\uffff\1\26\1\uffff\1\110\1\26\1"+
+        "\112\1\113\1\26\2\uffff\1\115\1\uffff\1\26\2\uffff\1\117\1\uffff"+
+        "\1\120\2\uffff";
     static final String DFA11_eofS =
-        "\122\uffff";
+        "\121\uffff";
     static final String DFA11_minS =
-        "\1\11\1\156\1\164\1\150\1\146\1\154\1\157\1\150\1\165\1\145\1\uffff"+
-        "\1\141\1\151\1\uffff\1\75\7\uffff\1\60\2\uffff\1\52\4\uffff\1\164"+
-        "\1\162\1\141\2\60\1\163\1\162\1\151\1\164\1\141\1\151\1\163\3\uffff"+
-        "\1\60\1\151\1\162\2\uffff\1\145\1\60\1\154\1\60\1\144\1\165\1\156"+
+        "\1\11\1\156\1\164\1\150\1\146\1\154\1\157\1\150\1\165\1\145\1\141"+
+        "\1\151\1\uffff\1\75\7\uffff\1\60\2\uffff\1\52\4\uffff\1\164\1\162"+
+        "\1\141\2\60\1\163\1\162\1\151\1\164\1\141\1\151\1\163\3\uffff\1"+
+        "\60\1\151\1\162\2\uffff\1\145\1\60\1\154\1\60\1\144\1\165\1\156"+
         "\1\164\1\uffff\1\156\2\60\1\uffff\1\145\1\uffff\1\60\1\162\2\60"+
         "\1\147\2\uffff\1\60\1\uffff\1\156\2\uffff\1\60\1\uffff\1\60\2\uffff";
     static final String DFA11_maxS =
         "\1\175\1\156\1\164\1\150\1\156\1\154\1\157\1\150\1\165\1\145\1"+
-        "\uffff\1\141\1\151\1\uffff\1\75\7\uffff\1\172\2\uffff\1\57\4\uffff"+
-        "\1\164\1\162\1\141\2\172\1\163\1\162\1\151\2\164\1\151\1\163\3\uffff"+
-        "\1\172\1\151\1\162\2\uffff\1\145\1\172\1\154\1\172\1\144\1\165\1"+
-        "\156\1\164\1\uffff\1\156\2\172\1\uffff\1\145\1\uffff\1\172\1\162"+
-        "\2\172\1\147\2\uffff\1\172\1\uffff\1\156\2\uffff\1\172\1\uffff\1"+
-        "\172\2\uffff";
+        "\141\1\151\1\uffff\1\75\7\uffff\1\172\2\uffff\1\57\4\uffff\1\164"+
+        "\1\162\1\141\2\172\1\163\1\162\1\151\2\164\1\151\1\163\3\uffff\1"+
+        "\172\1\151\1\162\2\uffff\1\145\1\172\1\154\1\172\1\144\1\165\1\156"+
+        "\1\164\1\uffff\1\156\2\172\1\uffff\1\145\1\uffff\1\172\1\162\2\172"+
+        "\1\147\2\uffff\1\172\1\uffff\1\156\2\uffff\1\172\1\uffff\1\172\2"+
+        "\uffff";
     static final String DFA11_acceptS =
-        "\12\uffff\1\13\2\uffff\1\17\1\uffff\1\21\1\22\1\23\1\24\1\25\1"+
-        "\26\1\27\1\uffff\1\31\1\32\1\uffff\1\34\1\35\1\36\1\33\14\uffff"+
-        "\1\20\1\30\1\37\3\uffff\1\4\1\7\10\uffff\1\1\3\uffff\1\6\1\uffff"+
-        "\1\11\5\uffff\1\3\1\5\1\uffff\1\12\1\uffff\1\15\1\16\1\uffff\1\10"+
-        "\1\uffff\1\2\1\14";
+        "\14\uffff\1\16\1\uffff\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\uffff"+
+        "\1\30\1\31\1\uffff\1\33\1\34\1\35\1\32\14\uffff\1\17\1\27\1\36\3"+
+        "\uffff\1\4\1\7\10\uffff\1\1\3\uffff\1\6\1\uffff\1\11\5\uffff\1\3"+
+        "\1\5\1\uffff\1\12\1\uffff\1\14\1\15\1\uffff\1\10\1\uffff\1\2\1\13";
     static final String DFA11_specialS =
-        "\122\uffff}>";
+        "\121\uffff}>";
     static final String[] DFA11_transitionS = {
-            "\2\30\2\uffff\1\30\22\uffff\1\30\1\uffff\1\33\4\uffff\1\34"+
-            "\1\20\1\21\2\35\1\15\1\35\1\12\1\31\12\26\1\uffff\1\17\1\32"+
-            "\1\16\1\32\2\uffff\2\27\1\3\5\27\1\1\2\27\1\14\1\13\5\27\1\2"+
-            "\7\27\1\24\1\uffff\1\25\3\uffff\4\27\1\5\1\6\2\27\1\4\5\27\1"+
-            "\10\2\27\1\11\4\27\1\7\3\27\1\22\1\uffff\1\23",
+            "\2\27\2\uffff\1\27\22\uffff\1\27\1\uffff\1\32\4\uffff\1\33"+
+            "\1\17\1\20\2\34\1\14\1\34\1\uffff\1\30\12\25\1\uffff\1\16\1"+
+            "\31\1\15\1\31\2\uffff\2\26\1\3\5\26\1\1\2\26\1\13\1\12\5\26"+
+            "\1\2\7\26\1\23\1\uffff\1\24\3\uffff\4\26\1\5\1\6\2\26\1\4\5"+
+            "\26\1\10\2\26\1\11\4\26\1\7\3\26\1\21\1\uffff\1\22",
+            "\1\35",
             "\1\36",
             "\1\37",
-            "\1\40",
-            "\1\41\7\uffff\1\42",
+            "\1\40\7\uffff\1\41",
+            "\1\42",
             "\1\43",
             "\1\44",
             "\1\45",
             "\1\46",
             "\1\47",
-            "",
             "\1\50",
-            "\1\51",
             "",
-            "\1\32",
-            "",
+            "\1\31",
             "",
             "",
             "",
             "",
             "",
             "",
-            "\12\26\7\uffff\32\27\6\uffff\32\27",
+            "",
+            "\12\25\7\uffff\32\26\6\uffff\32\26",
             "",
             "",
-            "\1\54\4\uffff\1\54",
+            "\1\53\4\uffff\1\53",
             "",
             "",
             "",
             "",
+            "\1\54",
             "\1\55",
             "\1\56",
-            "\1\57",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\1\61",
             "\1\62",
             "\1\63",
             "\1\64",
-            "\1\65",
-            "\1\66\22\uffff\1\67",
+            "\1\65\22\uffff\1\66",
+            "\1\67",
             "\1\70",
-            "\1\71",
             "",
             "",
             "",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\1\72",
             "\1\73",
+            "",
+            "",
             "\1\74",
-            "",
-            "",
-            "\1\75",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
-            "\1\77",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\1\76",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\1\100",
             "\1\101",
             "\1\102",
             "\1\103",
+            "",
             "\1\104",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
             "",
-            "\1\105",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\1\107",
             "",
-            "\1\110",
-            "",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
-            "\1\112",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
-            "\1\115",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\1\111",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\1\114",
             "",
             "",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
             "",
-            "\1\117",
+            "\1\116",
             "",
             "",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
             "",
-            "\12\27\7\uffff\32\27\6\uffff\32\27",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
             "",
             ""
     };
@@ -1475,7 +1445,7 @@ public class strgramLexer extends Lexer {
             this.transition = DFA11_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | MAIN_NAME | LIST | COMMA | EQUAL | EOL | PAR_OPEN | PAR_CLOSE | CUR_OPEN | CUR_CLOSE | SQ_OPEN | SQ_CLOSE | INT | ID | WS | MATHOPER | COMPROPER | STRING | CHAR | COMMENT );";
+            return "1:1: Tokens : ( T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | MAIN_NAME | LIST | COMMA | EQUAL | EOL | PAR_OPEN | PAR_CLOSE | CUR_OPEN | CUR_CLOSE | SQ_OPEN | SQ_CLOSE | INT | ID | WS | MATHOPER | COMPROPER | STRING | CHAR | COMMENT );";
         }
     }
  

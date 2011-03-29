@@ -1,6 +1,7 @@
 group LLVM;
 
-opToInstr ::= [ // map operators to LLVM IR instructions
+// map operators to LLVM IR instructions
+opToInstr ::= [ 
         "+":"add",
         "-":"sub",
         "*":"mul",
@@ -15,8 +16,7 @@ opToInstr ::= [ // map operators to LLVM IR instructions
 
 llvmType ::= [ 
         "Int":"i32", 
-        "void":"void",
-        "int":"i32" 
+        "void":"void"
         ]
 
 program(globals,functions) ::= <<
@@ -32,10 +32,18 @@ args(args) ::=  <<<args; separator=", "> >>
 globalVariable ::= variable
 
 
+globalVars(vars) ::= <<
+  <vars; separator="\n">
+>>
+
+vars(vars) ::= <<
+  <vars; separator="\n">
+>>
+
 fun_decl(type, name, args, locals,stats) ::= <<
-define <if(type)><type><else>void<endif> @<name>(<args:{arg | <arg.type> %<arg.name>_arg}; separator=", ">) {
-    <args:{arg | %<arg.name> = alloca <arg.type>}; separator="\n">
-    <args:{arg | store <arg.type> %<arg.name>_arg, <arg.type>* %<arg.name>}; separator="\n">
+define <if(type)><type><else>void<endif> @<name>(<args:{arg | <arg.type> %<arg.id>_arg}; separator=", ">) {
+    <args:{arg | %<arg.id> = alloca <arg.type>}; separator="\n">
+    <args:{arg | store <arg.type> %<arg.id>_arg, <arg.type>* %<arg.id>}; separator="\n">
     <locals; separator="\n">
     <stats; separator="\n">
 }
@@ -46,9 +54,20 @@ return_st(ret_val) ::= <<
 ret i32 %r<ret_val.reg>
 >>
 
+def_arg(id, type) ::= "i32 %<id>_arg"
+
+def_var(id, type) ::= "%<id> = alloca i32"
+
 block(locals={$slist::locals}, stats={$slist::stats}) ::= <<
     <locals; separator="\n">
     <stats; separator="\n">
+>>
+
+body(ops, ret) ::= <<
+{
+  <ops; separator="\n">
+  <ret>
+}
 >>
 
 main_decl(locals={$slist::locals}, stats={$slist::stats}) ::= <<
@@ -98,12 +117,6 @@ while (<bool_cond>) {
 }
 >>
 
-if_else_op(bool_cond,locals,stats,else_block) ::= <<
-if (<bool_cond>) {
-    <locals; separator="\n">
-    <stats; separator="\n">
-} <else_block>
->>
 
 if_op(cond, stat1, stat2, tmp) ::= <<
 <cond>
@@ -140,7 +153,16 @@ listParam(listName,val) ::= <<<listName>.add(<val>);
 
 >> 
 
-assign(lhs,rhs) ::= "<rhs> store i32 %r<rhs>, i32*"
+assign(id, rhs) ::= <<
+<rhs>
+store i32 %r<rhs.reg>, i32* %<id>
+>>
+
+def_assign(type, id, rhs) ::= <<
+%<id> = alloca i32
+<rhs>
+store i32 %r<rhs.reg>, i32* %<id>
+>>
 
 equals(left,right) ::= "<left> == <right>"
 

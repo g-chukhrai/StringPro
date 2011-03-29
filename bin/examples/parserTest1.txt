@@ -1,4 +1,6 @@
 Int fact(Int n) {
+	Int i;
+	i = 5;
     if (n <= 1) {
     	return 1;
     }
