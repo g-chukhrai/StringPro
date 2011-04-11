@@ -19,18 +19,17 @@ llvmType ::= [
         "void":"void"
         ]
 
-program(globals,functions) ::= <<
+program(globals,functions,strings) ::= <<
+		target datalayout = "e-p:32:32:32-i1:8:8-i8:8:8-i16:16:16-i32:32:32-i64:64:64-f32:32:32-f64:64:64-v64:64:64-v128:128:128-a0:0:64-f80:32:32-n8:16:32"
+		target triple = "i386-mingw32"
+    <strings:{s | @.str<s.reg> = private constant [<s.len> x i8] c<s.s>, align 1}; separator="\n">
     declare i32 @printf(i8 *, ...)
     <globals; separator="\n">
     <functions; separator="\n">
 >>
 
-variable(type,name) ::=  "@<name> = global i32 0"
 
 args(args) ::=  <<<args; separator=", "> >>
-
-globalVariable ::= variable
-
 
 globalVars(vars) ::= <<
   <vars; separator="\n">
@@ -57,6 +56,9 @@ ret i32 %r<ret_val.reg>
 def_arg(id, type) ::= "i32 %<id>_arg"
 
 def_var(id, type) ::= "%<id> = alloca i32"
+
+def_glob(id,type) ::=  "@<id> = global i32 0"
+
 
 block(locals={$slist::locals}, stats={$slist::stats}) ::= <<
     <locals; separator="\n">
@@ -185,12 +187,13 @@ funCall(reg, funName, funArgs,ret) ::= <<
 %r<reg> = call <llvmType.(ret)>(<funArgs:{i32}; separator=",">)* @<funName>(<funArgs:{i32 %r<it.reg>}; separator=", ">)
 >>
 
-outOp(params) ::= <<
+outOp(format, params) ::= <<
+<format>
 <if(params)>
 <params; separator="\n">
-call i32 (i8*, ...)* @printf(i8* %r, <params:{i32 %r<it.reg>}; separator=", ">)
+call i32 (i8*, ...)* @printf(i8* %r<format.reg>, <params:{i32 %r<it.reg>}; separator=", ">)
 <else>
-call i32 (i8*, ...)* @printf(i8* %r)
+call i32 (i8*, ...)* @printf(i8* %r<format.reg>)
 <endif>
 >>
 readOp() ::= <<System.in.read()>>
@@ -204,4 +207,4 @@ load_var(reg, id) ::= "%r<reg> = load i32* %<id>"
 int(reg, v) ::= "%r<reg> = add i32 <v>, 0"
 
 // s needed by C target, sreg needed by llvm target
-string(reg, s, sreg) ::= "%r<reg> = getelementptr <string_type(s)>* @s<sreg>, i32 0, i32 0"
+string(reg, s, sreg, len) ::= "%r<reg> = getelementptr [<len> x i8]* @.str<reg>, i64 0, i64 0"

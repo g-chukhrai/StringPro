@@ -38,19 +38,30 @@ public int getLastReg(){return reg-1;}
       strings.add(new StringTemplate(s));
       return strings.size();
     }
+    public int getStringLength(final String s){ 
+      return s.length() - 1;
+    }
+    public String getString(String s){
+        s = s.substring(1,s.length()-1);
+        s = s.replaceAll("\\\\n", " \\\\0A");
+        s = s.replaceAll("\\\\r", " \\\\0D");
+        return  "\"" + s  + "\\00\"";
+    }
 }
  
-program
+program 
 scope {
 String name;
 List globals;
 List functions;
+List strings;
 }
 @init {
   $program::globals = new ArrayList();
   $program::functions = new ArrayList();
+  $program::strings = new ArrayList();
   $program::name = "[global]";
-}
+} 
   :
   (
     fun_decl 
@@ -66,7 +77,7 @@ List functions;
        $program::globals.add($var.st);
       }
   )+
-    ->program(globals={$program::globals}, functions={$program::functions})
+    ->program(globals={$program::globals}, functions={$program::functions}, strings={$program::strings})
   ;
 
 type returns [String idType]
@@ -94,6 +105,8 @@ id_init
     }
       -> {$b.idType!=null}?
          def_assign(type={$var::varType}, id={$a.text}, rhs={$expr.st})
+      -> {$program::name.equals("[global]")}?
+         def_glob(id={$a.text},type={$var::varType})
       -> def_var(id={$a.text}, type={$var::varType})
   ;
 
@@ -172,9 +185,20 @@ math_exp returns [String idType]
 data returns [String idType]
   :
     INT     {$idType = "Int";}        ->int(reg={getreg()},v={$INT.text})
-  | STRING  {$idType = "String";}     ->string(reg={getreg()}, s={new StringTemplate($STRING.text)},sreg={getstr($STRING.text)})
+  | str
+  {
+    $idType = "String";
+    $program::strings.add($str.st);
+  }     
+  ->{$str.st}
   | CHAR    {$idType = "Char";}       ->{new StringTemplate($CHAR.text)}
   ;
+  
+str 
+: STRING 
+  ->string(reg={getreg()}, s={getString($STRING.text)},sreg={getstr($STRING.text)},len={getStringLength($STRING.text)})
+
+;
 
 data_id returns [String idType]
   :
@@ -271,11 +295,11 @@ brack_id
 
 in_out_op returns [String idType]
   :
-  ('out' op_cond) 
+  ('out' PAR_OPEN data_id (COMMA e+=expr)* PAR_CLOSE) 
     {
      $idType = null;
     }
-  ->outOp(params={$op_cond.st})
+  ->outOp(format = {$data_id.st}, params={$e})
   | ('read' PAR_OPEN PAR_CLOSE) 
     {
      $idType = "String";
@@ -371,10 +395,8 @@ parameter_declaration
 
 fun_body returns [String idType]
   :
-  CUR_OPEN (var | ops )* return_st? CUR_CLOSE
+  CUR_OPEN (var {$slist::locals.add($var.st);}| ops {$slist::stats.add($ops.st);})* return_st? CUR_CLOSE
   {
-    $slist::locals.add($var.st);
-    $slist::stats.add($ops.st);
     $slist::stats.add($return_st.st);
     if ($return_st.idType != null) {
       $idType = $return_st.idType;
