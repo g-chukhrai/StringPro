@@ -9,7 +9,7 @@ List locals;
 List stats;
 }
 
-@header {
+@header { 
 package stringpack;
   import org.antlr.stringtemplate.*;
 }
@@ -46,6 +46,9 @@ public int getLastReg(){return reg-1;}
         s = s.replaceAll("\\\\n", " \\\\0A");
         s = s.replaceAll("\\\\r", " \\\\0D");
         return  "\"" + s  + "\\00\"";
+    }
+    public Integer getCode(String s) {
+        return s.codePointAt(1);
     }
 }
  
@@ -89,7 +92,7 @@ type returns [String idType]
 
 id_init
   :
-  a=ID (EQUAL b=expr)? 
+  a=ID (EQUAL b=expr)?
     {
      if ($a.text != null) {
              if (names.isExist($program::name + "." + $a.text)) {
@@ -97,7 +100,7 @@ id_init
              } else {
      	          names.add(names.new Name($program::name + "." + $a.text, $var::varType, $a.line));
                 names.get($program::name + "." + $a.text).addLineUses($a.line);
-                if (!$var::varType.equals($expr.idType)) {
+                if (b != null && !$var::varType.equals($expr.idType)) {
                      errors.add("line "+$a.line+": name "+$a.text +" wrong type conversion cannot convert " + $expr.idType + " to " + $var::varType);
                 }     	          
      			    }
@@ -107,27 +110,31 @@ id_init
          def_assign(type={$var::varType}, id={$a.text}, rhs={$expr.st})
       -> {$program::name.equals("[global]")}?
          def_glob(id={$a.text},type={$var::varType})
-      -> def_var(id={$a.text}, type={$var::varType})
+      -> {!$var::varType.equals("String")}?
+         def_var(id={$a.text}, type={$var::varType})
+      -> def_str(id={$a.text}, type={$var::varType}, reg={getreg()})
   ;
 
 
 
-id_assign
+id_assign returns [String idType]
   :
-  a=ID EQUAL b=expr 
+  a=ID('['c=data_id']')? EQUAL b=expr 
     {
                  if (names.isExist($program::name + "." + $a.text)) {
                    names.get($program::name + "." + $a.text).addLineUses($a.line);
-                   String varType = names.get($program::name + "." + $a.text).getType();
-                   if (!varType.equals($b.idType)) {
-                    errors.add("line "+$a.line+": name "+$a.text+" wrong type conversion cannot convert " + $b.idType + " to " + varType);
+                   $idType = names.get($program::name + "." + $a.text).getType();
+                   if ((c != null && !"Char".equals($b.idType)) || (c==null && !$idType.equals($b.idType))) {
+                    errors.add("line "+$a.line+": name "+$a.text+" wrong type conversion cannot convert " + $b.idType + " to " + $idType);
                    }
                  }else {
                     errors.add("line "+$a.line+": name "+$a.text+" cann't be resolved");
                
                  }
     }
-  ->assign(id={$a.text}, rhs={$expr.st})
+  ->{$c.idType!=null}?
+    array_assign(id={$a.text}, rhs={$expr.st},format={$c.st},reg={getreg()})
+  ->assign(id={$a.text}, rhs={$expr.st},type={$idType})
   ;
 var
 scope {
@@ -180,6 +187,15 @@ math_exp returns [String idType]
     $idType = $fun_call.idType;
   }   
   ->{$fun_call.st}
+  |
+  a=data_id c='['b=data_id']'
+    {
+           if (!"String".equals($a.idType)) {
+              errors.add("line " + $c.line + ": get array element operation error " + $a.text + " type must be String, not " + $a.idType);
+           }
+           $idType = "Char";
+    }
+  ->get_elem(format={$a.st},reg={getreg()},format2={$b.st})
   ;
 
 data returns [String idType]
@@ -197,7 +213,7 @@ data returns [String idType]
   | 
     CHAR    
     {$idType = "Char";}
-    ->{new StringTemplate($CHAR.text)}
+    ->char(reg={getreg()},v={getCode($CHAR.text)},type={$idType})
   ;
   
 str 
@@ -299,39 +315,71 @@ brack_id
 
 in_out_op returns [String idType]
   :
-  ('out' PAR_OPEN data_id (COMMA e+=expr)* PAR_CLOSE) 
+    'out' PAR_OPEN data_id (COMMA e+=expr)* PAR_CLOSE
     {
      $idType = null;
     }
   ->outOp(format = {$data_id.st}, params={$e})
-  | ('read' PAR_OPEN ID PAR_CLOSE) 
+  | 
+    b='read' PAR_OPEN PAR_CLOSE
     {
-     if (!names.isExist($program::name + "." + $ID.text)) {
-           errors.add("line "+$ID.line+": name "+$ID.text+" cannot be resolved");
-     } else {
-           names.get($program::name + "." + $ID.text).addLineUses($ID.line);   
-           $idType = names.get($program::name + "." + $ID.text).getType();
-           if (!"String".equals($idType)) {
-              errors.add("line " + $ID.line + ": read operation error " + $ID.text + " type must be String, not" + $idType);
-           }
-     }     
+      $idType = "String";
     }
-    ->readOp(id={$ID.text})
-  | 'toInt' PAR_OPEN ID PAR_CLOSE
+    ->readOp(reg={getreg()},tmp={getreg()})
+  | 
+    b='toInt' PAR_OPEN a=data_id PAR_CLOSE
     {
-     if (!names.isExist($program::name + "." + $ID.text)) {
-           errors.add("line "+$ID.line+": name "+$ID.text+" cannot be resolved");
-     } else {
-           names.get($program::name + "." + $ID.text).addLineUses($ID.line);   
-           $idType = names.get($program::name + "." + $ID.text).getType();
-           if (!"String".equals($idType)) {
-              errors.add("line " + $ID.line + ": toInt operation error " + $ID.text + " type must be String, not" + $idType);
+           if (!"String".equals($a.idType)) {
+              errors.add("line " + $b.line + ": "+ $b.text +" operation error " + $a.text + " type must be String, not " + $a.idType);
            }
            $idType = "Int";
-     }     
+    } 
+    ->toIntOp(format={$a.st},reg={getreg()})
+  |
+    b='length' PAR_OPEN a=data_id PAR_CLOSE
+    {
+           if (!"String".equals($a.idType)) {
+              errors.add("line " + $b.line + ": length operation error " + $a.text + " type must be String, not " + $a.idType);
+           }
+           $idType = "Int";
     }
-    ->toIntOp(id={$ID.text},reg={getreg()})
-
+   ->length_op(format={$a.st},reg={getreg()})
+  |
+   b='append' PAR_OPEN a1=data_id COMMA a2=data_id PAR_CLOSE
+    {
+           if (!"String".equals($a1.idType)) {
+              errors.add("line " + $b.line + ": length operation error " + $a1.text + " type must be String, not " + $a1.idType);
+           }
+           if (!"String".equals($a2.idType)) {
+              errors.add("line " + $b.line + ": length operation error " + $a2.text + " type must be String, not " + $a2.idType);
+           }
+           $idType = "String";
+    }
+   ->append_op(arg1={$a1.st}, arg2={$a2.st},reg={getreg()})
+  |
+   b='compare' PAR_OPEN a1=data_id COMMA a2=data_id PAR_CLOSE
+    {
+           if (!"String".equals($a1.idType)) {
+              errors.add("line " + $b.line + ": length operation error " + $a1.text + " type must be String, not " + $a1.idType);
+           }
+           if (!"String".equals($a2.idType)) {
+              errors.add("line " + $b.line + ": length operation error " + $a2.text + " type must be String, not " + $a2.idType);
+           }
+           $idType = "Int";
+    }
+   ->compare_op(arg1={$a1.st}, arg2={$a2.st},reg={getreg()})
+  |
+   b='copy' PAR_OPEN a1=data_id COMMA a2=data_id PAR_CLOSE
+    {
+           if (!"String".equals($a1.idType)) {
+              errors.add("line " + $b.line + ": length operation error " + $a1.text + " type must be String, not " + $a1.idType);
+           }
+           if (!"String".equals($a2.idType)) {
+              errors.add("line " + $b.line + ": length operation error " + $a2.text + " type must be String, not " + $a2.idType);
+           }
+           $idType = "String";
+    }
+   ->copy_op(arg1={$a1.st}, arg2={$a2.st},reg={getreg()})
   ;
 
 fun_call returns [String idType]
@@ -422,7 +470,7 @@ parameter_declaration
 
 fun_body returns [String idType]
   :
-  CUR_OPEN (var {$slist::locals.add($var.st);}| ops {$slist::stats.add($ops.st);})+ return_st? CUR_CLOSE
+  CUR_OPEN ((var {$slist::locals.add($var.st);}| ops {$slist::stats.add($ops.st);})+)? return_st? CUR_CLOSE
   {
     $slist::stats.add($return_st.st);
     if ($return_st.idType != null) {

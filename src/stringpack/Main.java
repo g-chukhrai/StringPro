@@ -18,20 +18,12 @@ public class Main {
 	public static StringTemplateGroup templates;
 
 	public static void main(String[] args) throws Exception {
-		 String templateFileName = "LLVM.stg";
-		 if (args != null) {
-			 String exampleFileName = args[0];
-			 
-//		 System.out.println("Type filename:");
-//		 Scanner in = new Scanner(System.in);
-//		 String exampleFileName = in.nextLine();
-//		 while (!new File(exampleFileName+".txt").exists()) {
-//			 System.out.println("File not exist!");
-//			 exampleFileName = in.nextLine();
-//		 }
-//		 
-//		String templateFileName = "D:\\JavaProj\\stringpro\\src\\examples\\LLVM.stg";
-//		String exampleFileName = "D:\\JavaProj\\stringpro\\src\\examples\\parserTest1";
+//		 String templateFileName = "LLVM.stg";
+//		 if (args != null) {
+//			 String exampleFileName = args[0];
+
+		String templateFileName = "D:\\JavaProj\\stringpro\\src\\examples\\LLVM.stg";
+		String exampleFileName = "D:\\JavaProj\\stringpro\\src\\examples\\parserTest1";
 		templates = new StringTemplateGroup(new FileReader(templateFileName),AngleBracketTemplateLexer.class);
 		CharStream input = new ANTLRFileStream(exampleFileName+".txt");
 		
@@ -69,5 +61,5 @@ public class Main {
 	      }
 		 }
 
-	}
+//	}
 }

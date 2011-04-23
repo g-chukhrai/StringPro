@@ -1,6 +1,12 @@
 Int main(){
-	for (10) {
-		out("%s\n","a");
+	String s1 = "Hello";
+	String s2;
+	Int i = 0;
+	for(5) {
+		s2[i] = s1[i];
+		i = i + 1;
 	}
+	out("s1 = %s\n",s1);
+	out("s2 = %s\n",s2);
 	return 1;
 }
