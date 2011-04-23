@@ -184,19 +184,25 @@ math_exp returns [String idType]
 
 data returns [String idType]
   :
-    INT     {$idType = "Int";}        ->int(reg={getreg()},v={$INT.text})
-  | str
-  {
-    $idType = "String";
-    $program::strings.add($str.st);
-  }     
-  ->{$str.st}
-  | CHAR    {$idType = "Char";}       ->{new StringTemplate($CHAR.text)}
+    INT     
+    {$idType = "Int";}        
+    ->int(reg={getreg()},v={$INT.text},type={$idType})
+  | 
+	  str
+	  {
+	    $idType = "String";
+	    $program::strings.add($str.st);
+	  }     
+	  ->{$str.st}
+  | 
+    CHAR    
+    {$idType = "Char";}
+    ->{new StringTemplate($CHAR.text)}
   ;
   
 str 
 : STRING 
-  ->string(reg={getreg()}, s={getString($STRING.text)},sreg={getstr($STRING.text)},len={getStringLength($STRING.text)})
+  ->string(reg={getreg()}, s={getString($STRING.text)},sreg={getstr($STRING.text)},len={getStringLength($STRING.text)}, type={"String"})
 
 ;
 
@@ -211,7 +217,7 @@ data_id returns [String idType]
            $idType = names.get($program::name + "." + $ID.text).getType();
      }
   }
-  ->load_var(reg = {getreg()}, id={$ID.text})
+  ->load_var(reg = {getreg()}, id={$ID.text}, type = {$idType})
   | 
   data 
   {$idType = $data.idType;}  
@@ -247,29 +253,27 @@ scope slist;
   $slist::stats = new ArrayList();
 }
   :
-  'for' PAR_OPEN
-  (
-    INT
-    ->for_op (count={$INT.text}, locals={$slist::locals}, stats={$slist::stats})
-    | (type a=ID 'in' b=ID)
-  )
-  
-    {
-     if (names.isExist($program::name + "." + $a.text)) {
-           errors.add("line "+$a.line+": name "+$a.text+" dublicated");
-         } else {
-           names.add(names.new Name($program::name + "." + $a.text, $type.idType, $a.line));
-         }
-         if (! names.isExist($program::name + "." + $b.text)) {
-           errors.add("line "+$b.line+": name "+$b.text+" cannot be resolved");
-         } else {
-           names.get($program::name + "." + $b.text).addLineUses($b.line);   
-         }
-    }
+  'for' PAR_OPEN for_expr
+//    {
+//     if (names.isExist($program::name + "." + $a.text)) {
+//           errors.add("line "+$a.line+": name "+$a.text+" dublicated");
+//         } else {
+//           names.add(names.new Name($program::name + "." + $a.text, $type.idType, $a.line));
+//         }
+//         if (! names.isExist($program::name + "." + $b.text)) {
+//           errors.add("line "+$b.line+": name "+$b.text+" cannot be resolved");
+//         } else {
+//           names.get($program::name + "." + $b.text).addLineUses($b.line);   
+//         }
+//    }  
   PAR_CLOSE fun_body
-  ->for_list_op (type={$type.idType}, id={$a.text}, listId={$b.text}, 
-            locals={$slist::locals}, stats={$slist::stats})
+  ->for_op (cond={$for_expr.st}, stat={$fun_body.st}, tmp={getreg()})
   ;
+
+for_expr 
+: INT
+  ->for_expr(id={getreg()}, less={$INT.text}, reg={getreg()})
+;
 
 while_op
 scope slist;
@@ -300,11 +304,34 @@ in_out_op returns [String idType]
      $idType = null;
     }
   ->outOp(format = {$data_id.st}, params={$e})
-  | ('read' PAR_OPEN PAR_CLOSE) 
+  | ('read' PAR_OPEN ID PAR_CLOSE) 
     {
-     $idType = "String";
+     if (!names.isExist($program::name + "." + $ID.text)) {
+           errors.add("line "+$ID.line+": name "+$ID.text+" cannot be resolved");
+     } else {
+           names.get($program::name + "." + $ID.text).addLineUses($ID.line);   
+           $idType = names.get($program::name + "." + $ID.text).getType();
+           if (!"String".equals($idType)) {
+              errors.add("line " + $ID.line + ": read operation error " + $ID.text + " type must be String, not" + $idType);
+           }
+     }     
     }
-    ->readOp()
+    ->readOp(id={$ID.text})
+  | 'toInt' PAR_OPEN ID PAR_CLOSE
+    {
+     if (!names.isExist($program::name + "." + $ID.text)) {
+           errors.add("line "+$ID.line+": name "+$ID.text+" cannot be resolved");
+     } else {
+           names.get($program::name + "." + $ID.text).addLineUses($ID.line);   
+           $idType = names.get($program::name + "." + $ID.text).getType();
+           if (!"String".equals($idType)) {
+              errors.add("line " + $ID.line + ": toInt operation error " + $ID.text + " type must be String, not" + $idType);
+           }
+           $idType = "Int";
+     }     
+    }
+    ->toIntOp(id={$ID.text},reg={getreg()})
+
   ;
 
 fun_call returns [String idType]
@@ -395,7 +422,7 @@ parameter_declaration
 
 fun_body returns [String idType]
   :
-  CUR_OPEN (var {$slist::locals.add($var.st);}| ops {$slist::stats.add($ops.st);})* return_st? CUR_CLOSE
+  CUR_OPEN (var {$slist::locals.add($var.st);}| ops {$slist::stats.add($ops.st);})+ return_st? CUR_CLOSE
   {
     $slist::stats.add($return_st.st);
     if ($return_st.idType != null) {

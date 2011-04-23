@@ -1,12 +1,6 @@
-
-Int factorial(Int X) {
-  if (X == 0) {
-  	return 1;
-  }
-  return X*factorial(X-1);
-}
-
 Int main(){
-	out("A");
+	for (10) {
+		out("%s\n","a");
+	}
 	return 1;
 }

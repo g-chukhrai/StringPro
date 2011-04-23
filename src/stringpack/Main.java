@@ -21,6 +21,7 @@ public class Main {
 		 String templateFileName = "LLVM.stg";
 		 if (args != null) {
 			 String exampleFileName = args[0];
+			 
 //		 System.out.println("Type filename:");
 //		 Scanner in = new Scanner(System.in);
 //		 String exampleFileName = in.nextLine();
@@ -28,7 +29,7 @@ public class Main {
 //			 System.out.println("File not exist!");
 //			 exampleFileName = in.nextLine();
 //		 }
-		 
+//		 
 //		String templateFileName = "D:\\JavaProj\\stringpro\\src\\examples\\LLVM.stg";
 //		String exampleFileName = "D:\\JavaProj\\stringpro\\src\\examples\\parserTest1";
 		templates = new StringTemplateGroup(new FileReader(templateFileName),AngleBracketTemplateLexer.class);
