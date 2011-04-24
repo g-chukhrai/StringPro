@@ -1,0 +1,10 @@
+for f in call if fact global_array printf
+do
+	echo "###########" $f
+	java -cp "..:$CLASSPATH" CC -templates llvm.stg $f.c > $f.ll
+	llvm-as -f $f.ll
+	llc -f $f.bc
+	llvm-gcc -o $f $f"_main.c" $f.s
+#	./$f > $f.output
+	./$f
+done

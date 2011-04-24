@@ -1,0 +1,82 @@
+digraph {
+	ordering=out;
+	ranksep=.3;
+	node [shape=box, fixedsize=false, fontsize=11, fontname="Helvetica-bold", 		width=.25, height=.25];
+	edge [arrowsize=.5, color="black"]
+
+  n0 [label="FILE"];
+  n1 [label="FUNCDEF"];
+  n1 [label="FUNCDEF"];
+  n2 [label="g"];
+  n3 [label="int"];
+  n4 [label="ARGS"];
+  n4 [label="ARGS"];
+  n5 [label="ARG"];
+  n5 [label="ARG"];
+  n6 [label="x"];
+  n7 [label="int"];
+  n8 [label="ARG"];
+  n8 [label="ARG"];
+  n9 [label="y"];
+  n10 [label="int"];
+  n11 [label="BLOCK"];
+  n11 [label="BLOCK"];
+  n12 [label="return"];
+  n12 [label="return"];
+  n13 [label="EXPR"];
+  n13 [label="EXPR"];
+  n14 [label="+"];
+  n14 [label="+"];
+  n15 [label="x"];
+  n16 [label="y"];
+  n17 [label="FUNCDEF"];
+  n17 [label="FUNCDEF"];
+  n18 [label="f"];
+  n19 [label="void"];
+  n20 [label="BLOCK"];
+  n20 [label="BLOCK"];
+  n21 [label="CALL"];
+  n21 [label="CALL"];
+  n22 [label="printf"];
+  n23 [label="ELIST"];
+  n23 [label="ELIST"];
+  n24 [label="%d\n"];
+  n25 [label="CALL"];
+  n25 [label="CALL"];
+  n26 [label="g"];
+  n27 [label="ELIST"];
+  n27 [label="ELIST"];
+  n28 [label="1"];
+  n29 [label="2"];
+
+  n0 -> n1 // "FILE" -> "FUNCDEF"
+  n1 -> n2 // "FUNCDEF" -> "g"
+  n1 -> n3 // "FUNCDEF" -> "int"
+  n1 -> n4 // "FUNCDEF" -> "ARGS"
+  n4 -> n5 // "ARGS" -> "ARG"
+  n5 -> n6 // "ARG" -> "x"
+  n5 -> n7 // "ARG" -> "int"
+  n4 -> n8 // "ARGS" -> "ARG"
+  n8 -> n9 // "ARG" -> "y"
+  n8 -> n10 // "ARG" -> "int"
+  n1 -> n11 // "FUNCDEF" -> "BLOCK"
+  n11 -> n12 // "BLOCK" -> "return"
+  n12 -> n13 // "return" -> "EXPR"
+  n13 -> n14 // "EXPR" -> "+"
+  n14 -> n15 // "+" -> "x"
+  n14 -> n16 // "+" -> "y"
+  n0 -> n17 // "FILE" -> "FUNCDEF"
+  n17 -> n18 // "FUNCDEF" -> "f"
+  n17 -> n19 // "FUNCDEF" -> "void"
+  n17 -> n20 // "FUNCDEF" -> "BLOCK"
+  n20 -> n21 // "BLOCK" -> "CALL"
+  n21 -> n22 // "CALL" -> "printf"
+  n21 -> n23 // "CALL" -> "ELIST"
+  n23 -> n24 // "ELIST" -> "%d\n"
+  n23 -> n25 // "ELIST" -> "CALL"
+  n25 -> n26 // "CALL" -> "g"
+  n25 -> n27 // "CALL" -> "ELIST"
+  n27 -> n28 // "ELIST" -> "1"
+  n27 -> n29 // "ELIST" -> "2"
+
+}

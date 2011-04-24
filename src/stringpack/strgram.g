@@ -6,7 +6,6 @@ options {
 
 scope slist {
 List locals;
-List stats;
 }
 
 @header { 
@@ -58,11 +57,13 @@ String name;
 List globals;
 List functions;
 List strings;
+HashMap<String,Integer> stringsLengths;
 }
 @init {
   $program::globals = new ArrayList();
   $program::functions = new ArrayList();
   $program::strings = new ArrayList();
+  $program::stringsLengths = new HashMap<String,Integer>();
   $program::name = "[global]";
 } 
   :
@@ -90,9 +91,12 @@ type returns [String idType]
   | 'Char'    {$idType = "Char";}     ->type_char()
   ;
 
-id_init
+id_init 
+scope {
+String name;
+}
   :
-  a=ID (EQUAL b=expr)?
+  a=ID {$id_init::name = $a.text;} (EQUAL b=expr)?
     {
      if ($a.text != null) {
              if (names.isExist($program::name + "." + $a.text)) {
@@ -106,20 +110,23 @@ id_init
      			    }
              }
     }
-      -> {$b.idType!=null}?
+      -> {$b.idType!=null && !"[global]".equals($program::name)}?
          def_assign(type={$var::varType}, id={$a.text}, rhs={$expr.st})
-      -> {$program::name.equals("[global]")}?
-         def_glob(id={$a.text},type={$var::varType})
+      -> {$program::name.equals("[global]") && "Int".equals($var::varType)}?
+         def_glob(id={$a.text},type={$var::varType}, rhs={$expr.st})
       -> {!$var::varType.equals("String")}?
          def_var(id={$a.text}, type={$var::varType})
-      -> def_str(id={$a.text}, type={$var::varType}, reg={getreg()})
+      -> {!$program::name.equals("[global]")}? 
+         def_str(id={$a.text}, type={$var::varType}, reg={getreg()})
+      -> zero()
+         
   ;
 
 
 
 id_assign returns [String idType]
   :
-  a=ID('['c=data_id']')? EQUAL b=expr 
+  a=ID('['c=expr']')? EQUAL b=expr 
     {
                  if (names.isExist($program::name + "." + $a.text)) {
                    names.get($program::name + "." + $a.text).addLineUses($a.line);
@@ -133,8 +140,8 @@ id_assign returns [String idType]
                  }
     }
   ->{$c.idType!=null}?
-    array_assign(id={$a.text}, rhs={$expr.st},format={$c.st},reg={getreg()})
-  ->assign(id={$a.text}, rhs={$expr.st},type={$idType})
+    array_assign(id={$a.text}, rhs={$b.st},format={$c.st},reg={getreg()})
+  ->assign(id={$a.text}, rhs={$b.st},type={$idType})
   ;
 var
 scope {
@@ -188,14 +195,14 @@ math_exp returns [String idType]
   }   
   ->{$fun_call.st}
   |
-  a=data_id c='['b=data_id']'
+  a=data_id c='['b=expr']'
     {
            if (!"String".equals($a.idType)) {
               errors.add("line " + $c.line + ": get array element operation error " + $a.text + " type must be String, not " + $a.idType);
            }
            $idType = "Char";
     }
-  ->get_elem(format={$a.st},reg={getreg()},format2={$b.st})
+  ->get_elem(format={$a.st},reg={getreg()},format2={$b.st}, type={$idType})
   ;
 
 data returns [String idType]
@@ -216,9 +223,18 @@ data returns [String idType]
     ->char(reg={getreg()},v={getCode($CHAR.text)},type={$idType})
   ;
   
-str 
+str  
 : STRING 
-  ->string(reg={getreg()}, s={getString($STRING.text)},sreg={getstr($STRING.text)},len={getStringLength($STRING.text)}, type={"String"})
+{
+  String name;
+  if ("[global]".equals($program::name)){
+    name = $id_init::name; 
+  } else {
+    name = ".str" + String.valueOf(getreg());
+  }
+  $program::stringsLengths.put(name,getStringLength($STRING.text));
+}
+  ->string(reg={getreg()}, v={getString($STRING.text)},sreg={getstr($STRING.text)},len={getStringLength($STRING.text)}, type={"String"}, name={name})
 
 ;
 
@@ -226,13 +242,19 @@ data_id returns [String idType]
   :
   ID 
   {
+  String scope = null;
      if (! names.isExist($program::name + "." + $ID.text)) {
            errors.add("line "+$ID.line+": name "+$ID.text+" cannot be resolved");
      } else {
            names.get($program::name + "." + $ID.text).addLineUses($ID.line);   
            $idType = names.get($program::name + "." + $ID.text).getType();
+           scope = names.getScope($program::name + "." + $ID.text);
      }
   }
+  ->{"global".equals(scope) && "String".equals($idType)}?
+    load_global_str(reg = {getreg()}, id={$ID.text}, type = {$idType}, len={$program::stringsLengths.get($ID.text)}, name={$ID.text})
+  ->{"global".equals(scope)}?
+    load_global_var(reg = {getreg()}, id={$ID.text}, type = {$idType})
   ->load_var(reg = {getreg()}, id={$ID.text}, type = {$idType})
   | 
   data 
@@ -244,7 +266,6 @@ if_op
 scope slist;
 @init {
   $slist::locals = new ArrayList();
-  $slist::stats = new ArrayList();
 }
   :
   'if' bool_cond fun_body else_block?
@@ -255,7 +276,6 @@ else_block
 scope slist;
 @init {
   $slist::locals = new ArrayList();
-  $slist::stats = new ArrayList();
 }
   :
   'else' fun_body
@@ -266,45 +286,39 @@ for_op
 scope slist;
 @init {
   $slist::locals = new ArrayList();
-  $slist::stats = new ArrayList();
 }
   :
-  'for' PAR_OPEN for_expr
-//    {
-//     if (names.isExist($program::name + "." + $a.text)) {
-//           errors.add("line "+$a.line+": name "+$a.text+" dublicated");
-//         } else {
-//           names.add(names.new Name($program::name + "." + $a.text, $type.idType, $a.line));
-//         }
-//         if (! names.isExist($program::name + "." + $b.text)) {
-//           errors.add("line "+$b.line+": name "+$b.text+" cannot be resolved");
-//         } else {
-//           names.get($program::name + "." + $b.text).addLineUses($b.line);   
-//         }
-//    }  
-  PAR_CLOSE fun_body
-  ->for_op (cond={$for_expr.st}, stat={$fun_body.st}, tmp={getreg()})
+  'for' PAR_OPEN for_var COMMA math_exp PAR_CLOSE fun_body
+  ->for_op (id={$for_var.st}, cond={$math_exp.st}, stat={$fun_body.st}, tmp={getreg()}, reg={getreg()})
   ;
 
-for_expr 
-: INT
-  ->for_expr(id={getreg()}, less={$INT.text}, reg={getreg()})
+for_var 
+:
+  a=ID
+  {
+             if (names.isExist($program::name + "." + $a.text)) {
+                 errors.add("line "+$a.line+": name "+$a.text+" duplicated");
+             } else {
+                names.add(names.new Name($program::name + "." + $a.text, "Int", $a.line));
+                names.get($program::name + "." + $a.text).addLineUses($a.line);
+             }
+  }
+  ->def_var(id={$ID.text}, type={"Int"})
 ;
 
 while_op
 scope slist;
 @init {
 $slist::locals = new ArrayList();
-  $slist::stats = new ArrayList();
 }
   :
   'while' bool_cond fun_body
-    ->while_op(bool_cond={$bool_cond.st}, locals={$slist::locals}, stats={$slist::stats})
+    ->while_op(bool_cond={$bool_cond.st}, locals={$slist::locals})
   ;
 
 bool_cond
   :
-  PAR_OPEN a=data_id (COMPROPER b=data_id)* PAR_CLOSE
+  PAR_OPEN a=expr COMPROPER b=expr PAR_CLOSE
   ->bop(reg={getreg()}, op={$COMPROPER.text}, a={$a.st}, b={$b.st})
   ;
 
@@ -325,7 +339,7 @@ in_out_op returns [String idType]
     {
       $idType = "String";
     }
-    ->readOp(reg={getreg()},tmp={getreg()})
+    ->readOp(reg={getreg()},tmp={getreg()}, type={$idType})
   | 
     b='toInt' PAR_OPEN a=data_id PAR_CLOSE
     {
@@ -334,7 +348,7 @@ in_out_op returns [String idType]
            }
            $idType = "Int";
     } 
-    ->toIntOp(format={$a.st},reg={getreg()})
+    ->toIntOp(format={$a.st},reg={getreg()}, type={$idType})
   |
     b='length' PAR_OPEN a=data_id PAR_CLOSE
     {
@@ -343,7 +357,7 @@ in_out_op returns [String idType]
            }
            $idType = "Int";
     }
-   ->length_op(format={$a.st},reg={getreg()})
+   ->length_op(format={$a.st},reg={getreg()}, tmp={getreg()},type={$idType})
   |
    b='append' PAR_OPEN a1=data_id COMMA a2=data_id PAR_CLOSE
     {
@@ -355,7 +369,7 @@ in_out_op returns [String idType]
            }
            $idType = "String";
     }
-   ->append_op(arg1={$a1.st}, arg2={$a2.st},reg={getreg()})
+   ->append_op(arg1={$a1.st}, arg2={$a2.st},reg={getreg()}, type={$idType})
   |
    b='compare' PAR_OPEN a1=data_id COMMA a2=data_id PAR_CLOSE
     {
@@ -367,7 +381,7 @@ in_out_op returns [String idType]
            }
            $idType = "Int";
     }
-   ->compare_op(arg1={$a1.st}, arg2={$a2.st},reg={getreg()})
+   ->compare_op(arg1={$a1.st}, arg2={$a2.st},reg={getreg()}, type={$idType})
   |
    b='copy' PAR_OPEN a1=data_id COMMA a2=data_id PAR_CLOSE
     {
@@ -379,7 +393,7 @@ in_out_op returns [String idType]
            }
            $idType = "String";
     }
-   ->copy_op(arg1={$a1.st}, arg2={$a2.st},reg={getreg()})
+   ->copy_op(arg1={$a1.st}, arg2={$a2.st},reg={getreg()}, type={$idType})
   ;
 
 fun_call returns [String idType]
@@ -393,7 +407,7 @@ fun_call returns [String idType]
      	methods.get($a.text).addLineUses($a.line);
      }
     }  
-  -> funCall(reg={getreg()},funName={$a.text},funArgs={$b},ret={$idType})
+  -> funCall(reg={getreg()},funName={$a.text},funArgs={$b},type={$idType})
   | 
   in_out_op 
     {
@@ -432,7 +446,6 @@ fun_decl
 scope slist;
 @init {
   $slist::locals = new ArrayList();
-  $slist::stats = new ArrayList();
 }
   :
   type? a=ID 
@@ -450,9 +463,9 @@ scope slist;
      	}
      }
     }
-   -> fun_decl(type={$type.st}, name={$ID.text}, locals={$slist::locals}, stats={$slist::stats}, args={$p})
+   -> fun_decl(type={$type.st}, name={$ID.text}, locals={$slist::locals}, args={$p})
    |  MAIN_NAME PAR_OPEN PAR_CLOSE fun_body 
-   -> main_decl(locals={$slist::locals}, stats={$slist::stats})
+   -> main_decl(locals={$slist::locals})
   ;
 
 parameter_declaration 
@@ -470,14 +483,14 @@ parameter_declaration
 
 fun_body returns [String idType]
   :
-  CUR_OPEN ((var {$slist::locals.add($var.st);}| ops {$slist::stats.add($ops.st);})+)? return_st? CUR_CLOSE
+  CUR_OPEN ((var {$slist::locals.add($var.st);}| ops {$slist::locals.add($ops.st);})+)? return_st? CUR_CLOSE
   {
-    $slist::stats.add($return_st.st);
+    $slist::locals.add($return_st.st);
     if ($return_st.idType != null) {
       $idType = $return_st.idType;
     } 
   }
-  ->block(locals={$slist::locals}, stats={$slist::stats})
+  ->block(locals={$slist::locals})
   ;
   
 return_st returns [String idType]
@@ -545,7 +558,7 @@ STRING
 
 CHAR
   :
-  '\'' ALPHA? '\''
+  '\'' .? '\''
   ;
 
 COMMENT

@@ -49,6 +49,15 @@ public class NamesTable {
 		}
 		return _n;
 	}
+	public String getScope(String n) {
+		Name _n = names.get(n); 
+		String scope = "local";
+		if (_n == null) {
+			_n = names.get("[global]" + n.substring(n.indexOf('.')));
+			if (_n != null) scope = "global";
+		}
+		return scope;
+	}
 	public void print(PrintStream out) {
 	    System.out.println("\n\rVariables: ");
 		for (String idtf : names.keySet()) {

@@ -18,12 +18,12 @@ public class Main {
 	public static StringTemplateGroup templates;
 
 	public static void main(String[] args) throws Exception {
-//		 String templateFileName = "LLVM.stg";
-//		 if (args != null) {
-//			 String exampleFileName = args[0];
+		 String templateFileName = "LLVM.stg";
+		 if (args != null) {
+			 String exampleFileName = args[0];
 
-		String templateFileName = "D:\\JavaProj\\stringpro\\src\\examples\\LLVM.stg";
-		String exampleFileName = "D:\\JavaProj\\stringpro\\src\\examples\\parserTest1";
+//		String templateFileName = "D:\\JavaProj\\stringpro\\src\\examples\\LLVM.stg";
+//		String exampleFileName = "D:\\JavaProj\\stringpro\\src\\examples\\parserTest1";
 		templates = new StringTemplateGroup(new FileReader(templateFileName),AngleBracketTemplateLexer.class);
 		CharStream input = new ANTLRFileStream(exampleFileName+".txt");
 		
@@ -46,20 +46,21 @@ public class Main {
 			}
 		} else {
 			System.out.println("\n\rBUILD complete: no errors found");			
-		}
-		System.out.println("\n\rOUTPUT:");	
-		System.out.println(r.getTemplate().toString());
-
-	      File f = new File(exampleFileName+".ll");
-	      if(!f.exists()){
-		      f.createNewFile();
-		      FileWriter fstream = new FileWriter(f);
-		      BufferedWriter out = new BufferedWriter(fstream);
-		      out.write(r.getTemplate().toString());
-		      out.close();		      
-		      System.out.println("New file "+ exampleFileName + ".ll has been created to the current directory");
-	      }
+			System.out.println("\n\rOUTPUT:");	
+			System.out.println(r.getTemplate().toString());
+	
+		      File f = new File(exampleFileName+".ll");
+		      if(!f.exists()){
+			      f.createNewFile();
+			      FileWriter fstream = new FileWriter(f);
+			      BufferedWriter out = new BufferedWriter(fstream);
+			      out.write(r.getTemplate().toString());
+			      out.close();		      
+			      System.out.println("New file "+ exampleFileName + ".ll has been created to the current directory");
+		      }
 		 }
+	}
 
-//	}
+
+	}
 }
