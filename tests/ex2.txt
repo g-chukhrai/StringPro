@@ -1,0 +1,11 @@
+Int main(){
+	out("Input any string:\n");
+	String s = read();
+	out("String is %s!\n", s);
+	Int len = length(s);
+	for (i,len) {
+		Char ch = s[i];
+		out ("Char[%d] in string %s is %c\n", i, s, ch);
+	}
+	return 1;
+}

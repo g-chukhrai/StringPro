@@ -1,0 +1,293 @@
+group LLVM;
+
+// map operators to LLVM IR instructions
+opToInstr ::= [ 
+        "+":"add",
+        "-":"sub",
+        "*":"mul",
+        "/":"sdiv",
+        "==":"icmp eq",
+        "!=":"icmp ne",
+        "<":"icmp slt",
+        ">":"icmp sgt",
+        "<=":"icmp sle",
+        ">=":"icmp sge"
+]
+
+llvmType ::= [ 
+        "Int":"i32", 
+        "Char":"i8",
+        "String":"i8*"
+        ]
+
+program(globals,functions,strings) ::= <<
+target datalayout = "e-p:32:32:32-i1:8:8-i8:8:8-i16:16:16-i32:32:32-i64:64:64-f32:32:32-f64:64:64-v64:64:64-v128:128:128-a0:0:64-f80:32:32-n8:16:32"
+target triple = "i386-mingw32"
+declare i32 @printf(i8 *, ...) nounwind
+declare i8* @gets(i8*)
+declare i32 @atoi(i8*) nounwind readonly
+declare i8* @strcat(i8*, i8*) nounwind
+declare i8* @strcpy(i8*, i8*) nounwind
+declare i64 @strlen(i8*) nounwind readonly
+declare i32 @strcmp(i8*, i8*) nounwind readonly
+
+<strings:{s | @<s.name> = private constant [<s.len> x i8] c<s.v>, align 1}; separator="\n">
+<globals; separator="\n">
+<functions; separator="\n">
+>>
+
+zero() ::= ""
+
+args(args) ::=  <<<args; separator=", "> >>
+
+globalVars(vars) ::= <<
+<vars; separator="\n">
+>>
+
+vars(vars) ::= <<
+<vars; separator="\n">
+>>
+
+fun_decl(type, name, args, locals) ::= <<
+define <if(type)><type><else>void<endif> @<name>(<args:{arg | <arg.type> %<arg.id>_arg}; separator=", ">) {
+	<args:{arg | %<arg.id> = alloca <arg.type>}; separator="\n">
+	<args:{arg | store <arg.type> %<arg.id>_arg, <arg.type>* %<arg.id>}; separator="\n">
+	<locals; separator="\n">
+}
+>>
+
+return_st(ret_val) ::= <<
+<ret_val>
+ret <llvmType.(ret_val.type)> %r<ret_val.reg>
+>>
+
+def_arg(id, type) ::= "<llvmType.(type)> %<id>_arg"
+
+def_var(id, type) ::= "%<id> = alloca <llvmType.(type)>"
+
+def_str(id, type,reg) ::= <<
+%<id> = alloca <llvmType.(type)>
+%st1<reg> = alloca [256 x i8] 
+%st2<reg> = bitcast [256 x i8]* %st1<reg> to i8*
+store i8* %st2<reg>, i8** %<id>, align 4
+>>
+
+def_glob(id,type,rhs) ::=  "@<id> = global <llvmType.(type)> <rhs.v>"
+
+
+block(locals={$slist::locals}) ::= <<
+<locals; separator="\n">
+>>
+
+body(ops, ret) ::= <<
+{
+<ops; separator="\n">
+<ret>
+}
+>>
+
+main_decl(locals={$slist::locals}) ::= <<
+define i32 @main() {
+  <locals; separator="\n">
+}
+>>
+
+type_int() ::= "i32"
+
+type_char() ::= "i8"
+
+type_string() ::= "i8*"
+
+type_user_object(name) ::= "<name>"
+
+parameter(type,name) ::= "<type> %<name>"
+
+statement(expr) ::= "<expr>;"
+
+statementList(locals) ::= <<
+{
+<locals; separator="\n">
+}<\n>
+>>
+
+for_list_op (type, id, listId, locals) ::= <<
+for (<type> <id> : <listId>) {
+  <locals; separator="\n">
+}  
+>>
+            
+while_op(bool_cond,locals) ::= <<
+while (<bool_cond>) {
+  <locals; separator="\n">
+}
+>>
+
+
+if_op(cond, stat1, stat2, tmp) ::= <<
+<cond>
+br i1 %r<cond.reg>, label %true<tmp>, label %false<tmp>
+true<tmp>:
+  <stat1>
+	br label %false<tmp>
+	<if(stat2)>
+	br label %end<tmp>
+false<tmp>:
+	<stat2>
+end<tmp>:
+	<else>
+false<tmp>:
+<endif>
+>>
+
+for_op(id, cond, stat, tmp, reg) ::= <<
+<id>
+%zero<id.reg> = add i32 0, 0
+store i32 %zero<id.reg>, i32* %<id.id>
+%comp<cond.reg> = alloca i32
+<cond>
+store i32 %r<cond.reg>, i32* %comp<cond.reg>
+br label %loop<tmp>
+loop<tmp>:
+	%a1<cond.reg> = load i32* %<id.id>, align 4  
+	%a2<cond.reg> = load i32* %comp<cond.reg>, align 4
+	%bool<cond.reg> = icmp slt i32 %a1<cond.reg>, %a2<cond.reg>
+	br i1 %bool<cond.reg>, label %start<tmp>, label %end<tmp>
+start<tmp>:
+	<stat>
+	%aa<cond.reg> = load i32* %<id.id>, align 4  
+	%bb<cond.reg> = add nsw i32 %aa<cond.reg>, 1      
+	store i32 %bb<cond.reg>, i32* %<id.id>, align 4
+	br label %loop<tmp>
+end<tmp>:
+>>
+
+bop(reg, op, a, b) ::= <<
+<a>
+<b>
+%r<reg> = <opToInstr.(op)> i32 %r<a.reg>, %r<b.reg>
+>>
+
+else_block(locals) ::= <<
+else {
+  <locals; separator="\n">
+}
+>>
+
+listInit(name,params) ::= <<List <name> = new ArrayList();
+<params>
+>>
+listParam(listName,val) ::= <<<listName>.add(<val>);
+
+>> 
+
+assign(id, rhs,type) ::= <<
+<rhs>
+store <llvmType.(type)> %r<rhs.reg>, <llvmType.(type)>* %<id>
+>>
+
+array_assign(id, rhs, format,reg) ::= <<
+<rhs>
+<format>
+%ra1<reg> = load i8** %<id>, align 8                  
+%ra2<reg> = getelementptr inbounds i8* %ra1<reg>, i32 %r<format.reg>
+store i8 %r<rhs.reg>, i8* %ra2<reg>, align 1
+>>
+
+def_assign(type, id, rhs) ::= <<
+%<id> = alloca <llvmType.(type)>
+<rhs>
+store <llvmType.(type)> %r<rhs.reg>, <llvmType.(type)>* %<id>
+>>
+
+equals(left,right) ::= "<left> == <right>"
+
+lessThan(left,right) ::= "<left> \< <right>"
+
+add(left,right) ::= "<left> + <right>"
+
+addSign(left,sign,right) ::= "<left> <sign> <right>"
+
+refVar(id) ::= "<id>"
+
+iconst(value) ::= "<value>"
+
+inbrac(value) ::= "(<value>)"
+
+addExpr(sign,right) ::= "<sign><right>"
+
+funCall(reg, funName, funArgs,type) ::= <<
+<funArgs; separator="\n">
+%r<reg> = call <llvmType.(type)>(<funArgs:{<llvmType.(it.type)>}; separator=",">)* @<funName>(<funArgs:{<llvmType.(it.type)> %r<it.reg>}; separator=", ">)
+>>
+
+outOp(format, params) ::= <<
+<format>
+<if(params)>
+<params; separator="\n">
+call i32 (i8*, ...)* @printf(i8* %r<format.reg>, <params:{<llvmType.(it.type)> %r<it.reg>}; separator=", ">)
+<else>
+call i32 (i8*, ...)* @printf(i8* %r<format.reg>)
+<endif>
+>>
+
+readOp(reg,tmp,type) ::= <<
+%r<tmp> = alloca [256 x i8]
+%read<tmp> = bitcast [256 x i8]* %r<tmp> to i8*
+%r<reg> = call i8* @gets(i8* %read<tmp>) nounwind
+>>
+
+toIntOp(format,reg, type) ::= <<
+<format>
+%r<reg> = call i32 @atoi(i8* %r<format.reg>) nounwind readonly
+>>
+
+get_elem(format,reg,format2,type) ::= <<
+<format>
+<format2>
+%rget<reg> = getelementptr inbounds i8* %r<format.reg>, i32 %r<format2.reg>
+%r<reg> = load i8* %rget<reg>, align 1
+>>
+
+length_op(format,reg,tmp, type) ::= <<
+<format>
+%r<tmp> = call i64 @strlen(i8* %r<format.reg>) nounwind readonly
+%r<reg> = trunc i64 %r<tmp> to i32
+>>
+
+copy_op(arg1,arg2,reg, type) ::= <<
+<arg1>
+<arg2>
+%r<reg> = call i8* @strcpy(i8* %r<arg1.reg>, i8* %r<arg2.reg>) nounwind
+>>
+
+append_op(arg1,arg2,reg, type) ::= <<
+<arg1>
+<arg2>
+%r<reg> = call i8* @strcat(i8* %r<arg1.reg>, i8* %r<arg2.reg>) nounwind
+>>
+
+compare_op(arg1,arg2,reg, type) ::= <<
+<arg1>
+<arg2>
+%r<reg> = call i32 @strcmp(i8* %r<arg1.reg>, i8* %r<arg2.reg>) nounwind readonly
+>>
+
+array_type(type) ::= "[<type.sizeExpr> x i32]"
+
+string_type(s) ::= "[<s> x i8]"
+
+load_var(reg, id, type) ::= "%r<reg> = load <llvmType.(type)>* %<id>"
+
+load_global_var(reg, id, type) ::= "%r<reg> = load <llvmType.(type)>* @<id>"
+
+load_global_str(reg, id, type, len, name) ::= "%r<reg> = getelementptr [<len> x i8]* @<name>, i64 0, i64 0"
+
+int(reg, v, type) ::= "%r<reg> = add i32 <v>, 0"
+
+char(reg, v, type) ::= <<
+%char<reg> = add i32 <v>, 0
+%r<reg> = trunc i32 %char<reg> to i8  
+>>
+
+// s needed by C target, sreg needed by llvm target
+string(reg, v, sreg, len, type, name) ::= "%r<reg> = getelementptr [<len> x i8]* @<name>, i64 0, i64 0"

@@ -1,0 +1,9 @@
+Int main(){
+	out("Hello!\nInput word:");
+	String text;
+	read(text);
+	for (10) {
+		out("%s\n",text);
+	}
+	return 1;
+}

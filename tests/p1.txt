@@ -1,0 +1,18 @@
+Int factorial(Int X) {
+  if (X == 0) {
+	return 1;
+  }
+  return X*factorial(X-1);
+}
+
+Int main(){
+	out("START:\n");
+	String text;
+	read(text);
+	Int i;
+	i = toInt(text);
+	Int f;
+	f = factorial(i);
+	out("factorial %d = %d;\n",i,f);
+	return 1;
+}

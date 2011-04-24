@@ -1,0 +1,6 @@
+Int main(){
+	out("Input your name:\n");
+	String name = read();
+	out("Hello, %s!\n", name);
+	return 1;
+}

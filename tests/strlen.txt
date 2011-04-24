@@ -1,0 +1,6 @@
+Int main(){
+	String text = read();
+	Int len = length(text);
+	out("%s length is %d;\n",text,len);
+	return 1;
+}
