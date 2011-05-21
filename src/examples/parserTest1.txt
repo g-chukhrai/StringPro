@@ -1,9 +1,43 @@
-Int main(){
-	String s;
-	Char ch = '!';
-	s[0] = ch;
-	out("String is %c! %s\n", ch ,s);
-	return 1;
-	
+String smthGlobal = "You can call me everywhere!\n";
+Int Int = 3;
+
+String reverseString(String old){
+	String new; 
+	copy(new,old);
+	Char ch = '!';'';
+	for (i, length(new)) {
+		new[i] = old[length(new) - (i+1)];
+		out("new[%d] = %c\n", i, new[i]);
+	}
+	return new;
+}
+
+String compareStrings(String s1, String s2){
+	Int result = compare(s1,s2);
+	String resultString;
+	if (result + 0) {
+		resultString = "less";
+	} 
+	if (result == 0) {
+		resultString = "equals";
+	} 
+	if (result > 0) {
+		resultString = "more";
+	}
+	return resultString;
+}
+
+Int main(){	
+	for (i, globalVar) {
+		out("%d. %s",i,smthGlobal);
+	}
+	out("Input some string: ");
+	String in = read()
+	out("read %s\n", in);
+	String reversed = reverseString(in);
+	out("String reversed: old: %s -> new: %s\n", in, reversed);
+	String compared = compareStrings(in,reversed);
+	out("String %s %s string %s\n", in, compared,reversed);
+	return 1;	
 }
 

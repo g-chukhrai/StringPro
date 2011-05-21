@@ -10,7 +10,7 @@ public class NamesTable {
 		private String	type;
 		private int		lineDeclaration;
 		private ArrayList<Integer> linesUses = new ArrayList<Integer>();
-		
+
 		public Name(String idtf, String type, int line) {
 			this.idtf = idtf;
 			this.type = type;
@@ -30,6 +30,18 @@ public class NamesTable {
 	}
 	
 	private HashMap<String, Name> names = new HashMap<String, Name>();
+	private ArrayList<String> reserved = new ArrayList<String>();
+	
+	public NamesTable(){
+		reserved.add("String");
+		reserved.add("Int");
+		reserved.add("Char");	
+		reserved.add("void");
+	}
+	
+	public boolean isReserved(String name) {
+		return reserved.contains(name);
+	}
 	
 	public boolean isExist(String name) {
 		boolean rv = names.containsKey(name);

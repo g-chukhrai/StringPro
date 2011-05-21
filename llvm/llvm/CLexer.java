@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 C.g 2009-11-23 14:20:56
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g 2011-04-28 19:25:32
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -6,39 +6,15 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class CLexer extends Lexer {
-    public static final int T__29=29;
-    public static final int T__28=28;
-    public static final int T__27=27;
-    public static final int T__26=26;
-    public static final int T__25=25;
-    public static final int LETTER=21;
-    public static final int ID=18;
     public static final int EOF=-1;
-    public static final int INDEX=14;
-    public static final int EXPR=12;
-    public static final int ARG=11;
-    public static final int ELIST=13;
-    public static final int ARGS=10;
-    public static final int VARDEF=8;
-    public static final int COMMENT=23;
-    public static final int ARRAY=9;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int FUNCDEF=5;
-    public static final int T__45=45;
-    public static final int LINE_COMMENT=24;
-    public static final int T__48=48;
-    public static final int INT=20;
-    public static final int FILE=4;
+    public static final int T__25=25;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int T__29=29;
     public static final int T__30=30;
     public static final int T__31=31;
     public static final int T__32=32;
-    public static final int WS=22;
     public static final int T__33=33;
     public static final int T__34=34;
     public static final int T__35=35;
@@ -46,12 +22,36 @@ public class CLexer extends Lexer {
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__48=48;
+    public static final int FILE=4;
+    public static final int FUNCDEF=5;
+    public static final int EXTERNFUNC=6;
+    public static final int EXTERNVAR=7;
+    public static final int VARDEF=8;
+    public static final int ARRAY=9;
+    public static final int ARGS=10;
+    public static final int ARG=11;
+    public static final int EXPR=12;
+    public static final int ELIST=13;
+    public static final int INDEX=14;
+    public static final int CALL=15;
     public static final int BLOCK=16;
     public static final int ASSIGN=17;
-    public static final int EXTERNFUNC=6;
-    public static final int CALL=15;
+    public static final int ID=18;
     public static final int STRING=19;
-    public static final int EXTERNVAR=7;
+    public static final int INT=20;
+    public static final int LETTER=21;
+    public static final int WS=22;
+    public static final int COMMENT=23;
+    public static final int LINE_COMMENT=24;
 
     // delegates
     // delegators
@@ -64,15 +64,15 @@ public class CLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "C.g"; }
+    public String getGrammarFileName() { return "D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g"; }
 
     // $ANTLR start "ASSIGN"
     public final void mASSIGN() throws RecognitionException {
         try {
             int _type = ASSIGN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:3:8: ( '=' )
-            // C.g:3:10: '='
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:3:8: ( '=' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:3:10: '='
             {
             match('='); 
 
@@ -91,8 +91,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:4:7: ( '(' )
-            // C.g:4:9: '('
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:4:7: ( '(' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:4:9: '('
             {
             match('('); 
 
@@ -111,8 +111,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:5:7: ( ')' )
-            // C.g:5:9: ')'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:5:7: ( ')' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:5:9: ')'
             {
             match(')'); 
 
@@ -131,8 +131,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:6:7: ( ';' )
-            // C.g:6:9: ';'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:6:7: ( ';' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:6:9: ';'
             {
             match(';'); 
 
@@ -151,8 +151,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:7:7: ( 'void' )
-            // C.g:7:9: 'void'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:7:7: ( 'void' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:7:9: 'void'
             {
             match("void"); 
 
@@ -172,8 +172,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:8:7: ( 'int' )
-            // C.g:8:9: 'int'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:8:7: ( 'int' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:8:9: 'int'
             {
             match("int"); 
 
@@ -193,8 +193,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:9:7: ( '[' )
-            // C.g:9:9: '['
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:9:7: ( '[' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:9:9: '['
             {
             match('['); 
 
@@ -213,8 +213,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:10:7: ( ']' )
-            // C.g:10:9: ']'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:10:7: ( ']' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:10:9: ']'
             {
             match(']'); 
 
@@ -233,8 +233,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:11:7: ( ',' )
-            // C.g:11:9: ','
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:11:7: ( ',' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:11:9: ','
             {
             match(','); 
 
@@ -253,8 +253,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:12:7: ( 'return' )
-            // C.g:12:9: 'return'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:12:7: ( 'return' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:12:9: 'return'
             {
             match("return"); 
 
@@ -274,8 +274,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:13:7: ( 'if' )
-            // C.g:13:9: 'if'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:13:7: ( 'if' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:13:9: 'if'
             {
             match("if"); 
 
@@ -295,8 +295,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:14:7: ( 'else' )
-            // C.g:14:9: 'else'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:14:7: ( 'else' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:14:9: 'else'
             {
             match("else"); 
 
@@ -316,8 +316,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:15:7: ( 'while' )
-            // C.g:15:9: 'while'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:15:7: ( 'while' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:15:9: 'while'
             {
             match("while"); 
 
@@ -337,8 +337,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:16:7: ( '{' )
-            // C.g:16:9: '{'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:16:7: ( '{' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:16:9: '{'
             {
             match('{'); 
 
@@ -357,8 +357,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:17:7: ( '}' )
-            // C.g:17:9: '}'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:17:7: ( '}' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:17:9: '}'
             {
             match('}'); 
 
@@ -377,8 +377,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:18:7: ( '==' )
-            // C.g:18:9: '=='
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:18:7: ( '==' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:18:9: '=='
             {
             match("=="); 
 
@@ -398,8 +398,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:19:7: ( '!=' )
-            // C.g:19:9: '!='
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:19:7: ( '!=' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:19:9: '!='
             {
             match("!="); 
 
@@ -419,8 +419,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:20:7: ( '<' )
-            // C.g:20:9: '<'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:20:7: ( '<' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:20:9: '<'
             {
             match('<'); 
 
@@ -439,8 +439,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:21:7: ( '>' )
-            // C.g:21:9: '>'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:21:7: ( '>' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:21:9: '>'
             {
             match('>'); 
 
@@ -459,8 +459,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:22:7: ( '<=' )
-            // C.g:22:9: '<='
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:22:7: ( '<=' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:22:9: '<='
             {
             match("<="); 
 
@@ -480,8 +480,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:23:7: ( '>=' )
-            // C.g:23:9: '>='
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:23:7: ( '>=' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:23:9: '>='
             {
             match(">="); 
 
@@ -501,8 +501,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:24:7: ( '+' )
-            // C.g:24:9: '+'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:24:7: ( '+' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:24:9: '+'
             {
             match('+'); 
 
@@ -521,8 +521,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:25:7: ( '-' )
-            // C.g:25:9: '-'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:25:7: ( '-' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:25:9: '-'
             {
             match('-'); 
 
@@ -541,8 +541,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:26:7: ( '*' )
-            // C.g:26:9: '*'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:26:7: ( '*' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:26:9: '*'
             {
             match('*'); 
 
@@ -561,8 +561,8 @@ public class CLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:27:7: ( '/' )
-            // C.g:27:9: '/'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:27:7: ( '/' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:27:9: '/'
             {
             match('/'); 
 
@@ -581,11 +581,11 @@ public class CLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:129:2: ( LETTER ( LETTER | '0' .. '9' )* )
-            // C.g:129:4: LETTER ( LETTER | '0' .. '9' )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:129:2: ( LETTER ( LETTER | '0' .. '9' )* )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:129:4: LETTER ( LETTER | '0' .. '9' )*
             {
             mLETTER(); 
-            // C.g:129:11: ( LETTER | '0' .. '9' )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:129:11: ( LETTER | '0' .. '9' )*
             loop1:
             do {
                 int alt1=2;
@@ -598,7 +598,7 @@ public class CLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // C.g:
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -632,8 +632,8 @@ public class CLexer extends Lexer {
     // $ANTLR start "LETTER"
     public final void mLETTER() throws RecognitionException {
         try {
-            // C.g:134:2: ( 'A' .. 'Z' | 'a' .. 'z' | '_' )
-            // C.g:
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:134:2: ( 'A' .. 'Z' | 'a' .. 'z' | '_' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -658,10 +658,10 @@ public class CLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:139:5: ( ( '0' .. '9' )+ )
-            // C.g:139:7: ( '0' .. '9' )+
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:139:5: ( ( '0' .. '9' )+ )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:139:7: ( '0' .. '9' )+
             {
-            // C.g:139:7: ( '0' .. '9' )+
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:139:7: ( '0' .. '9' )+
             int cnt2=0;
             loop2:
             do {
@@ -675,7 +675,7 @@ public class CLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // C.g:139:7: '0' .. '9'
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:139:7: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -707,11 +707,11 @@ public class CLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:141:7: ( '\"' ( . )* '\"' )
-            // C.g:141:9: '\"' ( . )* '\"'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:141:7: ( '\"' ( . )* '\"' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:141:9: '\"' ( . )* '\"'
             {
             match('\"'); 
-            // C.g:141:13: ( . )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:141:13: ( . )*
             loop3:
             do {
                 int alt3=2;
@@ -727,7 +727,7 @@ public class CLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // C.g:141:13: .
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:141:13: .
             	    {
             	    matchAny(); 
 
@@ -757,8 +757,8 @@ public class CLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:143:5: ( ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' ) )
-            // C.g:143:8: ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:143:5: ( ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' ) )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:143:8: ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' )
             {
             if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||(input.LA(1)>='\f' && input.LA(1)<='\r')||input.LA(1)==' ' ) {
                 input.consume();
@@ -786,12 +786,12 @@ public class CLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:147:5: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // C.g:147:9: '/*' ( options {greedy=false; } : . )* '*/'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:147:5: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:147:9: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // C.g:147:14: ( options {greedy=false; } : . )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:147:14: ( options {greedy=false; } : . )*
             loop4:
             do {
                 int alt4=2;
@@ -816,7 +816,7 @@ public class CLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // C.g:147:42: .
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:147:42: .
             	    {
             	    matchAny(); 
 
@@ -847,12 +847,12 @@ public class CLexer extends Lexer {
         try {
             int _type = LINE_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C.g:151:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
-            // C.g:151:7: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:151:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:151:7: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
             {
             match("//"); 
 
-            // C.g:151:12: (~ ( '\\n' | '\\r' ) )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:151:12: (~ ( '\\n' | '\\r' ) )*
             loop5:
             do {
                 int alt5=2;
@@ -865,7 +865,7 @@ public class CLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // C.g:151:12: ~ ( '\\n' | '\\r' )
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:151:12: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -885,7 +885,7 @@ public class CLexer extends Lexer {
                 }
             } while (true);
 
-            // C.g:151:26: ( '\\r' )?
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:151:26: ( '\\r' )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -894,7 +894,7 @@ public class CLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // C.g:151:26: '\\r'
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:151:26: '\\r'
                     {
                     match('\r'); 
 
@@ -917,222 +917,222 @@ public class CLexer extends Lexer {
     // $ANTLR end "LINE_COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // C.g:1:8: ( ASSIGN | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | ID | INT | STRING | WS | COMMENT | LINE_COMMENT )
+        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:8: ( ASSIGN | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | ID | INT | STRING | WS | COMMENT | LINE_COMMENT )
         int alt7=31;
         alt7 = dfa7.predict(input);
         switch (alt7) {
             case 1 :
-                // C.g:1:10: ASSIGN
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:10: ASSIGN
                 {
                 mASSIGN(); 
 
                 }
                 break;
             case 2 :
-                // C.g:1:17: T__25
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:17: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
             case 3 :
-                // C.g:1:23: T__26
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:23: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
             case 4 :
-                // C.g:1:29: T__27
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:29: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
             case 5 :
-                // C.g:1:35: T__28
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:35: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
             case 6 :
-                // C.g:1:41: T__29
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:41: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
             case 7 :
-                // C.g:1:47: T__30
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:47: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
             case 8 :
-                // C.g:1:53: T__31
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:53: T__31
                 {
                 mT__31(); 
 
                 }
                 break;
             case 9 :
-                // C.g:1:59: T__32
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:59: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
             case 10 :
-                // C.g:1:65: T__33
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:65: T__33
                 {
                 mT__33(); 
 
                 }
                 break;
             case 11 :
-                // C.g:1:71: T__34
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:71: T__34
                 {
                 mT__34(); 
 
                 }
                 break;
             case 12 :
-                // C.g:1:77: T__35
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:77: T__35
                 {
                 mT__35(); 
 
                 }
                 break;
             case 13 :
-                // C.g:1:83: T__36
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:83: T__36
                 {
                 mT__36(); 
 
                 }
                 break;
             case 14 :
-                // C.g:1:89: T__37
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:89: T__37
                 {
                 mT__37(); 
 
                 }
                 break;
             case 15 :
-                // C.g:1:95: T__38
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:95: T__38
                 {
                 mT__38(); 
 
                 }
                 break;
             case 16 :
-                // C.g:1:101: T__39
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:101: T__39
                 {
                 mT__39(); 
 
                 }
                 break;
             case 17 :
-                // C.g:1:107: T__40
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:107: T__40
                 {
                 mT__40(); 
 
                 }
                 break;
             case 18 :
-                // C.g:1:113: T__41
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:113: T__41
                 {
                 mT__41(); 
 
                 }
                 break;
             case 19 :
-                // C.g:1:119: T__42
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:119: T__42
                 {
                 mT__42(); 
 
                 }
                 break;
             case 20 :
-                // C.g:1:125: T__43
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:125: T__43
                 {
                 mT__43(); 
 
                 }
                 break;
             case 21 :
-                // C.g:1:131: T__44
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:131: T__44
                 {
                 mT__44(); 
 
                 }
                 break;
             case 22 :
-                // C.g:1:137: T__45
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:137: T__45
                 {
                 mT__45(); 
 
                 }
                 break;
             case 23 :
-                // C.g:1:143: T__46
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:143: T__46
                 {
                 mT__46(); 
 
                 }
                 break;
             case 24 :
-                // C.g:1:149: T__47
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:149: T__47
                 {
                 mT__47(); 
 
                 }
                 break;
             case 25 :
-                // C.g:1:155: T__48
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:155: T__48
                 {
                 mT__48(); 
 
                 }
                 break;
             case 26 :
-                // C.g:1:161: ID
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:161: ID
                 {
                 mID(); 
 
                 }
                 break;
             case 27 :
-                // C.g:1:164: INT
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:164: INT
                 {
                 mINT(); 
 
                 }
                 break;
             case 28 :
-                // C.g:1:168: STRING
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:168: STRING
                 {
                 mSTRING(); 
 
                 }
                 break;
             case 29 :
-                // C.g:1:175: WS
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:175: WS
                 {
                 mWS(); 
 
                 }
                 break;
             case 30 :
-                // C.g:1:178: COMMENT
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:178: COMMENT
                 {
                 mCOMMENT(); 
 
                 }
                 break;
             case 31 :
-                // C.g:1:186: LINE_COMMENT
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:1:186: LINE_COMMENT
                 {
                 mLINE_COMMENT(); 
 
@@ -1162,18 +1162,18 @@ public class CLexer extends Lexer {
         "\uffff\1\144\1\172\1\uffff\1\165\1\145\1\154\1\172\1\uffff\1\162"+
         "\1\172\1\145\1\uffff\1\156\1\uffff\2\172\2\uffff";
     static final String DFA7_acceptS =
-        "\2\uffff\1\2\1\3\1\4\2\uffff\1\7\1\10\1\11\3\uffff\1\16\1\17\1\21"+
-        "\2\uffff\1\26\1\27\1\30\1\uffff\1\32\1\33\1\34\1\35\1\20\1\1\6\uffff"+
-        "\1\24\1\22\1\25\1\23\1\36\1\37\1\31\2\uffff\1\13\4\uffff\1\6\3\uffff"+
-        "\1\5\1\uffff\1\14\2\uffff\1\15\1\12";
+        "\2\uffff\1\2\1\3\1\4\2\uffff\1\7\1\10\1\11\3\uffff\1\16\1\17\1"+
+        "\21\2\uffff\1\26\1\27\1\30\1\uffff\1\32\1\33\1\34\1\35\1\20\1\1"+
+        "\6\uffff\1\24\1\22\1\25\1\23\1\36\1\37\1\31\2\uffff\1\13\4\uffff"+
+        "\1\6\3\uffff\1\5\1\uffff\1\14\2\uffff\1\15\1\12";
     static final String DFA7_specialS =
         "\73\uffff}>";
     static final String[] DFA7_transitionS = {
-            "\2\31\1\uffff\2\31\22\uffff\1\31\1\17\1\30\5\uffff\1\2\1\3\1"+
-            "\24\1\22\1\11\1\23\1\uffff\1\25\12\27\1\uffff\1\4\1\20\1\1\1"+
-            "\21\2\uffff\32\26\1\7\1\uffff\1\10\1\uffff\1\26\1\uffff\4\26"+
-            "\1\13\3\26\1\6\10\26\1\12\3\26\1\5\1\14\3\26\1\15\1\uffff\1"+
-            "\16",
+            "\2\31\1\uffff\2\31\22\uffff\1\31\1\17\1\30\5\uffff\1\2\1\3"+
+            "\1\24\1\22\1\11\1\23\1\uffff\1\25\12\27\1\uffff\1\4\1\20\1\1"+
+            "\1\21\2\uffff\32\26\1\7\1\uffff\1\10\1\uffff\1\26\1\uffff\4"+
+            "\26\1\13\3\26\1\6\10\26\1\12\3\26\1\5\1\14\3\26\1\15\1\uffff"+
+            "\1\16",
             "\1\32",
             "",
             "",

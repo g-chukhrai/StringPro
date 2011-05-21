@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 C.g 2009-11-23 14:20:55
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g 2011-04-28 19:25:32
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -13,39 +13,15 @@ public class CParser extends Parser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "FILE", "FUNCDEF", "EXTERNFUNC", "EXTERNVAR", "VARDEF", "ARRAY", "ARGS", "ARG", "EXPR", "ELIST", "INDEX", "CALL", "BLOCK", "ASSIGN", "ID", "STRING", "INT", "LETTER", "WS", "COMMENT", "LINE_COMMENT", "'('", "')'", "';'", "'void'", "'int'", "'['", "']'", "','", "'return'", "'if'", "'else'", "'while'", "'{'", "'}'", "'=='", "'!='", "'<'", "'>'", "'<='", "'>='", "'+'", "'-'", "'*'", "'/'"
     };
-    public static final int T__29=29;
-    public static final int T__28=28;
-    public static final int T__27=27;
-    public static final int T__26=26;
-    public static final int T__25=25;
-    public static final int LETTER=21;
-    public static final int ID=18;
     public static final int EOF=-1;
-    public static final int INDEX=14;
-    public static final int EXPR=12;
-    public static final int ARG=11;
-    public static final int ELIST=13;
-    public static final int ARGS=10;
-    public static final int COMMENT=23;
-    public static final int VARDEF=8;
-    public static final int ARRAY=9;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int FUNCDEF=5;
-    public static final int T__45=45;
-    public static final int LINE_COMMENT=24;
-    public static final int T__48=48;
-    public static final int INT=20;
-    public static final int FILE=4;
+    public static final int T__25=25;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int T__29=29;
     public static final int T__30=30;
     public static final int T__31=31;
     public static final int T__32=32;
-    public static final int WS=22;
     public static final int T__33=33;
     public static final int T__34=34;
     public static final int T__35=35;
@@ -53,12 +29,36 @@ public class CParser extends Parser {
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__48=48;
+    public static final int FILE=4;
+    public static final int FUNCDEF=5;
+    public static final int EXTERNFUNC=6;
+    public static final int EXTERNVAR=7;
+    public static final int VARDEF=8;
+    public static final int ARRAY=9;
+    public static final int ARGS=10;
+    public static final int ARG=11;
+    public static final int EXPR=12;
+    public static final int ELIST=13;
+    public static final int INDEX=14;
+    public static final int CALL=15;
     public static final int BLOCK=16;
     public static final int ASSIGN=17;
-    public static final int EXTERNFUNC=6;
-    public static final int CALL=15;
+    public static final int ID=18;
     public static final int STRING=19;
-    public static final int EXTERNVAR=7;
+    public static final int INT=20;
+    public static final int LETTER=21;
+    public static final int WS=22;
+    public static final int COMMENT=23;
+    public static final int LINE_COMMENT=24;
 
     // delegates
     // delegators
@@ -82,7 +82,7 @@ public class CParser extends Parser {
     }
 
     public String[] getTokenNames() { return CParser.tokenNames; }
-    public String getGrammarFileName() { return "C.g"; }
+    public String getGrammarFileName() { return "D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g"; }
 
 
     public static class translation_unit_return extends ParserRuleReturnScope {
@@ -91,7 +91,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "translation_unit"
-    // C.g:12:1: translation_unit : ( external_declaration )+ -> ^( FILE ( external_declaration )+ ) ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:12:1: translation_unit : ( external_declaration )+ -> ^( FILE ( external_declaration )+ ) ;
     public final CParser.translation_unit_return translation_unit() throws RecognitionException {
         CParser.translation_unit_return retval = new CParser.translation_unit_return();
         retval.start = input.LT(1);
@@ -103,10 +103,10 @@ public class CParser extends Parser {
 
         RewriteRuleSubtreeStream stream_external_declaration=new RewriteRuleSubtreeStream(adaptor,"rule external_declaration");
         try {
-            // C.g:13:2: ( ( external_declaration )+ -> ^( FILE ( external_declaration )+ ) )
-            // C.g:13:4: ( external_declaration )+
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:13:2: ( ( external_declaration )+ -> ^( FILE ( external_declaration )+ ) )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:13:4: ( external_declaration )+
             {
-            // C.g:13:4: ( external_declaration )+
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:13:4: ( external_declaration )+
             int cnt1=0;
             loop1:
             do {
@@ -120,7 +120,7 @@ public class CParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // C.g:13:4: external_declaration
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:13:4: external_declaration
             	    {
             	    pushFollow(FOLLOW_external_declaration_in_translation_unit78);
             	    external_declaration1=external_declaration();
@@ -158,7 +158,7 @@ public class CParser extends Parser {
             root_0 = (CTree)adaptor.nil();
             // 13:26: -> ^( FILE ( external_declaration )+ )
             {
-                // C.g:13:29: ^( FILE ( external_declaration )+ )
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:13:29: ^( FILE ( external_declaration )+ )
                 {
                 CTree root_1 = (CTree)adaptor.nil();
                 root_1 = (CTree)adaptor.becomeRoot((CTree)adaptor.create(FILE, "FILE"), root_1);
@@ -206,7 +206,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "external_declaration"
-    // C.g:16:1: external_declaration : ( function_definition -> function_definition | declaration -> declaration );
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:16:1: external_declaration : ( function_definition -> function_definition | declaration -> declaration );
     public final CParser.external_declaration_return external_declaration() throws RecognitionException {
         CParser.external_declaration_return retval = new CParser.external_declaration_return();
         retval.start = input.LT(1);
@@ -221,7 +221,7 @@ public class CParser extends Parser {
         RewriteRuleSubtreeStream stream_declaration=new RewriteRuleSubtreeStream(adaptor,"rule declaration");
         RewriteRuleSubtreeStream stream_function_definition=new RewriteRuleSubtreeStream(adaptor,"rule function_definition");
         try {
-            // C.g:17:2: ( function_definition -> function_definition | declaration -> declaration )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:17:2: ( function_definition -> function_definition | declaration -> declaration )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -231,11 +231,11 @@ public class CParser extends Parser {
                 if ( (LA2_1==ID) ) {
                     int LA2_2 = input.LA(3);
 
-                    if ( (LA2_2==27||LA2_2==30) ) {
-                        alt2=2;
-                    }
-                    else if ( (LA2_2==25) ) {
+                    if ( (LA2_2==25) ) {
                         alt2=1;
+                    }
+                    else if ( (LA2_2==27||LA2_2==30) ) {
+                        alt2=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return retval;}
@@ -262,7 +262,7 @@ public class CParser extends Parser {
             }
             switch (alt2) {
                 case 1 :
-                    // C.g:17:4: function_definition
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:17:4: function_definition
                     {
                     pushFollow(FOLLOW_function_definition_in_external_declaration99);
                     function_definition2=function_definition();
@@ -294,7 +294,7 @@ public class CParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // C.g:18:4: declaration
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:18:4: declaration
                     {
                     pushFollow(FOLLOW_declaration_in_external_declaration108);
                     declaration3=declaration();
@@ -353,7 +353,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "function_definition"
-    // C.g:21:1: function_definition : type_specifier ID '(' ( parameter_list )? ')' compound_statement -> ^( FUNCDEF ID type_specifier ( parameter_list )? compound_statement ) ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:21:1: function_definition : type_specifier ID '(' ( parameter_list )? ')' compound_statement -> ^( FUNCDEF ID type_specifier ( parameter_list )? compound_statement ) ;
     public final CParser.function_definition_return function_definition() throws RecognitionException {
         CParser.function_definition_return retval = new CParser.function_definition_return();
         retval.start = input.LT(1);
@@ -380,8 +380,8 @@ public class CParser extends Parser {
         RewriteRuleSubtreeStream stream_compound_statement=new RewriteRuleSubtreeStream(adaptor,"rule compound_statement");
         RewriteRuleSubtreeStream stream_parameter_list=new RewriteRuleSubtreeStream(adaptor,"rule parameter_list");
         try {
-            // C.g:22:2: ( type_specifier ID '(' ( parameter_list )? ')' compound_statement -> ^( FUNCDEF ID type_specifier ( parameter_list )? compound_statement ) )
-            // C.g:22:4: type_specifier ID '(' ( parameter_list )? ')' compound_statement
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:22:2: ( type_specifier ID '(' ( parameter_list )? ')' compound_statement -> ^( FUNCDEF ID type_specifier ( parameter_list )? compound_statement ) )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:22:4: type_specifier ID '(' ( parameter_list )? ')' compound_statement
             {
             pushFollow(FOLLOW_type_specifier_in_function_definition131);
             type_specifier4=type_specifier();
@@ -395,7 +395,7 @@ public class CParser extends Parser {
             char_literal6=(Token)match(input,25,FOLLOW_25_in_function_definition135); if (state.failed) return retval; 
             if ( state.backtracking==0 ) stream_25.add(char_literal6);
 
-            // C.g:22:26: ( parameter_list )?
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:22:26: ( parameter_list )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -404,7 +404,7 @@ public class CParser extends Parser {
             }
             switch (alt3) {
                 case 1 :
-                    // C.g:22:26: parameter_list
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:22:26: parameter_list
                     {
                     pushFollow(FOLLOW_parameter_list_in_function_definition137);
                     parameter_list7=parameter_list();
@@ -443,14 +443,14 @@ public class CParser extends Parser {
             root_0 = (CTree)adaptor.nil();
             // 23:3: -> ^( FUNCDEF ID type_specifier ( parameter_list )? compound_statement )
             {
-                // C.g:23:6: ^( FUNCDEF ID type_specifier ( parameter_list )? compound_statement )
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:23:6: ^( FUNCDEF ID type_specifier ( parameter_list )? compound_statement )
                 {
                 CTree root_1 = (CTree)adaptor.nil();
                 root_1 = (CTree)adaptor.becomeRoot((CTree)adaptor.create(FUNCDEF, "FUNCDEF"), root_1);
 
                 adaptor.addChild(root_1, stream_ID.nextNode());
                 adaptor.addChild(root_1, stream_type_specifier.nextTree());
-                // C.g:23:34: ( parameter_list )?
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:23:34: ( parameter_list )?
                 if ( stream_parameter_list.hasNext() ) {
                     adaptor.addChild(root_1, stream_parameter_list.nextTree());
 
@@ -492,7 +492,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "declaration"
-    // C.g:26:1: declaration : type_specifier declarator[$type_specifier.tree] ';' -> ^( VARDEF declarator ) ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:26:1: declaration : type_specifier declarator[$type_specifier.tree] ';' -> ^( VARDEF declarator ) ;
     public final CParser.declaration_return declaration() throws RecognitionException {
         CParser.declaration_return retval = new CParser.declaration_return();
         retval.start = input.LT(1);
@@ -510,8 +510,8 @@ public class CParser extends Parser {
         RewriteRuleSubtreeStream stream_declarator=new RewriteRuleSubtreeStream(adaptor,"rule declarator");
         RewriteRuleSubtreeStream stream_type_specifier=new RewriteRuleSubtreeStream(adaptor,"rule type_specifier");
         try {
-            // C.g:27:2: ( type_specifier declarator[$type_specifier.tree] ';' -> ^( VARDEF declarator ) )
-            // C.g:27:4: type_specifier declarator[$type_specifier.tree] ';'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:27:2: ( type_specifier declarator[$type_specifier.tree] ';' -> ^( VARDEF declarator ) )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:27:4: type_specifier declarator[$type_specifier.tree] ';'
             {
             pushFollow(FOLLOW_type_specifier_in_declaration170);
             type_specifier10=type_specifier();
@@ -544,7 +544,7 @@ public class CParser extends Parser {
             root_0 = (CTree)adaptor.nil();
             // 28:3: -> ^( VARDEF declarator )
             {
-                // C.g:28:6: ^( VARDEF declarator )
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:28:6: ^( VARDEF declarator )
                 {
                 CTree root_1 = (CTree)adaptor.nil();
                 root_1 = (CTree)adaptor.becomeRoot((CTree)adaptor.create(VARDEF, "VARDEF"), root_1);
@@ -586,7 +586,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "type_specifier"
-    // C.g:31:1: type_specifier : ( 'void' | 'int' );
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:31:1: type_specifier : ( 'void' | 'int' );
     public final CParser.type_specifier_return type_specifier() throws RecognitionException {
         CParser.type_specifier_return retval = new CParser.type_specifier_return();
         retval.start = input.LT(1);
@@ -598,8 +598,8 @@ public class CParser extends Parser {
         CTree set13_tree=null;
 
         try {
-            // C.g:32:2: ( 'void' | 'int' )
-            // C.g:
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:32:2: ( 'void' | 'int' )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:
             {
             root_0 = (CTree)adaptor.nil();
 
@@ -645,7 +645,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "declarator"
-    // C.g:36:1: declarator[CTree typeAST] returns [CommonTree id] : ( ID '[' expressionRoot ']' -> ^( ARRAY expressionRoot ) | ID ->);
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:36:1: declarator[CTree typeAST] returns [CommonTree id] : ( ID '[' expressionRoot ']' -> ^( ARRAY expressionRoot ) | ID ->);
     public final CParser.declarator_return declarator(CTree typeAST) throws RecognitionException {
         CParser.declarator_return retval = new CParser.declarator_return();
         retval.start = input.LT(1);
@@ -668,7 +668,7 @@ public class CParser extends Parser {
         RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
         RewriteRuleSubtreeStream stream_expressionRoot=new RewriteRuleSubtreeStream(adaptor,"rule expressionRoot");
         try {
-            // C.g:37:2: ( ID '[' expressionRoot ']' -> ^( ARRAY expressionRoot ) | ID ->)
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:37:2: ( ID '[' expressionRoot ']' -> ^( ARRAY expressionRoot ) | ID ->)
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -698,7 +698,7 @@ public class CParser extends Parser {
             }
             switch (alt4) {
                 case 1 :
-                    // C.g:37:6: ID '[' expressionRoot ']'
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:37:6: ID '[' expressionRoot ']'
                     {
                     ID14=(Token)match(input,ID,FOLLOW_ID_in_declarator221); if (state.failed) return retval; 
                     if ( state.backtracking==0 ) stream_ID.add(ID14);
@@ -734,7 +734,7 @@ public class CParser extends Parser {
                     root_0 = (CTree)adaptor.nil();
                     // 38:4: -> ^( ARRAY expressionRoot )
                     {
-                        // C.g:38:7: ^( ARRAY expressionRoot )
+                        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:38:7: ^( ARRAY expressionRoot )
                         {
                         CTree root_1 = (CTree)adaptor.nil();
                         root_1 = (CTree)adaptor.becomeRoot((CTree)adaptor.create(ARRAY, "ARRAY"), root_1);
@@ -751,7 +751,7 @@ public class CParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // C.g:39:6: ID
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:39:6: ID
                     {
                     ID18=(Token)match(input,ID,FOLLOW_ID_in_declarator249); if (state.failed) return retval; 
                     if ( state.backtracking==0 ) stream_ID.add(ID18);
@@ -810,7 +810,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "parameter_list"
-    // C.g:43:1: parameter_list : parameter_declaration ( ',' parameter_declaration )* -> ^( ARGS ( parameter_declaration )+ ) ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:43:1: parameter_list : parameter_declaration ( ',' parameter_declaration )* -> ^( ARGS ( parameter_declaration )+ ) ;
     public final CParser.parameter_list_return parameter_list() throws RecognitionException {
         CParser.parameter_list_return retval = new CParser.parameter_list_return();
         retval.start = input.LT(1);
@@ -827,8 +827,8 @@ public class CParser extends Parser {
         RewriteRuleTokenStream stream_32=new RewriteRuleTokenStream(adaptor,"token 32");
         RewriteRuleSubtreeStream stream_parameter_declaration=new RewriteRuleSubtreeStream(adaptor,"rule parameter_declaration");
         try {
-            // C.g:44:2: ( parameter_declaration ( ',' parameter_declaration )* -> ^( ARGS ( parameter_declaration )+ ) )
-            // C.g:44:4: parameter_declaration ( ',' parameter_declaration )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:44:2: ( parameter_declaration ( ',' parameter_declaration )* -> ^( ARGS ( parameter_declaration )+ ) )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:44:4: parameter_declaration ( ',' parameter_declaration )*
             {
             pushFollow(FOLLOW_parameter_declaration_in_parameter_list269);
             parameter_declaration19=parameter_declaration();
@@ -836,7 +836,7 @@ public class CParser extends Parser {
             state._fsp--;
             if (state.failed) return retval;
             if ( state.backtracking==0 ) stream_parameter_declaration.add(parameter_declaration19.getTree());
-            // C.g:44:26: ( ',' parameter_declaration )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:44:26: ( ',' parameter_declaration )*
             loop5:
             do {
                 int alt5=2;
@@ -849,7 +849,7 @@ public class CParser extends Parser {
 
                 switch (alt5) {
             	case 1 :
-            	    // C.g:44:27: ',' parameter_declaration
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:44:27: ',' parameter_declaration
             	    {
             	    char_literal20=(Token)match(input,32,FOLLOW_32_in_parameter_list272); if (state.failed) return retval; 
             	    if ( state.backtracking==0 ) stream_32.add(char_literal20);
@@ -885,7 +885,7 @@ public class CParser extends Parser {
             root_0 = (CTree)adaptor.nil();
             // 45:3: -> ^( ARGS ( parameter_declaration )+ )
             {
-                // C.g:45:6: ^( ARGS ( parameter_declaration )+ )
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:45:6: ^( ARGS ( parameter_declaration )+ )
                 {
                 CTree root_1 = (CTree)adaptor.nil();
                 root_1 = (CTree)adaptor.becomeRoot((CTree)adaptor.create(ARGS, "ARGS"), root_1);
@@ -933,7 +933,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "parameter_declaration"
-    // C.g:48:1: parameter_declaration : type_specifier declarator[$type_specifier.tree] -> ^( ARG declarator ) ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:48:1: parameter_declaration : type_specifier declarator[$type_specifier.tree] -> ^( ARG declarator ) ;
     public final CParser.parameter_declaration_return parameter_declaration() throws RecognitionException {
         CParser.parameter_declaration_return retval = new CParser.parameter_declaration_return();
         retval.start = input.LT(1);
@@ -948,8 +948,8 @@ public class CParser extends Parser {
         RewriteRuleSubtreeStream stream_declarator=new RewriteRuleSubtreeStream(adaptor,"rule declarator");
         RewriteRuleSubtreeStream stream_type_specifier=new RewriteRuleSubtreeStream(adaptor,"rule type_specifier");
         try {
-            // C.g:49:2: ( type_specifier declarator[$type_specifier.tree] -> ^( ARG declarator ) )
-            // C.g:49:4: type_specifier declarator[$type_specifier.tree]
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:49:2: ( type_specifier declarator[$type_specifier.tree] -> ^( ARG declarator ) )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:49:4: type_specifier declarator[$type_specifier.tree]
             {
             pushFollow(FOLLOW_type_specifier_in_parameter_declaration298);
             type_specifier22=type_specifier();
@@ -979,7 +979,7 @@ public class CParser extends Parser {
             root_0 = (CTree)adaptor.nil();
             // 50:4: -> ^( ARG declarator )
             {
-                // C.g:50:7: ^( ARG declarator )
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:50:7: ^( ARG declarator )
                 {
                 CTree root_1 = (CTree)adaptor.nil();
                 root_1 = (CTree)adaptor.becomeRoot((CTree)adaptor.create(ARG, "ARG"), root_1);
@@ -1021,7 +1021,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "statement"
-    // C.g:55:1: statement options {backtrack=true; } : ( compound_statement | assignment_expression ';' -> assignment_expression | postfix_expression ';' -> postfix_expression | 'return' expressionRoot ';' -> ^( 'return' expressionRoot ) | 'if' '(' expressionRoot ')' s1= statement ( 'else' s2= statement )? -> ^( 'if' expressionRoot $s1 ( $s2)? ) | 'while' '(' expressionRoot ')' statement -> ^( 'while' expressionRoot statement ) );
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:55:1: statement options {backtrack=true; } : ( compound_statement | assignment_expression ';' -> assignment_expression | postfix_expression ';' -> postfix_expression | 'return' expressionRoot ';' -> ^( 'return' expressionRoot ) | 'if' '(' expressionRoot ')' s1= statement ( 'else' s2= statement )? -> ^( 'if' expressionRoot $s1 ( $s2)? ) | 'while' '(' expressionRoot ')' statement -> ^( 'while' expressionRoot statement ) );
     public final CParser.statement_return statement() throws RecognitionException {
         CParser.statement_return retval = new CParser.statement_return();
         retval.start = input.LT(1);
@@ -1081,12 +1081,12 @@ public class CParser extends Parser {
         RewriteRuleSubtreeStream stream_assignment_expression=new RewriteRuleSubtreeStream(adaptor,"rule assignment_expression");
         RewriteRuleSubtreeStream stream_expressionRoot=new RewriteRuleSubtreeStream(adaptor,"rule expressionRoot");
         try {
-            // C.g:57:2: ( compound_statement | assignment_expression ';' -> assignment_expression | postfix_expression ';' -> postfix_expression | 'return' expressionRoot ';' -> ^( 'return' expressionRoot ) | 'if' '(' expressionRoot ')' s1= statement ( 'else' s2= statement )? -> ^( 'if' expressionRoot $s1 ( $s2)? ) | 'while' '(' expressionRoot ')' statement -> ^( 'while' expressionRoot statement ) )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:57:2: ( compound_statement | assignment_expression ';' -> assignment_expression | postfix_expression ';' -> postfix_expression | 'return' expressionRoot ';' -> ^( 'return' expressionRoot ) | 'if' '(' expressionRoot ')' s1= statement ( 'else' s2= statement )? -> ^( 'if' expressionRoot $s1 ( $s2)? ) | 'while' '(' expressionRoot ')' statement -> ^( 'while' expressionRoot statement ) )
             int alt7=6;
             alt7 = dfa7.predict(input);
             switch (alt7) {
                 case 1 :
-                    // C.g:57:4: compound_statement
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:57:4: compound_statement
                     {
                     root_0 = (CTree)adaptor.nil();
 
@@ -1100,7 +1100,7 @@ public class CParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // C.g:58:4: assignment_expression ';'
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:58:4: assignment_expression ';'
                     {
                     pushFollow(FOLLOW_assignment_expression_in_statement339);
                     assignment_expression25=assignment_expression();
@@ -1135,7 +1135,7 @@ public class CParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // C.g:59:4: postfix_expression ';'
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:59:4: postfix_expression ';'
                     {
                     pushFollow(FOLLOW_postfix_expression_in_statement352);
                     postfix_expression27=postfix_expression();
@@ -1170,7 +1170,7 @@ public class CParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // C.g:60:4: 'return' expressionRoot ';'
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:60:4: 'return' expressionRoot ';'
                     {
                     string_literal29=(Token)match(input,33,FOLLOW_33_in_statement369); if (state.failed) return retval; 
                     if ( state.backtracking==0 ) stream_33.add(string_literal29);
@@ -1200,7 +1200,7 @@ public class CParser extends Parser {
                     root_0 = (CTree)adaptor.nil();
                     // 60:32: -> ^( 'return' expressionRoot )
                     {
-                        // C.g:60:35: ^( 'return' expressionRoot )
+                        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:60:35: ^( 'return' expressionRoot )
                         {
                         CTree root_1 = (CTree)adaptor.nil();
                         root_1 = (CTree)adaptor.becomeRoot(stream_33.nextNode(), root_1);
@@ -1216,7 +1216,7 @@ public class CParser extends Parser {
                     }
                     break;
                 case 5 :
-                    // C.g:61:4: 'if' '(' expressionRoot ')' s1= statement ( 'else' s2= statement )?
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:61:4: 'if' '(' expressionRoot ')' s1= statement ( 'else' s2= statement )?
                     {
                     string_literal32=(Token)match(input,34,FOLLOW_34_in_statement386); if (state.failed) return retval; 
                     if ( state.backtracking==0 ) stream_34.add(string_literal32);
@@ -1239,7 +1239,7 @@ public class CParser extends Parser {
                     state._fsp--;
                     if (state.failed) return retval;
                     if ( state.backtracking==0 ) stream_statement.add(s1.getTree());
-                    // C.g:61:45: ( 'else' s2= statement )?
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:61:45: ( 'else' s2= statement )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1248,7 +1248,7 @@ public class CParser extends Parser {
                     }
                     switch (alt6) {
                         case 1 :
-                            // C.g:61:46: 'else' s2= statement
+                            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:61:46: 'else' s2= statement
                             {
                             string_literal36=(Token)match(input,35,FOLLOW_35_in_statement399); if (state.failed) return retval; 
                             if ( state.backtracking==0 ) stream_35.add(string_literal36);
@@ -1268,7 +1268,7 @@ public class CParser extends Parser {
 
 
                     // AST REWRITE
-                    // elements: s1, 34, expressionRoot, s2
+                    // elements: s1, 34, s2, expressionRoot
                     // token labels: 
                     // rule labels: retval, s2, s1
                     // token list labels: 
@@ -1283,14 +1283,14 @@ public class CParser extends Parser {
                     root_0 = (CTree)adaptor.nil();
                     // 62:11: -> ^( 'if' expressionRoot $s1 ( $s2)? )
                     {
-                        // C.g:62:14: ^( 'if' expressionRoot $s1 ( $s2)? )
+                        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:62:14: ^( 'if' expressionRoot $s1 ( $s2)? )
                         {
                         CTree root_1 = (CTree)adaptor.nil();
                         root_1 = (CTree)adaptor.becomeRoot(stream_34.nextNode(), root_1);
 
                         adaptor.addChild(root_1, stream_expressionRoot.nextTree());
                         adaptor.addChild(root_1, stream_s1.nextTree());
-                        // C.g:62:40: ( $s2)?
+                        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:62:40: ( $s2)?
                         if ( stream_s2.hasNext() ) {
                             adaptor.addChild(root_1, stream_s2.nextTree());
 
@@ -1306,7 +1306,7 @@ public class CParser extends Parser {
                     }
                     break;
                 case 6 :
-                    // C.g:63:4: 'while' '(' expressionRoot ')' statement
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:63:4: 'while' '(' expressionRoot ')' statement
                     {
                     string_literal37=(Token)match(input,36,FOLLOW_36_in_statement435); if (state.failed) return retval; 
                     if ( state.backtracking==0 ) stream_36.add(string_literal37);
@@ -1345,7 +1345,7 @@ public class CParser extends Parser {
                     root_0 = (CTree)adaptor.nil();
                     // 64:11: -> ^( 'while' expressionRoot statement )
                     {
-                        // C.g:64:14: ^( 'while' expressionRoot statement )
+                        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:64:14: ^( 'while' expressionRoot statement )
                         {
                         CTree root_1 = (CTree)adaptor.nil();
                         root_1 = (CTree)adaptor.becomeRoot(stream_36.nextNode(), root_1);
@@ -1389,7 +1389,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "compound_statement"
-    // C.g:71:1: compound_statement : '{' ( declaration )* ( statement )* '}' -> ^( BLOCK ( declaration )* ( statement )* ) ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:71:1: compound_statement : '{' ( declaration )* ( statement )* '}' -> ^( BLOCK ( declaration )* ( statement )* ) ;
     public final CParser.compound_statement_return compound_statement() throws RecognitionException {
         CParser.compound_statement_return retval = new CParser.compound_statement_return();
         retval.start = input.LT(1);
@@ -1410,13 +1410,13 @@ public class CParser extends Parser {
         RewriteRuleSubtreeStream stream_statement=new RewriteRuleSubtreeStream(adaptor,"rule statement");
         RewriteRuleSubtreeStream stream_declaration=new RewriteRuleSubtreeStream(adaptor,"rule declaration");
         try {
-            // C.g:72:2: ( '{' ( declaration )* ( statement )* '}' -> ^( BLOCK ( declaration )* ( statement )* ) )
-            // C.g:72:4: '{' ( declaration )* ( statement )* '}'
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:72:2: ( '{' ( declaration )* ( statement )* '}' -> ^( BLOCK ( declaration )* ( statement )* ) )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:72:4: '{' ( declaration )* ( statement )* '}'
             {
             char_literal42=(Token)match(input,37,FOLLOW_37_in_compound_statement476); if (state.failed) return retval; 
             if ( state.backtracking==0 ) stream_37.add(char_literal42);
 
-            // C.g:72:8: ( declaration )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:72:8: ( declaration )*
             loop8:
             do {
                 int alt8=2;
@@ -1429,7 +1429,7 @@ public class CParser extends Parser {
 
                 switch (alt8) {
             	case 1 :
-            	    // C.g:72:8: declaration
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:72:8: declaration
             	    {
             	    pushFollow(FOLLOW_declaration_in_compound_statement478);
             	    declaration43=declaration();
@@ -1446,7 +1446,7 @@ public class CParser extends Parser {
                 }
             } while (true);
 
-            // C.g:72:21: ( statement )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:72:21: ( statement )*
             loop9:
             do {
                 int alt9=2;
@@ -1459,7 +1459,7 @@ public class CParser extends Parser {
 
                 switch (alt9) {
             	case 1 :
-            	    // C.g:72:21: statement
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:72:21: statement
             	    {
             	    pushFollow(FOLLOW_statement_in_compound_statement481);
             	    statement44=statement();
@@ -1495,18 +1495,18 @@ public class CParser extends Parser {
             root_0 = (CTree)adaptor.nil();
             // 72:36: -> ^( BLOCK ( declaration )* ( statement )* )
             {
-                // C.g:72:39: ^( BLOCK ( declaration )* ( statement )* )
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:72:39: ^( BLOCK ( declaration )* ( statement )* )
                 {
                 CTree root_1 = (CTree)adaptor.nil();
                 root_1 = (CTree)adaptor.becomeRoot((CTree)adaptor.create(BLOCK, "BLOCK"), root_1);
 
-                // C.g:72:47: ( declaration )*
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:72:47: ( declaration )*
                 while ( stream_declaration.hasNext() ) {
                     adaptor.addChild(root_1, stream_declaration.nextTree());
 
                 }
                 stream_declaration.reset();
-                // C.g:72:60: ( statement )*
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:72:60: ( statement )*
                 while ( stream_statement.hasNext() ) {
                     adaptor.addChild(root_1, stream_statement.nextTree());
 
@@ -1547,7 +1547,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "assignment_expression"
-    // C.g:77:1: assignment_expression : postfix_expression ( '=' expressionRoot )? ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:77:1: assignment_expression : postfix_expression ( '=' expressionRoot )? ;
     public final CParser.assignment_expression_return assignment_expression() throws RecognitionException {
         CParser.assignment_expression_return retval = new CParser.assignment_expression_return();
         retval.start = input.LT(1);
@@ -1563,8 +1563,8 @@ public class CParser extends Parser {
         CTree char_literal47_tree=null;
 
         try {
-            // C.g:78:2: ( postfix_expression ( '=' expressionRoot )? )
-            // C.g:78:4: postfix_expression ( '=' expressionRoot )?
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:78:2: ( postfix_expression ( '=' expressionRoot )? )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:78:4: postfix_expression ( '=' expressionRoot )?
             {
             root_0 = (CTree)adaptor.nil();
 
@@ -1574,7 +1574,7 @@ public class CParser extends Parser {
             state._fsp--;
             if (state.failed) return retval;
             if ( state.backtracking==0 ) adaptor.addChild(root_0, postfix_expression46.getTree());
-            // C.g:78:23: ( '=' expressionRoot )?
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:78:23: ( '=' expressionRoot )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1583,7 +1583,7 @@ public class CParser extends Parser {
             }
             switch (alt10) {
                 case 1 :
-                    // C.g:78:24: '=' expressionRoot
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:78:24: '=' expressionRoot
                     {
                     char_literal47=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_assignment_expression512); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
@@ -1631,7 +1631,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "expressionRoot"
-    // C.g:81:1: expressionRoot : expression -> ^( EXPR expression ) ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:81:1: expressionRoot : expression -> ^( EXPR expression ) ;
     public final CParser.expressionRoot_return expressionRoot() throws RecognitionException {
         CParser.expressionRoot_return retval = new CParser.expressionRoot_return();
         retval.start = input.LT(1);
@@ -1643,8 +1643,8 @@ public class CParser extends Parser {
 
         RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
         try {
-            // C.g:82:2: ( expression -> ^( EXPR expression ) )
-            // C.g:82:4: expression
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:82:2: ( expression -> ^( EXPR expression ) )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:82:4: expression
             {
             pushFollow(FOLLOW_expression_in_expressionRoot528);
             expression49=expression();
@@ -1668,7 +1668,7 @@ public class CParser extends Parser {
             root_0 = (CTree)adaptor.nil();
             // 82:15: -> ^( EXPR expression )
             {
-                // C.g:82:18: ^( EXPR expression )
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:82:18: ^( EXPR expression )
                 {
                 CTree root_1 = (CTree)adaptor.nil();
                 root_1 = (CTree)adaptor.becomeRoot((CTree)adaptor.create(EXPR, "EXPR"), root_1);
@@ -1709,7 +1709,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "expression"
-    // C.g:85:1: expression : conditional_expression ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:85:1: expression : conditional_expression ;
     public final CParser.expression_return expression() throws RecognitionException {
         CParser.expression_return retval = new CParser.expression_return();
         retval.start = input.LT(1);
@@ -1721,8 +1721,8 @@ public class CParser extends Parser {
 
 
         try {
-            // C.g:86:2: ( conditional_expression )
-            // C.g:86:4: conditional_expression
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:86:2: ( conditional_expression )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:86:4: conditional_expression
             {
             root_0 = (CTree)adaptor.nil();
 
@@ -1761,7 +1761,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "conditional_expression"
-    // C.g:89:1: conditional_expression : relational_expression ( ( '==' | '!=' ) relational_expression )? ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:89:1: conditional_expression : relational_expression ( ( '==' | '!=' ) relational_expression )? ;
     public final CParser.conditional_expression_return conditional_expression() throws RecognitionException {
         CParser.conditional_expression_return retval = new CParser.conditional_expression_return();
         retval.start = input.LT(1);
@@ -1777,8 +1777,8 @@ public class CParser extends Parser {
         CTree set52_tree=null;
 
         try {
-            // C.g:90:2: ( relational_expression ( ( '==' | '!=' ) relational_expression )? )
-            // C.g:90:4: relational_expression ( ( '==' | '!=' ) relational_expression )?
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:90:2: ( relational_expression ( ( '==' | '!=' ) relational_expression )? )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:90:4: relational_expression ( ( '==' | '!=' ) relational_expression )?
             {
             root_0 = (CTree)adaptor.nil();
 
@@ -1788,7 +1788,7 @@ public class CParser extends Parser {
             state._fsp--;
             if (state.failed) return retval;
             if ( state.backtracking==0 ) adaptor.addChild(root_0, relational_expression51.getTree());
-            // C.g:90:26: ( ( '==' | '!=' ) relational_expression )?
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:90:26: ( ( '==' | '!=' ) relational_expression )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1797,7 +1797,7 @@ public class CParser extends Parser {
             }
             switch (alt11) {
                 case 1 :
-                    // C.g:90:27: ( '==' | '!=' ) relational_expression
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:90:27: ( '==' | '!=' ) relational_expression
                     {
                     set52=(Token)input.LT(1);
                     set52=(Token)input.LT(1);
@@ -1853,7 +1853,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "relational_expression"
-    // C.g:93:1: relational_expression : additive_expression ( ( '<' | '>' | '<=' | '>=' ) additive_expression )* ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:93:1: relational_expression : additive_expression ( ( '<' | '>' | '<=' | '>=' ) additive_expression )* ;
     public final CParser.relational_expression_return relational_expression() throws RecognitionException {
         CParser.relational_expression_return retval = new CParser.relational_expression_return();
         retval.start = input.LT(1);
@@ -1869,8 +1869,8 @@ public class CParser extends Parser {
         CTree set55_tree=null;
 
         try {
-            // C.g:94:5: ( additive_expression ( ( '<' | '>' | '<=' | '>=' ) additive_expression )* )
-            // C.g:94:7: additive_expression ( ( '<' | '>' | '<=' | '>=' ) additive_expression )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:94:5: ( additive_expression ( ( '<' | '>' | '<=' | '>=' ) additive_expression )* )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:94:7: additive_expression ( ( '<' | '>' | '<=' | '>=' ) additive_expression )*
             {
             root_0 = (CTree)adaptor.nil();
 
@@ -1880,7 +1880,7 @@ public class CParser extends Parser {
             state._fsp--;
             if (state.failed) return retval;
             if ( state.backtracking==0 ) adaptor.addChild(root_0, additive_expression54.getTree());
-            // C.g:94:27: ( ( '<' | '>' | '<=' | '>=' ) additive_expression )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:94:27: ( ( '<' | '>' | '<=' | '>=' ) additive_expression )*
             loop12:
             do {
                 int alt12=2;
@@ -1893,7 +1893,7 @@ public class CParser extends Parser {
 
                 switch (alt12) {
             	case 1 :
-            	    // C.g:94:28: ( '<' | '>' | '<=' | '>=' ) additive_expression
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:94:28: ( '<' | '>' | '<=' | '>=' ) additive_expression
             	    {
             	    set55=(Token)input.LT(1);
             	    set55=(Token)input.LT(1);
@@ -1952,7 +1952,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "additive_expression"
-    // C.g:97:1: additive_expression : multiplicative_expression ( ( '+' | '-' ) multiplicative_expression )* ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:97:1: additive_expression : multiplicative_expression ( ( '+' | '-' ) multiplicative_expression )* ;
     public final CParser.additive_expression_return additive_expression() throws RecognitionException {
         CParser.additive_expression_return retval = new CParser.additive_expression_return();
         retval.start = input.LT(1);
@@ -1968,8 +1968,8 @@ public class CParser extends Parser {
         CTree set58_tree=null;
 
         try {
-            // C.g:98:2: ( multiplicative_expression ( ( '+' | '-' ) multiplicative_expression )* )
-            // C.g:98:4: multiplicative_expression ( ( '+' | '-' ) multiplicative_expression )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:98:2: ( multiplicative_expression ( ( '+' | '-' ) multiplicative_expression )* )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:98:4: multiplicative_expression ( ( '+' | '-' ) multiplicative_expression )*
             {
             root_0 = (CTree)adaptor.nil();
 
@@ -1979,7 +1979,7 @@ public class CParser extends Parser {
             state._fsp--;
             if (state.failed) return retval;
             if ( state.backtracking==0 ) adaptor.addChild(root_0, multiplicative_expression57.getTree());
-            // C.g:98:30: ( ( '+' | '-' ) multiplicative_expression )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:98:30: ( ( '+' | '-' ) multiplicative_expression )*
             loop13:
             do {
                 int alt13=2;
@@ -1992,7 +1992,7 @@ public class CParser extends Parser {
 
                 switch (alt13) {
             	case 1 :
-            	    // C.g:98:31: ( '+' | '-' ) multiplicative_expression
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:98:31: ( '+' | '-' ) multiplicative_expression
             	    {
             	    set58=(Token)input.LT(1);
             	    set58=(Token)input.LT(1);
@@ -2051,7 +2051,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "multiplicative_expression"
-    // C.g:101:1: multiplicative_expression : postfix_expression ( ( '*' | '/' ) postfix_expression )* ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:101:1: multiplicative_expression : postfix_expression ( ( '*' | '/' ) postfix_expression )* ;
     public final CParser.multiplicative_expression_return multiplicative_expression() throws RecognitionException {
         CParser.multiplicative_expression_return retval = new CParser.multiplicative_expression_return();
         retval.start = input.LT(1);
@@ -2067,8 +2067,8 @@ public class CParser extends Parser {
         CTree set61_tree=null;
 
         try {
-            // C.g:102:2: ( postfix_expression ( ( '*' | '/' ) postfix_expression )* )
-            // C.g:102:4: postfix_expression ( ( '*' | '/' ) postfix_expression )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:102:2: ( postfix_expression ( ( '*' | '/' ) postfix_expression )* )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:102:4: postfix_expression ( ( '*' | '/' ) postfix_expression )*
             {
             root_0 = (CTree)adaptor.nil();
 
@@ -2078,7 +2078,7 @@ public class CParser extends Parser {
             state._fsp--;
             if (state.failed) return retval;
             if ( state.backtracking==0 ) adaptor.addChild(root_0, postfix_expression60.getTree());
-            // C.g:102:23: ( ( '*' | '/' ) postfix_expression )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:102:23: ( ( '*' | '/' ) postfix_expression )*
             loop14:
             do {
                 int alt14=2;
@@ -2091,7 +2091,7 @@ public class CParser extends Parser {
 
                 switch (alt14) {
             	case 1 :
-            	    // C.g:102:24: ( '*' | '/' ) postfix_expression
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:102:24: ( '*' | '/' ) postfix_expression
             	    {
             	    set61=(Token)input.LT(1);
             	    set61=(Token)input.LT(1);
@@ -2150,7 +2150,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "postfix_expression"
-    // C.g:105:1: postfix_expression : ( primary_expression -> primary_expression ) ( '[' expression ']' -> ^( INDEX $postfix_expression expression ) | '(' argument_expression_list ')' -> ^( CALL $postfix_expression argument_expression_list ) | '(' ')' -> ^( CALL $postfix_expression) )* ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:105:1: postfix_expression : ( primary_expression -> primary_expression ) ( '[' expression ']' -> ^( INDEX $postfix_expression expression ) | '(' argument_expression_list ')' -> ^( CALL $postfix_expression argument_expression_list ) | '(' ')' -> ^( CALL $postfix_expression) )* ;
     public final CParser.postfix_expression_return postfix_expression() throws RecognitionException {
         CParser.postfix_expression_return retval = new CParser.postfix_expression_return();
         retval.start = input.LT(1);
@@ -2184,11 +2184,11 @@ public class CParser extends Parser {
         RewriteRuleSubtreeStream stream_primary_expression=new RewriteRuleSubtreeStream(adaptor,"rule primary_expression");
         RewriteRuleSubtreeStream stream_argument_expression_list=new RewriteRuleSubtreeStream(adaptor,"rule argument_expression_list");
         try {
-            // C.g:106:2: ( ( primary_expression -> primary_expression ) ( '[' expression ']' -> ^( INDEX $postfix_expression expression ) | '(' argument_expression_list ')' -> ^( CALL $postfix_expression argument_expression_list ) | '(' ')' -> ^( CALL $postfix_expression) )* )
-            // C.g:106:6: ( primary_expression -> primary_expression ) ( '[' expression ']' -> ^( INDEX $postfix_expression expression ) | '(' argument_expression_list ')' -> ^( CALL $postfix_expression argument_expression_list ) | '(' ')' -> ^( CALL $postfix_expression) )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:106:2: ( ( primary_expression -> primary_expression ) ( '[' expression ']' -> ^( INDEX $postfix_expression expression ) | '(' argument_expression_list ')' -> ^( CALL $postfix_expression argument_expression_list ) | '(' ')' -> ^( CALL $postfix_expression) )* )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:106:6: ( primary_expression -> primary_expression ) ( '[' expression ']' -> ^( INDEX $postfix_expression expression ) | '(' argument_expression_list ')' -> ^( CALL $postfix_expression argument_expression_list ) | '(' ')' -> ^( CALL $postfix_expression) )*
             {
-            // C.g:106:6: ( primary_expression -> primary_expression )
-            // C.g:106:7: primary_expression
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:106:6: ( primary_expression -> primary_expression )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:106:7: primary_expression
             {
             pushFollow(FOLLOW_primary_expression_in_postfix_expression665);
             primary_expression63=primary_expression();
@@ -2219,7 +2219,7 @@ public class CParser extends Parser {
             retval.tree = root_0;}
             }
 
-            // C.g:107:9: ( '[' expression ']' -> ^( INDEX $postfix_expression expression ) | '(' argument_expression_list ')' -> ^( CALL $postfix_expression argument_expression_list ) | '(' ')' -> ^( CALL $postfix_expression) )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:107:9: ( '[' expression ']' -> ^( INDEX $postfix_expression expression ) | '(' argument_expression_list ')' -> ^( CALL $postfix_expression argument_expression_list ) | '(' ')' -> ^( CALL $postfix_expression) )*
             loop15:
             do {
                 int alt15=4;
@@ -2244,7 +2244,7 @@ public class CParser extends Parser {
 
                 switch (alt15) {
             	case 1 :
-            	    // C.g:107:13: '[' expression ']'
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:107:13: '[' expression ']'
             	    {
             	    char_literal64=(Token)match(input,30,FOLLOW_30_in_postfix_expression682); if (state.failed) return retval; 
             	    if ( state.backtracking==0 ) stream_30.add(char_literal64);
@@ -2274,7 +2274,7 @@ public class CParser extends Parser {
             	    root_0 = (CTree)adaptor.nil();
             	    // 108:12: -> ^( INDEX $postfix_expression expression )
             	    {
-            	        // C.g:108:15: ^( INDEX $postfix_expression expression )
+            	        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:108:15: ^( INDEX $postfix_expression expression )
             	        {
             	        CTree root_1 = (CTree)adaptor.nil();
             	        root_1 = (CTree)adaptor.becomeRoot((CTree)adaptor.create(INDEX, "INDEX"), root_1);
@@ -2291,7 +2291,7 @@ public class CParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // C.g:109:13: '(' argument_expression_list ')'
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:109:13: '(' argument_expression_list ')'
             	    {
             	    char_literal67=(Token)match(input,25,FOLLOW_25_in_postfix_expression722); if (state.failed) return retval; 
             	    if ( state.backtracking==0 ) stream_25.add(char_literal67);
@@ -2308,7 +2308,7 @@ public class CParser extends Parser {
 
 
             	    // AST REWRITE
-            	    // elements: postfix_expression, argument_expression_list
+            	    // elements: argument_expression_list, postfix_expression
             	    // token labels: 
             	    // rule labels: retval
             	    // token list labels: 
@@ -2321,7 +2321,7 @@ public class CParser extends Parser {
             	    root_0 = (CTree)adaptor.nil();
             	    // 110:12: -> ^( CALL $postfix_expression argument_expression_list )
             	    {
-            	        // C.g:110:15: ^( CALL $postfix_expression argument_expression_list )
+            	        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:110:15: ^( CALL $postfix_expression argument_expression_list )
             	        {
             	        CTree root_1 = (CTree)adaptor.nil();
             	        root_1 = (CTree)adaptor.becomeRoot((CTree)adaptor.create(CALL, "CALL"), root_1);
@@ -2338,7 +2338,7 @@ public class CParser extends Parser {
             	    }
             	    break;
             	case 3 :
-            	    // C.g:111:13: '(' ')'
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:111:13: '(' ')'
             	    {
             	    char_literal70=(Token)match(input,25,FOLLOW_25_in_postfix_expression762); if (state.failed) return retval; 
             	    if ( state.backtracking==0 ) stream_25.add(char_literal70);
@@ -2362,7 +2362,7 @@ public class CParser extends Parser {
             	    root_0 = (CTree)adaptor.nil();
             	    // 111:21: -> ^( CALL $postfix_expression)
             	    {
-            	        // C.g:111:24: ^( CALL $postfix_expression)
+            	        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:111:24: ^( CALL $postfix_expression)
             	        {
             	        CTree root_1 = (CTree)adaptor.nil();
             	        root_1 = (CTree)adaptor.becomeRoot((CTree)adaptor.create(CALL, "CALL"), root_1);
@@ -2412,7 +2412,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "argument_expression_list"
-    // C.g:115:1: argument_expression_list : expression ( ',' expression )* -> ^( ELIST ( expression )+ ) ;
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:115:1: argument_expression_list : expression ( ',' expression )* -> ^( ELIST ( expression )+ ) ;
     public final CParser.argument_expression_list_return argument_expression_list() throws RecognitionException {
         CParser.argument_expression_list_return retval = new CParser.argument_expression_list_return();
         retval.start = input.LT(1);
@@ -2429,8 +2429,8 @@ public class CParser extends Parser {
         RewriteRuleTokenStream stream_32=new RewriteRuleTokenStream(adaptor,"token 32");
         RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
         try {
-            // C.g:116:2: ( expression ( ',' expression )* -> ^( ELIST ( expression )+ ) )
-            // C.g:116:6: expression ( ',' expression )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:116:2: ( expression ( ',' expression )* -> ^( ELIST ( expression )+ ) )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:116:6: expression ( ',' expression )*
             {
             pushFollow(FOLLOW_expression_in_argument_expression_list797);
             expression72=expression();
@@ -2438,7 +2438,7 @@ public class CParser extends Parser {
             state._fsp--;
             if (state.failed) return retval;
             if ( state.backtracking==0 ) stream_expression.add(expression72.getTree());
-            // C.g:116:17: ( ',' expression )*
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:116:17: ( ',' expression )*
             loop16:
             do {
                 int alt16=2;
@@ -2451,7 +2451,7 @@ public class CParser extends Parser {
 
                 switch (alt16) {
             	case 1 :
-            	    // C.g:116:18: ',' expression
+            	    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:116:18: ',' expression
             	    {
             	    char_literal73=(Token)match(input,32,FOLLOW_32_in_argument_expression_list800); if (state.failed) return retval; 
             	    if ( state.backtracking==0 ) stream_32.add(char_literal73);
@@ -2487,7 +2487,7 @@ public class CParser extends Parser {
             root_0 = (CTree)adaptor.nil();
             // 116:35: -> ^( ELIST ( expression )+ )
             {
-                // C.g:116:38: ^( ELIST ( expression )+ )
+                // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:116:38: ^( ELIST ( expression )+ )
                 {
                 CTree root_1 = (CTree)adaptor.nil();
                 root_1 = (CTree)adaptor.becomeRoot((CTree)adaptor.create(ELIST, "ELIST"), root_1);
@@ -2535,7 +2535,7 @@ public class CParser extends Parser {
     };
 
     // $ANTLR start "primary_expression"
-    // C.g:119:1: primary_expression : ( ID | STRING | INT | '(' expression ')' -> expression );
+    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:119:1: primary_expression : ( ID | STRING | INT | '(' expression ')' -> expression );
     public final CParser.primary_expression_return primary_expression() throws RecognitionException {
         CParser.primary_expression_return retval = new CParser.primary_expression_return();
         retval.start = input.LT(1);
@@ -2559,7 +2559,7 @@ public class CParser extends Parser {
         RewriteRuleTokenStream stream_26=new RewriteRuleTokenStream(adaptor,"token 26");
         RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
         try {
-            // C.g:120:2: ( ID | STRING | INT | '(' expression ')' -> expression )
+            // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:120:2: ( ID | STRING | INT | '(' expression ')' -> expression )
             int alt17=4;
             switch ( input.LA(1) ) {
             case ID:
@@ -2592,7 +2592,7 @@ public class CParser extends Parser {
 
             switch (alt17) {
                 case 1 :
-                    // C.g:120:4: ID
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:120:4: ID
                     {
                     root_0 = (CTree)adaptor.nil();
 
@@ -2605,7 +2605,7 @@ public class CParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // C.g:121:4: STRING
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:121:4: STRING
                     {
                     root_0 = (CTree)adaptor.nil();
 
@@ -2618,7 +2618,7 @@ public class CParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // C.g:122:4: INT
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:122:4: INT
                     {
                     root_0 = (CTree)adaptor.nil();
 
@@ -2631,7 +2631,7 @@ public class CParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // C.g:123:4: '(' expression ')'
+                    // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:123:4: '(' expression ')'
                     {
                     char_literal78=(Token)match(input,25,FOLLOW_25_in_primary_expression839); if (state.failed) return retval; 
                     if ( state.backtracking==0 ) stream_25.add(char_literal78);
@@ -2692,8 +2692,8 @@ public class CParser extends Parser {
 
     // $ANTLR start synpred2_C
     public final void synpred2_C_fragment() throws RecognitionException {   
-        // C.g:58:4: ( assignment_expression ';' )
-        // C.g:58:4: assignment_expression ';'
+        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:58:4: ( assignment_expression ';' )
+        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:58:4: assignment_expression ';'
         {
         pushFollow(FOLLOW_assignment_expression_in_synpred2_C339);
         assignment_expression();
@@ -2708,8 +2708,8 @@ public class CParser extends Parser {
 
     // $ANTLR start synpred3_C
     public final void synpred3_C_fragment() throws RecognitionException {   
-        // C.g:59:4: ( postfix_expression ';' )
-        // C.g:59:4: postfix_expression ';'
+        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:59:4: ( postfix_expression ';' )
+        // D:\\JavaProj\\stringpro\\llvm\\llvm\\C.g:59:4: postfix_expression ';'
         {
         pushFollow(FOLLOW_postfix_expression_in_synpred3_C352);
         postfix_expression();

@@ -17,6 +17,7 @@ package stringpack;
 package stringpack;
 }
 
+//дополнительные методы дл€ перехвата ошибок, преобразовани€ строк
 @members {
 protected NamesTable names = new NamesTable();
 protected MethodTable methods = new MethodTable();
@@ -29,6 +30,7 @@ public String getErrorHeader(RecognitionException e) {
 public void emitErrorMessage(String msg) {
 	errors.add(msg);
 }
+
 private int reg = 1;
 public int getreg() { return reg++; }
 public int getLastReg(){return reg-1;}
@@ -51,6 +53,7 @@ public int getLastReg(){return reg-1;}
     }
 }
  
+//точка входа, определ€ем массивы переменных, методов, область видимости
 program 
 scope {
 String name;
@@ -84,6 +87,7 @@ HashMap<String,Integer> stringsLengths;
     ->program(globals={$program::globals}, functions={$program::functions}, strings={$program::strings})
   ;
 
+//тип переменной
 type returns [String idType]
   :
     'Int'     {$idType = "Int";}      ->type_int()
@@ -91,6 +95,7 @@ type returns [String idType]
   | 'Char'    {$idType = "Char";}     ->type_char()
   ;
 
+//инициализаци€ переменной вместе может также присваиватьс€ значение
 id_init 
 scope {
 String name;
@@ -101,6 +106,9 @@ String name;
      if ($a.text != null) {
              if (names.isExist($program::name + "." + $a.text)) {
                  errors.add("line "+$a.line+": name "+$a.text+" duplicated");
+             } else if (names.isReserved($a.text)) {
+                 System.out.println("reserved" + $a.text);
+                 errors.add("line "+$a.line+": name "+$a.text+" reserved");
              } else {
      	          names.add(names.new Name($program::name + "." + $a.text, $var::varType, $a.line));
                 names.get($program::name + "." + $a.text).addLineUses($a.line);
@@ -108,8 +116,10 @@ String name;
                      errors.add("line "+$a.line+": name "+$a.text +" wrong type conversion cannot convert " + $expr.idType + " to " + $var::varType);
                 }     	          
      			    }
-             }
-    }
+      } else {
+        errors.add("line "+$a.line+": name "+$a.text+" null error");
+      }
+    } 
       -> {$b.idType!=null && !"[global]".equals($program::name)}?
          def_assign(type={$var::varType}, id={$a.text}, rhs={$expr.st})
       -> {$program::name.equals("[global]") && "Int".equals($var::varType)}?
@@ -123,7 +133,7 @@ String name;
   ;
 
 
-
+//присваивание переменной значени€
 id_assign returns [String idType]
   :
   a=ID('['c=expr']')? EQUAL b=expr 
@@ -143,6 +153,8 @@ id_assign returns [String idType]
     array_assign(id={$a.text}, rhs={$b.st},format={$c.st},reg={getreg()})
   ->assign(id={$a.text}, rhs={$b.st},type={$idType})
   ;
+  
+//работа с переменными  
 var
 scope {
 String varType;
@@ -158,12 +170,14 @@ $var::varType = "";
   
   ;
 
+//список параметров дл€ методов и прочее
 listParams
 : 
   PAR_OPEN (a+=expr (COMMA a+=expr)*)? PAR_CLOSE
   -> iconst(value={$a})
 ;
 
+//выражение, дл€ обработки математических выражений
 expr returns [String idType]
   :
   a=math_exp (MATHOPER b=math_exp)?
@@ -175,6 +189,7 @@ expr returns [String idType]
       -> {$a.st}
   ;
 
+//элемент математиического слагаемого
 math_exp returns [String idType]
   :
   data_id 
@@ -205,6 +220,7 @@ math_exp returns [String idType]
   ->get_elem(format={$a.st},reg={getreg()},format2={$b.st}, type={$idType})
   ;
 
+//простые значени€ - строка, число, символ
 data returns [String idType]
   :
     INT     
@@ -222,7 +238,8 @@ data returns [String idType]
     {$idType = "Char";}
     ->char(reg={getreg()},v={getCode($CHAR.text)},type={$idType})
   ;
-  
+ 
+//представление и преобразование строки
 str  
 : STRING 
 {
@@ -238,6 +255,7 @@ str
 
 ;
 
+//данные и идентификатор переменной
 data_id returns [String idType]
   :
   ID 
@@ -262,6 +280,7 @@ data_id returns [String idType]
   ->{$data.st}
   ;
 
+//конструкци€ если - то
 if_op
 scope slist;
 @init {
@@ -272,6 +291,7 @@ scope slist;
   -> if_op(cond={$bool_cond.st}, stat1={$fun_body.st}, stat2={$else_block.st}, tmp={getreg()})
   ;
 
+// блок иначе в конструкции если - то
 else_block
 scope slist;
 @init {
@@ -282,6 +302,7 @@ scope slist;
     ->{$fun_body.st}
   ;
 
+// оператор цикла
 for_op
 scope slist;
 @init {
@@ -292,6 +313,7 @@ scope slist;
   ->for_op (id={$for_var.st}, cond={$math_exp.st}, stat={$fun_body.st}, tmp={getreg()}, reg={getreg()})
   ;
 
+// переменна€ итерации по циклу
 for_var 
 :
   a=ID
@@ -306,6 +328,7 @@ for_var
   ->def_var(id={$ID.text}, type={"Int"})
 ;
 
+// оператор цикла while
 while_op
 scope slist;
 @init {
@@ -316,17 +339,20 @@ $slist::locals = new ArrayList();
     ->while_op(bool_cond={$bool_cond.st}, locals={$slist::locals})
   ;
 
+// выражение возвращающее булево значение
 bool_cond
   :
   PAR_OPEN a=expr COMPROPER b=expr PAR_CLOSE
   ->bop(reg={getreg()}, op={$COMPROPER.text}, a={$a.st}, b={$b.st})
   ;
 
+// идентификатор в скобках
 brack_id
   :
   PAR_OPEN ID PAR_CLOSE
   ;
-
+  
+// функции ввода-вывода, а также дл€ работы со строками
 in_out_op returns [String idType]
   :
     'out' PAR_OPEN data_id (COMMA e+=expr)* PAR_CLOSE
@@ -396,6 +422,7 @@ in_out_op returns [String idType]
    ->copy_op(arg1={$a1.st}, arg2={$a2.st},reg={getreg()}, type={$idType})
   ;
 
+// вызов фукнции с параметрами
 fun_call returns [String idType]
   :
   a=ID PAR_OPEN (b+=expr (COMMA b+=expr)*)? PAR_CLOSE
@@ -417,12 +444,14 @@ fun_call returns [String idType]
 
   ;
 
+// список аргументов операции
 op_cond
   :
   PAR_OPEN (a+=expr (COMMA a+=expr)*)? PAR_CLOSE
   -> args(args={$a})
   ;
 
+// перечисление операций, которые могут присутствовать в теле функции или блоке данных
 ops
   :
   id_assign EOL
@@ -437,11 +466,13 @@ ops
     ->statement(expr={$fun_call.st})
   ;
 
+// фукнци€ мэин
 main_fun
   :
   MAIN_NAME PAR_OPEN PAR_CLOSE fun_body
   ;
 
+// деклараци€ функции
 fun_decl
 scope slist;
 @init {
@@ -468,6 +499,7 @@ scope slist;
    -> main_decl(locals={$slist::locals})
   ;
 
+// деклараци€ параметра функции
 parameter_declaration 
   :
   type a=ID
@@ -481,6 +513,7 @@ parameter_declaration
   -> def_arg(id={$ID.text}, type={$type.st})
   ;
 
+// тело функции или блочного выражени€
 fun_body returns [String idType]
   :
   CUR_OPEN ((var {$slist::locals.add($var.st);}| ops {$slist::locals.add($ops.st);})+)? return_st? CUR_CLOSE
@@ -492,7 +525,8 @@ fun_body returns [String idType]
   }
   ->block(locals={$slist::locals})
   ;
-  
+ 
+// выражение возврата 
 return_st returns [String idType]
 : 
 	'return' expr EOL
@@ -516,7 +550,8 @@ SQ_CLOSE    :  ']'  ;
 INT         :  DIGIT+  ;
 ID          : (ALPHA|DIGIT)+ ;
 
-fragment
+// заглавные и строчные латинские символы
+fragment 
 ALPHA
   :
   (
@@ -525,15 +560,18 @@ ALPHA
   )
   ;
 
+// цифры
 fragment
 DIGIT
   :
   '0'..'9'
   ;
 
+// пробелы и символы табул€ции
 WS  :   (' ' | '\t' | '\r' | '\n')+ {$channel=HIDDEN;}
     ;    
 
+// математические операторы
 MATHOPER
   :
   '-'
@@ -542,6 +580,7 @@ MATHOPER
   | '/'
   ;
 
+// операторы сравнени€ 
 COMPROPER
   :
     '>'
@@ -551,16 +590,19 @@ COMPROPER
   | '<='
   ;
 
+// стока
 STRING
   :
   '"' .* '"'
   ;
 
+// символ
 CHAR
   :
   '\'' .? '\''
   ;
 
+// комментарий
 COMMENT
   :
   '/*' (options {greedy=false;}: .)* '*/' 
